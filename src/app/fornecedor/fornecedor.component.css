@@ -1,0 +1,26 @@
+.falta-entregar {
+    background-color: black;
+    height: 200vh;
+}
+
+.proximas {
+    background-color: green;
+    height: 200vh;
+}
+
+.search-icon {
+    color: black;
+}
+
+.search-icon:hover {
+    cursor: pointer;
+}
+
+.minha-cor {
+    background-color: #54fd95;
+}
+
+.logo-eventsoup {
+    height: 60px;
+    margin-left: 5vw;
+}
