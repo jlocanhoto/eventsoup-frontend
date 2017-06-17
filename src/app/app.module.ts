@@ -1,3 +1,4 @@
+import { HomePageRoutingModule } from './homepage/homepage.routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,7 @@ import { HomepageModule } from './homepage/homepage.module';
     FormsModule,
     FornecedorModule,
     HomepageModule,
+    HomePageRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

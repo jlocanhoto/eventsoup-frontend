@@ -15,6 +15,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     $('.parallax').parallax();
     $(".button-collapse").sideNav();
+    $('.scrollspy').scrollSpy();
   }
 
   ngAfterViewInit() {
