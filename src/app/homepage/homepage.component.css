@@ -22,6 +22,7 @@ header .intro-text .intro-lead-in {
   font-size: 22px;
   line-height: 22px;
   margin-bottom: 25px;
+  margin-top: 15vh;
 }
 header .intro-text .intro-heading {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -51,4 +52,13 @@ header .intro-text .intro-heading {
     line-height: 75px;
     margin-bottom: 50px;
   }
+}
+
+.picture-height {
+  height: 90vh;
+  width: 100%;
+}
+
+.parallax {
+  z-index: -20;
 }
