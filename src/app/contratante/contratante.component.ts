@@ -24,8 +24,6 @@ export class ContratanteComponent implements OnInit {
     });
     $("#sidenav-overlay").remove();
     $("body").removeAttr( 'style' );
-    // left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    // touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 50%; right: 0px;
   }
 
 }
