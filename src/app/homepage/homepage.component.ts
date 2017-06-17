@@ -15,11 +15,11 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     $('.parallax').parallax();
     $(".button-collapse").sideNav();
-    // $.getScript('assets/modernizr.js');
   }
 
   ngAfterViewInit() {
-    // $.getScript("assets/main.js");
+    $.getScript('assets/modernizr.js');
+    $.getScript("assets/main.js");
   }
 
 }
