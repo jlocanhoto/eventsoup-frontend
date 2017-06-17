@@ -6,16 +6,18 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { FornecedorModule } from './fornecedor/fornecedor.module';
 import { HomepageModule } from './homepage/homepage.module';
+import { ContratanteModule } from './contratante/contratante.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     FornecedorModule,
     HomepageModule,
+    ContratanteModule,
     HomePageRoutingModule
   ],
   providers: [],

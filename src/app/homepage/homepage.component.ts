@@ -22,5 +22,16 @@ export class HomepageComponent implements OnInit {
     $.getScript('assets/modernizr.js');
     $.getScript("assets/main.js");
   }
+  
+  ngOnDestroy() {
+    $(".drag-target").css({
+      "touch-action": "pan-y", 
+      "-webkit-user-drag": "none", 
+      "-webkit-tap-highlight-color": "#000000",
+      "left": "0px"
+    });
+    $("#sidenav-overlay").remove();
+    $("body").removeAttr( 'style' );
+  }
 
 }

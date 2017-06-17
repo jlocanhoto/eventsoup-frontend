@@ -24,9 +24,6 @@ export class FornecedorComponent implements OnInit {
   cards = [];
 
   constructor() { 
-    $( document ).ready(function(){
-      $(".button-collapse").sideNav();
-    })
     this.cards = this.allCards;
   }
 
@@ -49,6 +46,18 @@ export class FornecedorComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(".button-collapse").sideNav();
+  }
+
+  ngOnDestroy() {
+    $(".drag-target").css({
+      "touch-action": "pan-y", 
+      "-webkit-user-drag": "none", 
+      "-webkit-tap-highlight-color": "#000000",
+      "left": "0px"
+    });
+    $("#sidenav-overlay").remove();
+    $("body").removeAttr( 'style' );
   }
 
 }
