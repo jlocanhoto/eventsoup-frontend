@@ -4,6 +4,7 @@ import { RouterModule }     from '@angular/router'
 
 import { CreateEventComponent }		from './create-event/create-event.component';
 import { SelectPackageComponent } from './select-package/select-package.component';
+import { ConfirmDetailsComponent } from './confirm-details/confirm-details.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { SelectPackageComponent } from './select-package/select-package.componen
   ],
   declarations: [
   	CreateEventComponent,
-  	SelectPackageComponent
+  	SelectPackageComponent,
+  	ConfirmDetailsComponent
   ],
   providers: [
   ]
