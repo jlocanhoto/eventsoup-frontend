@@ -76,8 +76,13 @@ export class CreateEventComponent {
 		// jquery-mask-plugin
 		let options =  {
 			onChange: function(money) {
-				that.budget = money;
-				console.log(that.budget)
+				if (money.length > 3) {
+					that.budget = money;
+					//console.log(that.budget)
+				}
+				else {
+					that.budget = "";
+				}
 			},
 			reverse: true
 		};
@@ -192,8 +197,8 @@ export class CreateEventComponent {
 		//flag = flag && (this.date !== "");
 		flag = flag && ($('.datepicker').val() !== "");
 		//flag = flag && (this.place !== "");
-		//flag = flag && (this.budget !== "");
-		flag = flag && ($('.money').val() !== "");
+		flag = flag && (this.budget !== "");
+		//flag = flag && ($('.money').val().length > 3);
 		//flag = flag && (this.option !== undefined);
 
 		let str = "btn disabled";
