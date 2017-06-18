@@ -3,6 +3,7 @@ import { CommonModule } 		from '@angular/common';
 import { RouterModule }     from '@angular/router'
 
 import { CreateEventComponent }		from './create-event/create-event.component';
+import { SelectPackageComponent } from './select-package/select-package.component';
 
 @NgModule({
   imports: [
@@ -10,10 +11,12 @@ import { CreateEventComponent }		from './create-event/create-event.component';
     RouterModule
   ],
   exports: [
-  	CreateEventComponent
+  	CreateEventComponent,
+    SelectPackageComponent
   ],
   declarations: [
-  	CreateEventComponent
+  	CreateEventComponent,
+  	SelectPackageComponent
   ],
   providers: [
   ]
