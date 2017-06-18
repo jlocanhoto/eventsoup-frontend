@@ -1,4 +1,19 @@
-<p>
-  create-event
-</p>
-<input type="date" class="datepicker">
+<div class="container">
+	<h2 class="header">Novo Evento</h2>
+	<div class="row">
+		<form class="col s12">
+			<div class="row">
+				<div class="input-field col s6">
+					<input id="data" type="date" class="datepicker">
+					<label for="data">Data do evento</label>
+				</div>
+				<div class="input-field col s6">
+					<input id="orcamento" type="text" class="money">
+					<label for="orcamento">Orçamento</label>
+				</div>
+			</div>
+		</form>
+		<button (click)="goBack()" class="btn-flat waves-effect waves-light">Cancelar</button>
+		<button (click)="createEvent()" class={{checkRequiredData()}}>Avançar</button>
+	</div>
+</div>

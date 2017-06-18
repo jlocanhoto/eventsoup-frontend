@@ -24,7 +24,7 @@ export class CreateEventComponent {
 	timeBegin		: string = "";
 	timeEnd			: string = "";
 	place			: string = "";
-	budget			: number = 0;
+	budget			: string = "";
 
 	specificQty		: number = 0;
 
@@ -48,7 +48,8 @@ export class CreateEventComponent {
 	}
 
 	ngAfterContentInit() {
-		// Brazilian Portuguese
+		// datepicker
+		// Brazilian Portuguese translation
 		$.extend( $.fn.pickadate.defaults, {
 		    monthsFull: [ 'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro' ],
 		    monthsShort: [ 'jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez' ],
@@ -68,9 +69,20 @@ export class CreateEventComponent {
 			selectYears: 10, // Creates a dropdown of 15 years to control year
 			onClose: function() {
 				that.date = this.get('select');
-				console.log(that.date)
+				//console.log(that.date)
 			}
 		});
+
+		// jquery-mask-plugin
+		let options =  {
+			onChange: function(money) {
+				that.budget = money;
+				console.log(that.budget)
+			},
+			reverse: true
+		};
+		
+		$('.money').mask("#.##0,00", options);
 	}
 	/*
 	checkBoxBehaviour(current: any): void {
@@ -123,13 +135,18 @@ export class CreateEventComponent {
 	}
 	*/
 
+	private moneyNotation(money: string): number {
+		return parseFloat(money.replace(".",";").replace(",",".").replace(";",","));
+	}
+
 	createEvent(): void {
 		this.newEvent 				= new Event();
 		//this.newEvent.title 		= this.title;
 		this.newEvent.date			= this.date;
 		//this.newEvent.time			= {begin: this.timeBegin, end: this.timeEnd};
 		//this.newEvent.place			= this.place;
-		this.newEvent.budget		= this.budget;
+
+		this.newEvent.budget		= this.moneyNotation(this.budget);
 		//this.newEvent.restrictions 	= this.getRestrictions();
 		/*
 		if (this.specificQty !== 0) {
@@ -172,15 +189,17 @@ export class CreateEventComponent {
 	checkRequiredData(): string {
 		let flag = true;
 		//flag = flag && (this.title !== "");
-		flag = flag && (this.date !== "");
+		//flag = flag && (this.date !== "");
+		flag = flag && ($('.datepicker').val() !== "");
 		//flag = flag && (this.place !== "");
-		flag = flag && (this.budget !== 0);
+		//flag = flag && (this.budget !== "");
+		flag = flag && ($('.money').val() !== "");
 		//flag = flag && (this.option !== undefined);
 
-		let str = "btn btn-success disabled";
+		let str = "btn disabled";
 
 		if (flag) {
-			str = "btn btn-success";
+			str = "btn";
 		}
 
 		this.requiredData = flag;
