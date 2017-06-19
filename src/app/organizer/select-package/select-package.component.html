@@ -1,3 +1,35 @@
-<p>
-  select-package works!
-</p>
+<div class="container">
+	<h2 class="header">Selecione seus pacotes</h2>
+	<div class="divider"></div>
+	<div class="row">
+		<div class="col s3 card-panel green lighten-5">
+		<!-- Grey navigation panel -->
+			<div>Seu pacote</div>
+		</div>
+
+		<div class="col s9 m8 l8 xl4">
+			<!-- Teal page content  -->
+			<div class="card" *ngFor="let pct of pacotes">
+				<div class="card-image">
+					<img src="assets/imagens/{{pct.img}}">
+					<span class="card-title" style="background: rgba(0,0,0,0.6)">{{pct.name}}</span>
+				</div>
+				<!-- <div class="card-stacked"> -->
+					<div class="card-content">
+						<div class="chip" *ngFor="let item of pct.items">
+							{{item.nome}}
+						</div>
+					</div>
+					<div class="card-action">
+						<a href="#">Adicionar tudo</a>
+					</div>
+				<!-- </div> -->
+			</div>
+				<!--
+				<div *ngFor="let color of colors">
+					<div class="{{color}} card-panel">exemplo</div>
+				</div>
+				-->
+		</div>
+	</div>
+</div>
