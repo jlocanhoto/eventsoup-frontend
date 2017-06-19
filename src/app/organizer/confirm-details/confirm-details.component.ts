@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./confirm-details.component.css']
 })
 export class ConfirmDetailsComponent implements OnInit {
+	selectedPackages = [];
+	packageNames = [];
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+		this.selectedPackages = [{"name":"pacote1", "items":['cu', 'buceta']}, {"name":"pacote2", "items":['rola']}];
+	}
 
 }
