@@ -6,6 +6,8 @@ import 'rxjs/add/operator/switchMap';
 import { Event } 							from '../../event/event';
 import { EventService }						from '../../event/event.service';
 
+declare var $ : any;
+
 const classesKits = [
 	{before: "panel panel-info"   , after: "panel panel-primary"},
 	{before: "panel panel-warning", after: "panel panel-yellow"},
@@ -46,8 +48,8 @@ export class SelectPackageComponent implements OnInit {
 								{"nome": "Doces"					, "check": false},
 								{"nome": "Tortas"					, "check": false},
 								{"nome": "Refrigerantes"			, "check": false},
-								{"nome": "Descartáveis"				, "check": false},
-								{"nome": "Mesas e cadeiras"			, "check": false}
+								//{"nome": "Descartáveis"				, "check": false},
+								//{"nome": "Mesas e cadeiras"			, "check": false}
 							]};
 				
 	pacoteBebidas	: any = {"name": "Pacote Bebidas",
@@ -71,7 +73,7 @@ export class SelectPackageComponent implements OnInit {
 	pacoteVeg		: any = {"name": "Pacote Vegetariano e Vegano",
 							 "img": "vegan_burguers.jpg",
 							 "items": [
-								{"nome": "Salgados"					, "check": false},
+								{"nome": "Salgados"						, "check": false},
 								{"nome": "Doces"						, "check": false},
 								{"nome": "Tortas" 						, "check": false},
 								{"nome": "Bebidas"						, "check": false},
@@ -93,7 +95,6 @@ export class SelectPackageComponent implements OnInit {
 			   this.pacoteVeg,
 			   this.pacoteIntolAler];
 
-
 	constructor (private eventService	: EventService,
 				 private route			: ActivatedRoute,
 				 private location		: Location,		 
@@ -104,6 +105,41 @@ export class SelectPackageComponent implements OnInit {
 		this.route.params
 				  .switchMap((params: Params) => this.eventService.getEvent(+params['id']))
 				  .subscribe((event) => this.event = event);
+	}
+
+	ngAfterViewInit(): void {
+		$('.chip').css('cursor', 'pointer');
+	}
+
+	selectItem(event, indexPackage, indexItem) {
+		/*
+		console.log(this.pacotes[indexPackage].name,
+					this.pacotes[indexPackage].items[indexItem].nome);
+		*/
+		var target = event.target || event.srcElement || event.currentTarget;
+		if (this.pacotes[indexPackage].items[indexItem].check === false) {
+			$(target).css({'background': '#a5d6a7', 'font-weight': 'bold'});
+			this.pacotes[indexPackage].items[indexItem].check = true;
+		}
+		else {
+			$(target).css({'background': '', 'font-weight': ''});
+			this.pacotes[indexPackage].items[indexItem].check = false;
+		}
+	}
+
+	selectAll(indexPackage) {
+		let i = indexPackage;
+		console.log('.chips_'+i);
+
+		for (let j = 0; j < this.pacotes[i].items.length; j++)
+		{
+			this.pacotes[i].items[j].check = true;
+			$('.chips_'+i).css({'background': '#a5d6a7', 'font-weight': 'bold'});
+		}
+	}
+
+	getCheck(indexPackage, indexItem) {
+		return this.pacotes[indexPackage].items[indexItem].check;
 	}
 
 	checkRequiredData(): string {
