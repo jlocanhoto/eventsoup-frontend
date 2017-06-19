@@ -2,19 +2,14 @@ import { NgModule } 				        from '@angular/core';
 import { CommonModule } 		        from '@angular/common';
 //import { RouterModule }             from '@angular/router';
 
-<<<<<<< HEAD
-import { CreateEventComponent }		from './create-event/create-event.component';
-import { SelectPackageComponent } from './select-package/select-package.component';
-import { ConfirmDetailsComponent } from './confirm-details/confirm-details.component';
 //import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
-=======
+
 import { CreateEventComponent }		  from './create-event/create-event.component';
 import { SelectPackageComponent }   from './select-package/select-package.component';
 import { ConfirmDetailsComponent }  from './confirm-details/confirm-details.component';
 import { OrganizerComponent }       from './organizer.component';
 import { DashboardComponent }       from './dashboard/dashboard.component';
 import { OrganizerRoutingModule }   from './organizer-routing.module';
->>>>>>> d098018c8581885b29a296a64cabfd393218d7ff
 
 @NgModule({
   imports: [

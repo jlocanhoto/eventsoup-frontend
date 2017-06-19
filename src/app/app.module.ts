@@ -10,7 +10,6 @@ import { AppComponent }         from './app.component';
 import { FornecedorModule }     from './fornecedor/fornecedor.module';
 import { HomepageModule }       from './homepage/homepage.module';
 import { OrganizerModule }      from './organizer/organizer.module';
-import { ContratanteModule }    from './contratante/contratante.module';
 import { EventService }         from './event/event.service';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { EventService }         from './event/event.service';
     FornecedorModule,
     HomepageModule,
     OrganizerModule,
-    ContratanteModule,
     //AppRoutingModule
     HomePageRoutingModule
   ],
