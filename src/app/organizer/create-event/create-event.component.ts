@@ -9,7 +9,8 @@ declare var $ : any;	// jQuery variable
 
 @Component({
 	selector: 'create-event',
-	templateUrl: './create-event.component.html'
+	templateUrl: './create-event.component.html',
+	styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent {
 	//events			: Event[];
@@ -69,7 +70,7 @@ export class CreateEventComponent {
 			selectYears: 10, // Creates a dropdown of 15 years to control year
 			onClose: function() {
 				that.date = this.get('select');
-				//console.log(that.date)
+				console.log(that.date)
 			}
 		});
 

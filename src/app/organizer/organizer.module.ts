@@ -5,6 +5,7 @@ import { RouterModule }     from '@angular/router'
 import { CreateEventComponent }		from './create-event/create-event.component';
 import { SelectPackageComponent } from './select-package/select-package.component';
 import { ConfirmDetailsComponent } from './confirm-details/confirm-details.component';
+//import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
 
 @NgModule({
   imports: [
