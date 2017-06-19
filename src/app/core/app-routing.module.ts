@@ -3,6 +3,7 @@ import { RouterModule, Routes }		  from '@angular/router';
 
 import { CreateEventComponent }     from '../organizer/create-event/create-event.component';
 import { SelectPackageComponent }   from '../organizer/select-package/select-package.component';
+import { ConfirmDetailsComponent }  from '../organizer/confirm-details/confirm-details.component'
 /*
 import { DashboardComponent }   	  from '../event-organizer/dashboard/dashboard.component';
 import { EventDetailComponent } 	  from '../shared/event-detail.component';
@@ -15,7 +16,8 @@ import { SkeletonComponent }        from '../shared/skeleton.component';
 
 const routes: Routes = [
   {path: 'event/create', component: CreateEventComponent},
-  {path: 'event/:id/packages', component: SelectPackageComponent}
+  {path: 'event/:id/packages', component: SelectPackageComponent},
+  {path: 'event/confirm-details', component: ConfirmDetailsComponent}
   /*{ path: '', redirectTo: '/home', pathMatch: 'full' 			                              },
   { path: 'login'                , component: LoginComponent                            },
   { path: 'home'                 , component: SkeletonComponent, children: [
