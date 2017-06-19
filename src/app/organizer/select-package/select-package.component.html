@@ -3,30 +3,17 @@
 	<div class="divider"></div>
 	<div class="row">
 		<div class="col s4 m4 l4 xl4">
-		<!-- Grey navigation panel -->
 			<h4>Seu pacote</h4>
-			<!--
-			<div class="card" *ngFor="let pct of pacotes; let i=index;">
-				<div class="card-content">
-			-->
-				<ul class="collection with-header" *ngFor="let pct of pacotes; let i=index;">
-					<li class="collection-header light-green lighten-5"><h5>{{pct.name}}</h5></li>
-					<div *ngFor="let item of pct.items; let j=index;">
-						<li class="collection-item" *ngIf="getCheck(i, j)">
-							{{item.nome}}
-						</li>
-					</div>
-				</ul>
-					<!--
-					<span class="card-title grey-text text-darken-4">{{pct.name}}</span>
-					<div *ngFor="let item of pct.items; let j=index;">
-						<div class="chip noselect" *ngIf="getCheck(i, j)">
-							{{item.nome}}
-						</div>
-					</div>
+			<ul class="collection with-header" *ngFor="let pct of pacotes; let i=index;">
+				<li class="collection-header light-green lighten-5"><h5>{{pct.name}}</h5></li>
+				<div *ngFor="let item of pct.items; let j=index;">
+					<li class="collection-item" *ngIf="getCheck(i, j)">
+						{{item.nome}}
+					</li>
 				</div>
-			</div>
-			-->
+			</ul>
+			<button (click)="goBack()" class="btn-flat waves-effect waves-light">Cancelar</button>
+			<button (click)="confirmDetails()" class="{{checkRequiredData()}} waves-effect waves-light">Avançar</button>
 		</div>
 
 		<div class="col s8 m8 l8 xl5">

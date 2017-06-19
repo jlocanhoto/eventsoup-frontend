@@ -24,8 +24,6 @@ const classesKits = [
 export class SelectPackageComponent implements OnInit {
 	@Input() event	: Event;	//recebe evento do pai, create-event
 
-	selectedPack	: number;
-
 	selPackClass 	: string[] 	= ["panel panel-primary",
 								   "panel panel-yellow",
 								   "panel panel-red", 
@@ -89,22 +87,35 @@ export class SelectPackageComponent implements OnInit {
 								{"nome": "Salgados sem glúten"			, "check": false}
 							]};
 
-	pacotes = [this.pacoteFesta,
-			   this.pacoteBebidas,
-			   this.pacoteRegional,
-			   this.pacoteVeg,
-			   this.pacoteIntolAler];
+	pacotes			: any = [this.pacoteFesta,
+							 this.pacoteBebidas,
+							 this.pacoteRegional,
+							 this.pacoteVeg,
+							 this.pacoteIntolAler];
+
+	selectedPacks	: any = [];
+	qtySelPacks		: number = 0;
 
 	constructor (private eventService	: EventService,
 				 private route			: ActivatedRoute,
 				 private location		: Location,		 
-				 private router			: Router		) { }
+				 private router			: Router		) {
+				
+					for(let i = 0; i < this.pacotes.length; i++)
+					{
+						this.selectedPacks.push({"name": this.pacotes[i].name,
+												"items": [] });
+					}
+
+					//console.log(this.selectedPacks);
+				}
 
 	ngOnInit(): void {
 		//console.log(this.event)
-		this.route.params
+		/*this.route.params
 				  .switchMap((params: Params) => this.eventService.getEvent(+params['id']))
 				  .subscribe((event) => this.event = event);
+		*/
 	}
 
 	ngAfterViewInit(): void {
@@ -125,17 +136,21 @@ export class SelectPackageComponent implements OnInit {
 			$(target).css({'background': '', 'font-weight': ''});
 			this.pacotes[indexPackage].items[indexItem].check = false;
 		}
+
+		this.getSelectedItems();
 	}
 
 	selectAll(indexPackage) {
 		let i = indexPackage;
-		console.log('.chips_'+i);
+		//console.log('.chips_'+i);
 
 		for (let j = 0; j < this.pacotes[i].items.length; j++)
 		{
 			this.pacotes[i].items[j].check = true;
 			$('.chips_'+i).css({'background': '#a5d6a7', 'font-weight': 'bold'});
 		}
+
+		this.getSelectedItems();
 	}
 
 	getCheck(indexPackage, indexItem) {
@@ -143,77 +158,56 @@ export class SelectPackageComponent implements OnInit {
 	}
 
 	checkRequiredData(): string {
-		let flag = false;
-		let packages = 		[{"pacoteFesta":	this.pacoteFesta},
-							{"pacoteBebidas":	this.pacoteBebidas},
-							{"pacoteRegional":	this.pacoteRegional},
-							{"pacoteVeg":		this.pacoteVeg}, 
-							{"pacoteIntolAler":	this.pacoteIntolAler}];
-		
-		let selectedItems = [];
+		let flag = (this.qtySelPacks > 0);
 
-		for (let i = 0; i < packages.length; i++)
-		{
-			let key = Object.keys(packages[i])[0];
-			let newSelection = [];
-
-			for (let j = 0; j < packages[i][key].length; j++)
-			{
-				if(packages[i][key][j].check){
-					newSelection.push(packages[i][key][j].nome)
-					flag = true;
-				}
-
-			}
-			let jsonSelection = {}
-			jsonSelection[key] = newSelection;
-			selectedItems.push( jsonSelection );
-		}
-
-		console.log(selectedItems);
-
-		let str = "btn btn-success disabled";
+		let str = "btn disabled";
 
 		if (flag) {
-			str = "btn btn-success";
+			str = "btn";
 		}
 
 		return str;
 	}
 
-	selectPck(n: number): void {
-		this.selectedPack = n;
-
-		for (let i = 0; i < this.selPackClass.length; i++)
+	getSelectedItems(): void {
+		for (let i = 0; i < this.pacotes.length; i++)
 		{
-			if (i === n) {
-				if (this.selPackClass[i] === classesKits[i].after){
-					this.selPackClass[i] = classesKits[i].before;
+			for (let j = 0; j < this.pacotes[i].items.length; j++)
+			{
+				let flag = this.pacotes[i].items[j].check;
+				let name = this.pacotes[i].items[j].nome;
+				let index = this.selectedPacks[i].items.indexOf(name);
+
+				if (flag) {
+					if (index === -1) {
+						this.selectedPacks[i].items.push(name);
+						this.qtySelPacks++;
+					}
 				}
 				else {
-					this.selPackClass[i] = classesKits[i].after;	
-				}				
-			}
-			else {
-				this.selPackClass[i] = classesKits[i].before;
+					if (index !== -1) {
+						this.selectedPacks[i].items.splice(index, 1);
+						this.qtySelPacks--;
+					}
+				}
 			}
 		}
-	}
 
-	addPackage(): void{
-		
+		//console.log(this.selectedPacks);
 	}
 
 	confirmDetails(): void {
 		//console.log(this.event);
 		//if (this.event !== undefined) {
-			let event = JSON.parse(localStorage.newEvent)
+			//let event = JSON.parse(localStorage.newEvent)
 			//event.packageID = this.selectedPack.toString();
 			//localStorage.setItem('newEvent', JSON.stringify(event));
+			
+			localStorage.setItem('selectedPacks', JSON.stringify(this.selectedPacks));
 
 			//let path = ['/home'];
-			let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
-			this.router.navigate(path);
+			//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
+			//this.router.navigate(path);
 			//let path = ['/event', this.event.id, 'purchase'];
 			//this.router.navigate(path);
 		/*}
