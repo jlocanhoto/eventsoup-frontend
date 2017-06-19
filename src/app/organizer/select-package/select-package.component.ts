@@ -199,17 +199,20 @@ export class SelectPackageComponent implements OnInit {
 	confirmDetails(): void {
 		//console.log(this.event);
 		//if (this.event !== undefined) {
-			//let event = JSON.parse(localStorage.newEvent)
-			//event.packageID = this.selectedPack.toString();
-			//localStorage.setItem('newEvent', JSON.stringify(event));
-			
 			localStorage.setItem('selectedPacks', JSON.stringify(this.selectedPacks));
 
-			//let path = ['/home'];
-			//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
-			//this.router.navigate(path);
-			//let path = ['/event', this.event.id, 'purchase'];
-			//this.router.navigate(path);
+			if (localStorage.newEvent !== undefined) {
+				let event = JSON.parse(localStorage.newEvent)
+
+				//event.packageID = this.selectedPack.toString();
+				//localStorage.setItem('newEvent', JSON.stringify(event));
+
+				//let path = ['/home'];
+				let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
+				this.router.navigate(path);
+				//let path = ['/event', this.event.id, 'purchase'];
+				//this.router.navigate(path);
+			}
 		/*}
 		else {
 			console.log('EVENT NOT FOUND!');
