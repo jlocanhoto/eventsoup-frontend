@@ -13,7 +13,8 @@ import { ConfirmDetailsComponent } from './confirm-details/confirm-details.compo
   ],
   exports: [
   	CreateEventComponent,
-    SelectPackageComponent
+    SelectPackageComponent,
+    ConfirmDetailsComponent
   ],
   declarations: [
   	CreateEventComponent,
