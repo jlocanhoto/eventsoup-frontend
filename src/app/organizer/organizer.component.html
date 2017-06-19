@@ -1,9 +1,10 @@
+<!--Começo do Menu-->
+
 <div class="navbar-fixed">
     <nav>
-        <div class="nav-wrapper teal">
-            <a routerLink="/contratante" class="brand-logo">EventSoup</a>
+        <div class="nav-wrapper grey darken-4">
+            <a routerLink="" class="logo">Event<span>Soup</span></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li routerLinkActive="active"><a >Home</a></li>
                 <li routerLinkActive="active"><a >Histórico</a></li>
                 <li routerLinkActive="active"><a >Perfil</a></li>
                 <li><a routerLink="">Sair</a></li>
@@ -12,11 +13,14 @@
         </div>
     </nav>
 </div>
+
 <ul id="slide-out" class="side-nav">
-    <li routerLinkActive="active"><a>Home</a></li>
-    <li routerLinkActive="active"><a>Histórico</a></li>
-    <li routerLinkActive="active"><a>Perfil</a></li>
+    <li routerLinkActive="active"><a >Histórico</a></li>
+    <li routerLinkActive="active"><a >Perfil</a></li>
     <li><a routerLink="">Sair</a></li>
 </ul>
+
+<!--Fim do Menu-->
+
 
 <router-outlet></router-outlet>

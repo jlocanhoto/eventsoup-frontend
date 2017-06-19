@@ -208,7 +208,8 @@ export class SelectPackageComponent implements OnInit {
 				//localStorage.setItem('newEvent', JSON.stringify(event));
 
 				//let path = ['/home'];
-				let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
+				let path = ['/organizer', 'event', event.id, 'confirmation'];
+				//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
 				this.router.navigate(path);
 				//let path = ['/event', this.event.id, 'purchase'];
 				//this.router.navigate(path);
