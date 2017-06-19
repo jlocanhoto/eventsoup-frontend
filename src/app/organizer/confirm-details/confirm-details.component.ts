@@ -12,7 +12,7 @@ export class ConfirmDetailsComponent implements OnInit {
 	constructor() { }
 
 	ngOnInit() {
-		this.selectedPackages = [{"name":"pacote1", "items":['cu', 'buceta']}, {"name":"pacote2", "items":['rola']}];
+		this.selectedPackages = JSON.parse(localStorage.selectedPacks);
 	}
 
 }
