@@ -1,0 +1,78 @@
+/*parte inicial da página*/
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+
+header {
+  /*background-image: url('../img/header-bg.jpg');*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  text-align: center;
+  color: white;
+}
+header .intro-text {
+  padding-top: 70px;
+  padding-bottom: 35px;
+}
+header .intro-text .intro-lead-in {
+  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 22px;
+  margin-bottom: 25px;
+}
+header .intro-text .intro-heading {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 50px;
+  margin-bottom: 25px;
+}
+
+.logo {
+  float: left;
+  padding-left: 10px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 30px;
+}
+
+.logo span {
+  color: #9eff5e !important;
+}
+
+@media (max-width: 768px) {
+  header .intro-text .intro-lead-in {
+    margin-top: 70px;
+  }
+
+  header .intro-text .intro-heading {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  header .intro-text {
+  padding-top: 70px;
+  padding-bottom: 35px;
+  }
+  header .intro-text .intro-lead-in {
+    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 25px;
+  }
+  header .intro-text .intro-heading {
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 75px;
+    line-height: 75px;
+    margin-bottom: 50px;
+  }
+}

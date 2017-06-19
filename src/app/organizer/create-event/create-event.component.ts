@@ -114,10 +114,11 @@ export class CreateEventComponent {
 	*/
 	addEvent(cb: (that : any) => void): void {
 		var p1 = new Promise((resolve, reject) => {
-			this.eventService.getEvents().subscribe((events) => {
+			//this.eventService.getEvents().subscribe((events) => {
 				//console.log(events);
 				//console.log(events.length);
-				this.newEvent.id = events.length;
+				//this.newEvent.id = events.length;
+				this.newEvent.id = 1;
 				/*this.eventService.create(this.newEvent).subscribe((events) => {
 					resolve(this);
 				});*/
@@ -125,7 +126,7 @@ export class CreateEventComponent {
 				//console.log(EVENTS.length);
 				resolve(this);
 				
-			})
+			//})
 		});
 
 		p1.then((that) => { cb(that); });
@@ -174,7 +175,7 @@ export class CreateEventComponent {
 
 			localStorage.setItem('newEvent', JSON.stringify(json));
 
-			let path = ['/home', {outlets: {spa: ['event', that.newEvent.id, 'packages']}}];
+			let path = ['/organizer', 'event', that.newEvent.id, 'packages'];
 			//let path = ['/home'];
 			that.router.navigate(path);
 		});
