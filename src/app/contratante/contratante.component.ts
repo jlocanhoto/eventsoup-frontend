@@ -1,3 +1,4 @@
+import { ContratanteService } from './contratante.service';
 import { Component, OnInit } from '@angular/core';
 
 declare let $;
@@ -8,11 +9,30 @@ declare let $;
   styleUrls: ['./contratante.component.css']
 })
 export class ContratanteComponent implements OnInit {
+  
+  eventos: any;
+  token: string;
 
-  constructor() { }
+  constructor(private service: ContratanteService) { }
 
   ngOnInit() {
+    this.service.getToken().subscribe(
+      res => {
+        console.log("res token")
+        console.log(res);
+        this.token = res;
+    })
+    
     $(".button-collapse").sideNav();
+  }
+
+  ngAfterViewInit() {
+    this.service.getEventos(this.token).subscribe(
+      res => {
+        this.eventos = res
+        console.log(this.eventos);
+        console.log("this.eventos");
+      });
   }
 
   ngOnDestroy() {

@@ -1,3 +1,4 @@
+import { ContratanteService } from './../contratante.service';
 import { Component, OnInit } from '@angular/core';
 
 declare let $;
@@ -8,11 +9,18 @@ declare let $;
   styleUrls: ['./home.component.css', '../../homepage/timeline.css']
 })
 export class HomeComponent implements OnInit {
+  
+  eventos: any;
 
-  constructor() { }
+  constructor(private service: ContratanteService) { }
 
   ngOnInit() {
     $('.tap-target').tapTarget('open');
+    this.service.getEventos("sdfsdf").subscribe(
+    res => {
+      this.eventos = res
+      // console.log(this.eventos);
+    });
   }
 
   open() {
