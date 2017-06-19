@@ -199,7 +199,7 @@ export class CreateEventComponent {
 		//flag = flag && (this.date !== "");
 		flag = flag && ($('.datepicker').val() !== "");
 		//flag = flag && (this.place !== "");
-		flag = flag && (this.budget !== "");
+		//flag = flag && (this.budget !== "");
 		//flag = flag && ($('.money').val().length > 3);
 		//flag = flag && (this.option !== undefined);
 
