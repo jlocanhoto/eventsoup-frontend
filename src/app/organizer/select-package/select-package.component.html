@@ -1,3 +1,44 @@
-<p>
-  select-package works!
-</p>
+<div class="container">
+	<h2 class="header">Selecione seus pacotes</h2>
+	<div class="divider"></div>
+	<div class="row">
+		<div class="col s4 m4 l4 xl4">
+			<h4>Seu pacote</h4>
+			<ul class="collection with-header" *ngFor="let pct of pacotes; let i=index;">
+				<li class="collection-header light-green lighten-5"><h5>{{pct.name}}</h5></li>
+				<div *ngFor="let item of pct.items; let j=index;">
+					<li class="collection-item" *ngIf="getCheck(i, j)">
+						{{item.nome}}
+					</li>
+				</div>
+			</ul>
+			<button (click)="goBack()" class="btn-flat waves-effect waves-light">Cancelar</button>
+			<button (click)="confirmDetails()" class="{{checkRequiredData()}} waves-effect waves-light">Avançar</button>
+		</div>
+
+		<div class="col s8 m8 l8 xl5">
+			<!-- Teal page content  -->
+			<div class="card" *ngFor="let pct of pacotes; let i=index;">
+				<div class="card-image">
+					<img src="assets/imagens/{{pct.img}}">
+					<span class="card-title" style="background: rgba(0,0,0,0.6)">{{pct.name}}</span>
+				</div>
+				<!-- <div class="card-stacked"> -->
+					<div class="card-content">
+						<div class="chip noselect chips_{{i}}" *ngFor="let item of pct.items; let j=index;" (click)="selectItem($event, i, j)">
+							{{item.nome}}
+						</div>
+					</div>
+					<div class="card-action">
+						<a (click)="selectAll(i)">Adicionar tudo</a>
+					</div>
+				<!-- </div> -->
+			</div>
+			<!--
+			<div *ngFor="let color of colors">
+				<div class="{{color}} card-panel">exemplo</div>
+			</div>
+			-->
+		</div>
+	</div>
+</div>
