@@ -1,15 +1,19 @@
-import { NgModule } 				from '@angular/core';
-import { CommonModule } 		from '@angular/common';
-import { RouterModule }     from '@angular/router'
+import { NgModule } 				        from '@angular/core';
+import { CommonModule } 		        from '@angular/common';
+//import { RouterModule }             from '@angular/router';
 
-import { CreateEventComponent }		from './create-event/create-event.component';
-import { SelectPackageComponent } from './select-package/select-package.component';
-import { ConfirmDetailsComponent } from './confirm-details/confirm-details.component';
+import { CreateEventComponent }		  from './create-event/create-event.component';
+import { SelectPackageComponent }   from './select-package/select-package.component';
+import { ConfirmDetailsComponent }  from './confirm-details/confirm-details.component';
+import { OrganizerComponent }       from './organizer.component';
+import { DashboardComponent }       from './dashboard/dashboard.component';
+import { OrganizerRoutingModule }   from './organizer-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    //RouterModule,
+    OrganizerRoutingModule
   ],
   exports: [
   	CreateEventComponent,
@@ -19,7 +23,9 @@ import { ConfirmDetailsComponent } from './confirm-details/confirm-details.compo
   declarations: [
   	CreateEventComponent,
   	SelectPackageComponent,
-  	ConfirmDetailsComponent
+  	ConfirmDetailsComponent,
+  	OrganizerComponent,
+  	DashboardComponent
   ],
   providers: [
   ]

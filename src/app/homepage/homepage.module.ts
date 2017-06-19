@@ -1,11 +1,14 @@
-import { HomepageComponent } from './homepage.component';
-import { HomepageService } from './homepage.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+import { HomepageComponent } from './homepage.component';
+import { HomepageService } from './homepage.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   providers: [HomepageService],
   declarations: [HomepageComponent],

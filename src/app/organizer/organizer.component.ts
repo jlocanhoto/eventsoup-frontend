@@ -1,28 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 
-declare var $:any;
+declare let $;
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./timeline.css', './homepage.component.css']
+  selector: 'app-organizer',
+  templateUrl: './organizer.component.html',
+  styleUrls: ['./organizer.component.css']
 })
-export class HomepageComponent implements OnInit {
+export class OrganizerComponent implements OnInit {
 
-  constructor() { 
-  }
+  constructor() { }
 
   ngOnInit() {
-    $('.parallax').parallax();
     $(".button-collapse").sideNav();
-    $('.scrollspy').scrollSpy();
   }
 
-  ngAfterViewInit() {
-    $.getScript('assets/modernizr.js');
-    $.getScript("assets/main.js");
-  }
-  
   ngOnDestroy() {
     $(".drag-target").css({
       "touch-action": "pan-y", 

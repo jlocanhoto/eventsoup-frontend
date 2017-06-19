@@ -11,22 +11,19 @@ export class FornecedorComponent implements OnInit {
 
 
   pacotes = [
-    {url: "http", codigo: 'XYd6'},
-    {url: "http", codigo: 'Xcd5'},
-    {url: "http", codigo: 'a5fR'},
-    {url: "http", codigo: 'adf6'},
-    {url: "http", codigo: 'uuhf'},
-    {url: "http", codigo: 'sdf5'},
-    {url: "http", codigo: 'ut89'},
+    {url: "sfsd", codigo: 'XYd6'},
+    {url: "hsafsdfttp", codigo: 'Xcd5'},
+    {url: "htsaftp", codigo: 'a5fR'},
+    {url: "hsdfttp", codigo: 'adf6'},
+    {url: "htsfdtp", codigo: 'uuhf'},
+    {url: "htdsfstp", codigo: 'sdf5'},
+    {url: "htsdftp", codigo: 'ut89'},
   ]
   searchBox: string = "";
   allCards = [];
   cards = [];
 
   constructor() { 
-    $( document ).ready(function(){
-      $(".button-collapse").sideNav();
-    })
     this.cards = this.allCards;
   }
 
@@ -49,6 +46,18 @@ export class FornecedorComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(".button-collapse").sideNav();
+  }
+
+  ngOnDestroy() {
+    $(".drag-target").css({
+      "touch-action": "pan-y", 
+      "-webkit-user-drag": "none", 
+      "-webkit-tap-highlight-color": "#000000",
+      "left": "0px"
+    });
+    $("#sidenav-overlay").remove();
+    $("body").removeAttr( 'style' );
   }
 
 }
