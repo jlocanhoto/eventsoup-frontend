@@ -1,6 +1,5 @@
-
 .progress-container {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -69,4 +68,3 @@ ol.progress-meter li.todo {
 ol.progress-meter li.todo:before {
   color: silver;
 }
-

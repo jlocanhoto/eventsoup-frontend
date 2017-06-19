@@ -10,6 +10,8 @@ import { ConfirmDetailsComponent }  from './confirm-details/confirm-details.comp
 import { OrganizerComponent }       from './organizer.component';
 import { DashboardComponent }       from './dashboard/dashboard.component';
 import { OrganizerRoutingModule }   from './organizer-routing.module';
+import { PurchaseComponent }        from './purchase/purchase.component';
+import { FinishComponent }          from './finish/finish.component';
 
 @NgModule({
   imports: [
@@ -18,16 +20,15 @@ import { OrganizerRoutingModule }   from './organizer-routing.module';
     OrganizerRoutingModule
   ],
   exports: [
-  	CreateEventComponent,
-    SelectPackageComponent,
-    ConfirmDetailsComponent
   ],
   declarations: [
   	CreateEventComponent,
   	SelectPackageComponent,
   	ConfirmDetailsComponent,
   	OrganizerComponent,
-  	DashboardComponent
+  	DashboardComponent,
+  	PurchaseComponent,
+  	FinishComponent
   ],
   providers: [
   ]
