@@ -39,8 +39,9 @@ export class SelectPackageComponent implements OnInit {
 	peopleQty		: number[] 	= [1, 0, 0, 0, 0, 0];
 	timeEating		: number 	= 0;
 
-	pacoteFesta		: any = {"name": "Pacote Festa",
+	pacoteExpresso		: any = {"name": "Expresso",
 							 "img": "salgados_doces.jpg",
+							 "desc": "Pausa rápida para um lanchinho depois de uma reunião",
 							 "items": [
 								{"nome": "Salgados"					, "check": false},
 								{"nome": "Doces"					, "check": false},
@@ -50,8 +51,9 @@ export class SelectPackageComponent implements OnInit {
 								//{"nome": "Mesas e cadeiras"			, "check": false}
 							]};
 				
-	pacoteBebidas	: any = {"name": "Pacote Bebidas",
+	pacoteCasual	: any = {"name": "Casual",
 							 "img": "cerveja_artesanal.png",
+							 "desc": "Um bom momento para trocar uma ideia",
 							 "items": [
 								{"nome": "Cervejas"					, "check": false},
 								{"nome": "Sucos"					, "check": false},
@@ -61,15 +63,18 @@ export class SelectPackageComponent implements OnInit {
 							]};
 
 
-	pacoteRegional	: any = {"name": "Pacote Regional",
+	pacoteFesta	: any = {"name": "Festa",
 							 "img": "bolo_de_rolo.jpg",
+							 "desc": "Descontraia com os aniversáriantes do mês",
 							 "items": [
 								{"nome": "Comidas típicas"				, "check": false},
 								{"nome": "Comidas e bebidas culturais"	, "check": false}
 							]};							;
 
-	pacoteVeg		: any = {"name": "Pacote Vegetariano e Vegano",
+/*
+	pacoteEmpresarial		: any = {"name": "Empresarial",
 							 "img": "vegan_burguers.jpg",
+							 "desc": "Receba seu convidade VIP com um evento requintado",
 							 "items": [
 								{"nome": "Salgados"						, "check": false},
 								{"nome": "Doces"						, "check": false},
@@ -78,20 +83,14 @@ export class SelectPackageComponent implements OnInit {
 								{"nome": "Sobremesas"					, "check": false},
 								{"nome": "Frutas"						, "check": false}
 							]};
+*/
 
-	pacoteIntolAler	: any = {"name": "Pacote Intolerantes e Alérgicos",
-							 "img": "bolo_sem_gluten.jpg",
-							 "items": [
-								{"nome": "Doces sem lactose"			, "check": false},
-								{"nome": "Tortas sem lactose"			, "check": false},
-								{"nome": "Salgados sem glúten"			, "check": false}
-							]};
 
-	pacotes			: any = [this.pacoteFesta,
-							 this.pacoteBebidas,
-							 this.pacoteRegional,
-							 this.pacoteVeg,
-							 this.pacoteIntolAler];
+
+	pacotes			: any = [this.pacoteExpresso,
+							 this.pacoteCasual,
+							 this.pacoteFesta];
+							 //this.pacoteEmpresarial];
 
 	selectedPacks	: any = [];
 	qtySelPacks		: number = 0;
