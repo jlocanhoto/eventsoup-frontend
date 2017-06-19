@@ -13,8 +13,8 @@ header {
   color: white;
 }
 header .intro-text {
-  padding-top: 10vh;
-  padding-bottom: 5vh;
+  padding-top: 70px;
+  padding-bottom: 35px;
 }
 header .intro-text .intro-lead-in {
   font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -22,7 +22,6 @@ header .intro-text .intro-lead-in {
   font-size: 22px;
   line-height: 22px;
   margin-bottom: 25px;
-  margin-top: 15vh;
 }
 header .intro-text .intro-heading {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -32,10 +31,21 @@ header .intro-text .intro-heading {
   line-height: 50px;
   margin-bottom: 25px;
 }
+
+@media (max-width: 768px) {
+  header .intro-text .intro-lead-in {
+    margin-top: 70px;
+  }
+
+  header .intro-text .intro-heading {
+    font-size: 40px;
+  }
+}
+
 @media (min-width: 768px) {
   header .intro-text {
-    padding-top: 10vh;
-    padding-bottom: 5vh;
+  padding-top: 70px;
+  padding-bottom: 35px;
   }
   header .intro-text .intro-lead-in {
     font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -55,10 +65,26 @@ header .intro-text .intro-heading {
 }
 
 .picture-height {
-  height: 90vh;
+  /*height: 90vh;*/
   width: 100%;
 }
 
 .parallax {
   z-index: -20;
+}
+
+.section-pacotes {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+@media only screen and (max-width: 992px) {
+  .section-pacotes {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.coisas-item {
+  margin-top: 30px;
 }

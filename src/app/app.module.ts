@@ -4,16 +4,18 @@ import { FormsModule }          from '@angular/forms';
 import { HttpModule }           from '@angular/http';
 
 import { AppRoutingModule }     from './core/app-routing.module';
+import { HomePageRoutingModule } from './homepage/homepage.routing.module';
 
 import { AppComponent }         from './app.component';
 import { FornecedorModule }     from './fornecedor/fornecedor.module';
 import { HomepageModule }       from './homepage/homepage.module';
 import { OrganizerModule }      from './organizer/organizer.module';
+import { ContratanteModule }    from './contratante/contratante.module';
 import { EventService }         from './event/event.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +24,9 @@ import { EventService }         from './event/event.service';
     FornecedorModule,
     HomepageModule,
     OrganizerModule,
-    AppRoutingModule
+    ContratanteModule,
+    //AppRoutingModule
+    HomePageRoutingModule
   ],
   providers: [
     EventService
