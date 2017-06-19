@@ -1,6 +1,7 @@
 import { Component }			from '@angular/core';
 import { Router } 				from '@angular/router';
 import { Location }				from '@angular/common';
+import { FormsModule }   		from '@angular/forms';
 
 import { Event } 				from '../../event/event';
 import { EventService }			from '../../event/event.service';
@@ -13,10 +14,7 @@ declare var $ : any;	// jQuery variable
 	styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent {
-	//events			: Event[];
-	//restrictStrs 	: string[] = [ 'Vegetariano', 'Regional', 'Intolerâncias', 'Alergias' ];
-	//restrictStrs 	: string[] = [ 'Vegetariano', 'Regional' ];
-	
+
 	newEvent		: Event;
 
 	title			: string = "";
@@ -26,8 +24,11 @@ export class CreateEventComponent {
 	timeEnd			: string = "";
 	place			: string = "";
 	budget			: string = "";
+	bairro			: string = "";
+	rua				: string = "";
+	numero			: number =	0;
 
-	specificQty		: number = 0;
+	qtd				: number = 0;
 
 
 	//restrictions	: boolean[];
@@ -155,13 +156,14 @@ export class CreateEventComponent {
 
 		this.newEvent.budget		= this.moneyNotation(this.budget);
 		//this.newEvent.restrictions 	= this.getRestrictions();
-		/*
-		if (this.specificQty !== 0) {
-			this.option.qty.min = this.option.qty.max = this.specificQty;
-		}
-		*/
-		this.newEvent.qtyPeople		= 1;
 
+		this.newEvent.qtdPeople		= this.qtd;
+		
+		this.newEvent.bairro		= this.bairro;
+		
+		this.newEvent.rua			= this.rua;
+		
+		this.newEvent.numero		= this.numero;
 
 		this.addEvent(function(that) {
 			let json = {
@@ -170,6 +172,14 @@ export class CreateEventComponent {
 				"date": that.newEvent.date,
 				//"place": that.newEvent.place,
 				"budget": that.newEvent.budget,
+
+				"qtdPeople" : that.newEvent.qtdPeople,
+
+				"bairro" : that.newEvent.bairro,
+
+				"rua" : that.newEvent.rua,
+
+				"numero" : that.newEvent.numero
 				//"restrictions": that.newEvent.restrictions,
 				//"packageID": ''
 			};
@@ -214,7 +224,7 @@ export class CreateEventComponent {
 		return str;
 	}
 
-	goBack(): void {
-		this.location.back();
-	}
+	// goBack(): void {
+	// 	this.location.back();
+	// }
 }

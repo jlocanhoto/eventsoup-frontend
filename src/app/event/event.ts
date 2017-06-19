@@ -7,7 +7,10 @@ export class Event {
   time: any;		// {begin: XX, end: XX}
   place: string;
   budget: number;
-  qtyPeople: any;	// {min: XX, max: XX}
+  qtdPeople: any;	// {min: XX, max: XX}
   //restrictions: string;
   packageID: string = "";
+  bairro      : string = "";
+  rua        : string = "";
+  numero      : number =  0;
 }
