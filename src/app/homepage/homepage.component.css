@@ -101,3 +101,31 @@ header .intro-text .intro-heading {
 .coisas-item {
   margin-top: 30px;
 }
+
+. focus img{
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.focus img:hover{
+  border: 70px solid #000;
+  border-radius:50%;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.updateIcon {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.containerIcon {
+  display: table;
+
+}
