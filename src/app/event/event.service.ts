@@ -88,7 +88,7 @@ export class EventService {
 			"data": 				event.date,
 			"endereco":				event.place,
 			"orcamento":			event.budget,
-			"quantidade_pessoas": 	event.qtyPeople,
+			"quantidade_pessoas": 	event.qtdPeople,
 		}
 		/*
 		if (event.restrictions !== ""){
