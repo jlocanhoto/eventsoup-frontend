@@ -38,15 +38,15 @@ export class SelectPackageComponent implements OnInit {
 
 	peopleQty		: number[] 	= [1, 0, 0, 0, 0, 0];
 	timeEating		: number 	= 0;
+	newEvent		: any = JSON.parse(localStorage.newEvent);
 
 	pacoteExpresso		: any = {"name": "Expresso",
 							 "img": "salgados_doces.jpg",
 							 "desc": "Pausa rápida para um lanchinho depois de uma reunião",
 							 "items": [
-								{"nome": "Salgados"					, "check": false},
-								{"nome": "Doces"					, "check": false},
-								{"nome": "Tortas"					, "check": false},
-								{"nome": "Refrigerantes"			, "check": false},
+								{"nome": "Coxinha"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
+								{"nome": "Empada"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15},
+								{"nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15}
 								//{"nome": "Descartáveis"				, "check": false},
 								//{"nome": "Mesas e cadeiras"			, "check": false}
 							]};
@@ -55,20 +55,18 @@ export class SelectPackageComponent implements OnInit {
 							 "img": "cerveja_artesanal.png",
 							 "desc": "Um bom momento para trocar uma ideia",
 							 "items": [
-								{"nome": "Cervejas"					, "check": false},
-								{"nome": "Sucos"					, "check": false},
-								{"nome": "Cafés"					, "check": false},
-								{"nome": "Chás"						, "check": false}
+								{"nome": "Brigadeiro"			,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
+								{"nome": "Surpresa de uva"		,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
+								{"nome": "Refrigerante"			,	"type": "liquido",	"qtd": this.newEvent.qtdPeople*0.5, "precoUnitario": 5.5},
+								{"nome": "Pão de queijo"		,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2}
 								//"Outras bebidas"	];
 							]};
-
 
 	pacoteFesta	: any = {"name": "Festa",
 							 "img": "bolo_de_rolo.jpg",
 							 "desc": "Descontraia com os aniversáriantes do mês",
 							 "items": [
-								{"nome": "Comidas típicas"				, "check": false},
-								{"nome": "Bebidas culturais"			, "check": false}
+								{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
 							]};	
 
 /*
@@ -117,9 +115,10 @@ export class SelectPackageComponent implements OnInit {
 				  .subscribe((event) => this.event = event);
 		*/
 
-		let t = JSON.parse(localStorage.newEvent);
+		this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
+		this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
 
-		console.dir(t);
+		console.dir(this.newEvent);
 	}
 
 	ngAfterViewInit(): void {
@@ -169,7 +168,7 @@ export class SelectPackageComponent implements OnInit {
 	}
 
 	checkRequiredData(): string {
-		let flag = (this.qtySelPacks > 0);
+		let flag = (this.selectedPack.items !== undefined);
 
 		let str = "btn disabled";
 
@@ -210,7 +209,7 @@ export class SelectPackageComponent implements OnInit {
 	confirmDetails(): void {
 		//console.log(this.event);
 		//if (this.event !== undefined) {
-			localStorage.setItem('selectedPacks', JSON.stringify(this.selectedPacks));
+			localStorage.setItem('selectedPack', JSON.stringify(this.selectedPack));
 
 			if (localStorage.newEvent !== undefined) {
 				let event = JSON.parse(localStorage.newEvent)
@@ -230,6 +229,20 @@ export class SelectPackageComponent implements OnInit {
 		else {
 			console.log('EVENT NOT FOUND!');
 		}*/
+	}
+
+	calcBudget(){
+		let budget = 0;
+
+
+		if(this.selectedPack.items !== undefined)
+		{
+			for(let i = 0; i < this.selectedPack.items.length; i++){
+				budget += this.selectedPack.items[i].qtd * this.selectedPack.items[i].precoUnitario;
+			}
+		}
+
+		return budget;
 	}
 
 	goBack(): void {
