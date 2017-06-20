@@ -233,8 +233,6 @@ export class SelectPackageComponent implements OnInit {
 
 	calcBudget(){
 		let budget = 0;
-
-
 		if(this.selectedPack.items !== undefined)
 		{
 			for(let i = 0; i < this.selectedPack.items.length; i++){

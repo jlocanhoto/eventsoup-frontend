@@ -1,5 +1,11 @@
 .container {width: 90% !important;}
 
+.padding20 { padding: 20px !important; }
+
+.padding5 { padding: 5px !important; }
+
+.no-border { border: 0; }
+
 .progress-container {
   width: 100%;
   margin: 0 auto;

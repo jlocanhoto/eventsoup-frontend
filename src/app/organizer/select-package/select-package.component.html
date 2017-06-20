@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="col s3">
-			<ul class="pedido card">
+			<ul class="card">
 				<div class="green padding20">
 					<h5 class="white-text">
 						Pacote {{selectedPack.name}}
@@ -59,20 +59,7 @@
 								</div>
 
 								<div class="col s4">
-									<div *ngIf="item.type==='salgado'">
-										<!-- <input value="{{newEvent.qtdPeople * 5}}" id="first_name2" type="text" ng-model="{{item.nome}}"> -->
-										<input id="first_name2" type="text" [(ngModel)]="item.qtd">
-									</div>
-
-									<div *ngIf="item.type==='doce'">
-										<!-- <input value="{{newEvent.qtdPeople * 3}}" id="first_name2" type="text" ng-model="{{item.nome}}"> -->
-										<input id="first_name2" type="text" [(ngModel)]="item.qtd">
-									</div>
-
-									<div *ngIf="item.type==='liquido'">
-										<!-- <input value="{{newEvent.qtdPeople * 0.5}}" id="first_name2" type="text" ng-model="{{item.nome}}"> -->
-										<input id="first_name2" type="text" [(ngModel)]="item.qtd">
-									</div>
+									<input id="first_name2" type="text" [(ngModel)]="item.qtd">
 								</div>
 							</li>
 						</ul> 
