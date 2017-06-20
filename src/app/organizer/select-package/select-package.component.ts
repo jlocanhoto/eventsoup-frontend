@@ -116,6 +116,10 @@ export class SelectPackageComponent implements OnInit {
 				  .switchMap((params: Params) => this.eventService.getEvent(+params['id']))
 				  .subscribe((event) => this.event = event);
 		*/
+
+		let t = JSON.parse(localStorage.newEvent);
+
+		console.dir(t);
 	}
 
 	ngAfterViewInit(): void {
