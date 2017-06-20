@@ -68,8 +68,8 @@ export class SelectPackageComponent implements OnInit {
 							 "desc": "Descontraia com os aniversáriantes do mês",
 							 "items": [
 								{"nome": "Comidas típicas"				, "check": false},
-								{"nome": "Comidas e bebidas culturais"	, "check": false}
-							]};							;
+								{"nome": "Bebidas culturais"			, "check": false}
+							]};	
 
 /*
 	pacoteEmpresarial		: any = {"name": "Empresarial",
@@ -86,6 +86,7 @@ export class SelectPackageComponent implements OnInit {
 */
 
 
+	selectedPack	: any = {};
 
 	pacotes			: any = [this.pacoteExpresso,
 							 this.pacoteCasual,
@@ -119,6 +120,13 @@ export class SelectPackageComponent implements OnInit {
 
 	ngAfterViewInit(): void {
 		$('.chip').css('cursor', 'pointer');
+	}
+
+
+	selectPackage(pkg){
+		console.log(pkg)
+		this.selectedPack = pkg;
+
 	}
 
 	selectItem(event, indexPackage, indexItem) {
@@ -208,6 +216,7 @@ export class SelectPackageComponent implements OnInit {
 
 				//let path = ['/home'];
 				let path = ['/organizer', 'event', event.id, 'confirmation'];
+				console.log(path)
 				//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
 				this.router.navigate(path);
 				//let path = ['/event', this.event.id, 'purchase'];

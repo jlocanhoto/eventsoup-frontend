@@ -4,30 +4,29 @@
 	</ol>
 	<br/><br/>
 	<div class="row">
-	
 		<div class="col s9">
 			<h4 class="header">Selecione seus pacotes</h4>
 			<!-- Teal page content  -->
 			<div class="row">
-				<div class="col s4 m4" *ngFor="let pct of pacotes; let i=index;">
-					<div class="card medium" >
-						<div class="card-image">
+				<div class="col s4 m4" *ngFor="let pct of pacotes">
+					<div class="card large waves-effect waves-block waves-light" (click)="selectPackage(pct)">
+						<div class="card-image ">
 							<img class="responsive-img" src="assets/imagens/{{pct.img}}">
 							<span class="card-title" style="background: rgba(0,0,0,0.6)">{{pct.name}}</span>
 						</div>
-						<div class="card-content">
-							<div class="card-content">
-								<p>
-									{{pct.desc}}
-								</p>
-							</div>
 
-							<div class="chip noselect chips_{{i}}" *ngFor="let item of pct.items; let j=index;" (click)="selectItem($event, i, j)">
-								{{item.nome}}
-							</div>
+						<div class="card-content">
+							<p>
+								{{pct.desc}}
+							</p>
 						</div>
-						<div class="card-action">
-							<a (click)="selectAll(i)">Adicionar tudo</a>
+
+						<div class="card-content">
+							<ul *ngFor="let item of pct.items">
+								<li>
+									{{item.nome}}
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -35,15 +34,33 @@
 		</div>
 
 		<div class="col s3">
-			<h4>Seu pacote</h4>
-			<ul class="collection with-header" *ngFor="let pct of pacotes; let i=index;">
-				<li class="collection-header light-green lighten-5"><h5>{{pct.name}}</h5></li>
-				<div *ngFor="let item of pct.items; let j=index;">
-					<li class="collection-item" *ngIf="getCheck(i, j)">
-						{{item.nome}}
-					</li>
+			<ul class="pedido card">
+				<div class="green padding20">
+					<h5 class="white-text"> <i class="small material-icons text-white">shopping_basket</i> Seu pacote</h5>
+				</div>
+				<div *ngIf="selectedPack.name!==undefined">
+					<div class="card-title padding20">Pacote {{selectedPack.name}}</div>
+					<div class="card-content" style="min-height: 10px;">
+						<ul class="collection no-border">
+							<li class="collection-items col s12"*ngFor="let item of selectedPack.items">
+								<div class="col s9" style="transform: translate(0,75%);" >
+									{{item.nome}}
+								</div>
+
+								<div class="col s3">
+									<input value="20" id="first_name2" type="text">
+								</div>
+							</li>
+						</ul> 
+					</div>
+					<div class="card-action green padding20 white-text">
+						<h5>R$</h5>
+					</div>
 				</div>
 			</ul>
+			<div>
+				
+			</div>
 			<button (click)="confirmDetails()" class="{{checkRequiredData()}} waves-effect waves-light">Avançar</button>
 		</div>
 	</div>
