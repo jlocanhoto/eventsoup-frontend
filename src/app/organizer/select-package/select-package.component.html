@@ -16,18 +16,18 @@
 						</div>
 
 						<div class="card-content">
-							<p>
-								{{pct.desc}}
-							</p>
-						</div>
-
-						<div class="card-content">
+							<h5> {{pct.desc}} </h5>
+							<br />
+							<b>Conteúdo do pacote:</b>
 							<ul *ngFor="let item of pct.items">
 								<li>
 									{{item.nome}}
 								</li>
 							</ul>
 						</div>
+						<div class="card-action">
+			              <button class="waves-effect waves-light btn red btn-large">Peça agora</button>
+			            </div>
 					</div>
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 				</div>
 				<div *ngIf="selectedPack.name!==undefined">
 					<div class="card-title padding20">R$ {{calcBudget()}}</div>
-					<div class="card-content padding5">
+					<div class="card-content">
 						<ul class="collection no-border">
 							<li class="collection-items col s12"*ngFor="let item of selectedPack.items">
 
@@ -64,13 +64,12 @@
 							</li>
 						</ul> 
 					</div>
+					<div class="card-action">
+			             <button (click)="confirmDetails()" class="{{checkRequiredData()}} waves-effect waves-light btn green btn-large">Avançar</button>
+			        </div>
 
 				</div>
 			</ul>
-			<div>
-				
-			</div>
-			<button (click)="confirmDetails()" class="{{checkRequiredData()}} waves-effect waves-light">Avançar</button>
 		</div>
 	</div>
 </div>

@@ -42,7 +42,7 @@ export class SelectPackageComponent implements OnInit {
 
 	pacoteExpresso		: any = {"name": "Expresso",
 							 "img": "salgados_doces.jpg",
-							 "desc": "Pausa rápida para um lanchinho depois de uma reunião",
+							 "desc": "Pausa para um lanche após uma reunião",
 							 "items": [
 								{"nome": "Coxinha"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
 								{"nome": "Empada"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15},

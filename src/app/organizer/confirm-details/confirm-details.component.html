@@ -121,38 +121,57 @@
 
 		<div class="col s3 m3">
 			<div class="card">
-				<h5 class ="green padding20 white-text">Pacote selecionado R$ {{calcBudget()}}</h5>
-				<div class="card-content padding5">
-					<ul class="collection no-border">
-						<li class="collection-items col s12"*ngFor="let item of selectedPack.items">
+				<h5 class ="green padding20 white-text">Seu Pedido</h5>
+				<div class="card-content">
+					<div class="row mb5" *ngFor="let item of selectedPack.items">
 
-							<div *ngIf="item.type==='liquido'">
-								<div class="col s8" style="transform: translate(0,75%);" >
-									{{item.nome}} (L)
-								</div>
+						<div *ngIf="item.type==='liquido'">
+							<div class="col s8">
+								{{item.nome}} (L)
 							</div>
+						</div>
 
-							<div *ngIf="item.type!=='liquido'">
-								<div class="col s8" style="transform: translate(0,75%);" >
-									<p>{{item.nome}}</p> 
-								</div>
+						<div *ngIf="item.type!=='liquido'">
+							<div class="col s8" >
+								{{item.nome}}
 							</div>
+						</div>
 
-							<div class="col s4">
-								<p>{{item.qtd}}</p>
-							</div>
-						</li>
-					</ul> 
+						<div class="col s4">{{item.qtd}}</div>
+					</div>
+					<br />
+					<b>Subtotal: R$ {{calcBudget()}}</b>
 				</div>
-				<span class="card-title">Entrega</span>
-				<p>Rua Conde de Irajá, 233</p>
-				<button class="waves-effect waves-light btn btn-large">Redefinir Dados</button>
-			</div>
 
-			<div class="right-align">
-				<button (click)="purchase()" class="btn waves-effect waves-light">Realizar Pagamento
-					<i class="material-icons right">done</i>
-				</button>
+				<!-- <div class="divider"></div> -->
+				
+				<div class="card-content">
+					<h5 class="card-title">Entrega</h5>
+					<b>Horário</b>
+					<input id="horario" type="text">
+					<br />
+					<b>Local: </b>
+					<p>
+						{{eventInfo.rua}}, {{eventInfo.numero}} - {{eventInfo.bairro}}
+					</p>
+					<br />
+					<b>Taxa de Entrega: R$ 10</b><br /><br />
+					<button class="btn w100 waves-effect waves-light">Redefinir Dados</button>
+				</div>
+				
+				<div class="divider"></div>
+
+				<div class="card-content">
+					<h5 class="card-title">Valor Total</h5>
+					<p>Este pacote inclui pratos, copos e talheres descartáveis para {{eventInfo.qtd}} pessoas</p><br />
+					<b>R$ {{10 + calcBudget()}}</b><br /><br />
+				</div>
+
+				<div class="card-action">
+			        <button (click)="purchase()" class="btn red waves-effect waves-light">Realizar Pagamento
+						<i class="material-icons right">done</i>
+					</button>
+			    </div>
 			</div>
 		</div>
 	</div>

@@ -20,12 +20,14 @@ export class ConfirmDetailsComponent implements OnInit {
 	tipoSelecionado : any = null;
 
 	selectedPack		: any = JSON.parse(localStorage.selectedPack);
+	eventInfo			: any = JSON.parse(localStorage.newEvent);
 
 	constructor(private location: Location,
 				private router	: Router	) { }
 
 	ngOnInit() {
 		this.selectedPackages = JSON.parse(localStorage.selectedPacks);
+		this.eventInfo = JSON.parse(localStorage.newEvent);
 	}
 
 	ngAfterViewInit() {
