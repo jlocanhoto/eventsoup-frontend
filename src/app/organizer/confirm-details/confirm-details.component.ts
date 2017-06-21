@@ -19,6 +19,21 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	tipoSelecionado : any = null;
 
+	confirmpass		: any = "";
+	complemento		: any = "";
+	sobrenome		: any = "";
+	telefone		: any = "";
+	bairro			: any = "";
+	numero			: any = "";
+	bairro			: any = "";
+	titulo			: any = "";
+	email			: any = "";
+	senha			: any = "";
+	info			: any = "";
+	nome			: any = "";
+	rua				: any = "";
+	cep				: any = "";
+
 	selectedPack		: any = JSON.parse(localStorage.selectedPack);
 	eventInfo			: any = JSON.parse(localStorage.newEvent);
 
