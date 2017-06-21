@@ -27,7 +27,7 @@ import { FinishComponent }          from './finish/finish.component';
   	SelectPackageComponent,
   	ConfirmDetailsComponent,
   	OrganizerComponent,
-    ProgressTrackerComponent
+    ProgressTrackerComponent,
   	DashboardComponent,
   	PurchaseComponent,
   	FinishComponent
