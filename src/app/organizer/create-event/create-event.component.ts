@@ -26,9 +26,9 @@ export class CreateEventComponent {
 	budget			: string = "";
 	bairro			: string = "";
 	rua				: string = "";
-	numero			: number =	0;
+	numero			: number;
 
-	qtd				: number = 0;
+	qtd				: number;
 
 
 	//restrictions	: boolean[];
