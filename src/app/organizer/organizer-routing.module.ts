@@ -8,6 +8,7 @@ import { SelectPackageComponent }   		from './select-package/select-package.comp
 import { ConfirmDetailsComponent }  		from './confirm-details/confirm-details.component';
 import { PurchaseComponent } 				from './purchase/purchase.component';
 import { FinishComponent }          		from './finish/finish.component';
+import { LoginComponent } from './../core/login/login.component';
 
 const ORGANIZER_ROUTES: Routes = [
     { path: 'organizer', component: OrganizerComponent, children: [
@@ -17,7 +18,8 @@ const ORGANIZER_ROUTES: Routes = [
   		{path: 'event/:id/confirmation', component: ConfirmDetailsComponent},
   		{path: 'event/:id/purchase', component: PurchaseComponent},
   		{path: 'event/:id/finish', component: FinishComponent}
-    ] }
+    ] },
+    { path: 'login', component: LoginComponent },
 ]
 
 @NgModule({
