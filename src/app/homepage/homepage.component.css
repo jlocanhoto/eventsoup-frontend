@@ -1,4 +1,6 @@
 /*parte inicial da página*/
+@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url('https://fonts.googleapis.com/css?family=Dosis|Oswald|Sanchez|Slabo+27px');
 
 header {
   /*background-image: url('../img/header-bg.jpg');*/
@@ -18,18 +20,21 @@ header .intro-text {
 }
 header .intro-text .intro-lead-in {
   font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-style: italic;
   font-size: 22px;
   line-height: 22px;
   margin-bottom: 25px;
 }
-header .intro-text .intro-heading {
-  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 50px;
-  line-height: 50px;
-  margin-bottom: 25px;
+
+.logo {
+  float: left;
+  padding-left: 10px;
+  color: #fff;
+  font-family: 'Exo', sans-serif;
+  font-size: 30px;
+}
+
+.logo span {
+  color: #9eff5e !important;
 }
 
 @media (max-width: 768px) {
@@ -48,17 +53,14 @@ header .intro-text .intro-heading {
   padding-bottom: 35px;
   }
   header .intro-text .intro-lead-in {
-    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-style: italic;
+    font-family: 'Slabo 27px', serif;
     font-size: 40px;
     line-height: 40px;
     margin-bottom: 25px;
   }
   header .intro-text .intro-heading {
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 75px;
+    font-family: 'Sanchez', serif;
+    font-size: 85px;
     line-height: 75px;
     margin-bottom: 50px;
   }
@@ -87,4 +89,60 @@ header .intro-text .intro-heading {
 
 .coisas-item {
   margin-top: 30px;
+}
+
+.focus img{
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.focus img:hover{
+  border: 70px solid #000;
+  border-radius:50%;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.updateIcon {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.containerIcon {
+  display: table;
+
+}
+
+.card-altura {
+  height: 450px;
+}
+
+@media only screen and (max-width: 600px) {
+  .card-altura {
+    height: 380px;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 700px){
+  .card-altura {
+    height: 530px;
+  }
+
+  .card-altura h5 {
+    font-size: 20px;
+  }
+
+  .card-altura b {
+    font-size: 15px;
+  }
+
+  .card-altura ul {
+    font-size: 14px;
+  }
 }

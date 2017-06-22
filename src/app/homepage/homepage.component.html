@@ -1,12 +1,12 @@
 <!--Começo do Menu-->
-
 <div class="navbar-fixed">
     <nav>
-        <div class="nav-wrapper teal">
-            <a routerLink="" class="brand-logo">EventSoup</a>
+        <div class="nav-wrapper grey darken-4">
+            <a routerLink="" class="logo">event<span>soup</span></a>
+            <!--<a routerLink="" class="brand-logo">EventSoup</a>-->
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a routerLink="/fornecedor">Entrar Fornecedor</a></li>
-				<li><a routerLink="/contratante">Entrar Contratante</a></li>
+				<li><a routerLink="/organizer">Entrar Contratante</a></li>
             </ul>
             <a href="javascript.void(0)" data-activates="slide-out" class="button-collapse right"><i class="material-icons white-text">menu</i></a>
         </div>
@@ -15,13 +15,13 @@
 
 <ul id="slide-out" class="side-nav">
 	<li><a routerLink="/fornecedor">Entrar Fornecedor</a></li>
-	<li><a routerLink="/contratante">Entrar Contratante</a></li>
+	<li><a routerLink="/organizer">Entrar Contratante</a></li>
 </ul>
 <!--Fim do Menu-->
 
 <div class="parallax-container picture-height">
   <div class="parallax">
-    <img src="assets/imagens/paisagem.jpg">
+    <img src="assets/imagens/home.jpg" class="focus">
   </div>
    <!-- Header -->
     <header>
@@ -29,7 +29,7 @@
             <div class="intro-text">
                 <div class="intro-lead-in">Bem vindo ao eventsoup!</div>
                 <div class="intro-heading">Organize aqui o seu evento!</div>
-                <a class="btn waves-effect waves-light">Criar Evento</a>
+                <a class="btn waves-effect waves-light" routerLink="/organizer/event/create">Criar Evento</a>
             </div>
         </div>
     </header>
@@ -41,112 +41,35 @@
 		<div  class="col s12 m4 l4 coisas-item">
 			<div class="center">
 				<i class="material-icons">menu</i>
-				<h5>Speeds up development</h5>
-				<p class="light center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
+				<h5>NOSSA MISSÃO</h5>
+				<p class="light center">Entregar para os nossos clientes, de acordo com suas reais necessidades, os melhores fornecedores da cidade para o seu evento empresarial de maneira prática e rápida, sem a necessidade de entrar em contato com estes serviços um a um.</p>
 			</div>
 		</div>
 		<div class="col s12 m4 l4 coisas-item">
 			<div class="center">
 				<i class="material-icons">menu</i>
-				<h5>User Experience Focused</h5>
-				<p class="light center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+				<h5>QUEM SOMOS</h5>
+				<p class="light center">Somos uma equipe de estudantes de Ciência/Engenharia da Computação – Centro de Informática UFPE – motivados e engajados em solucionar a problemática das muitas e longas etapas para a realização de um evento corporativo, independentemente do seu tamanho.</p>
 			</div>
 		</div>
 		<div class="col s12 m4 l4 coisas-item">
 			<div class="center promo promo-example">
 				<i class="material-icons">menu</i>
-				<h5>Fully responsive</h5>
-				<p class="light center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+				<h5>NOSSOS VALORES</h5>
+				<p class="light center">
+          Praticidade é tudo <br/>
+          Qualidade Técnica <br/>
+          Minimização de custos <br/>
+          Parcerias proveitosas e harmoniosas <br/>
+          Somos donos e somos um time unido <br/>
+          Profissionalismo no atendimento ao cliente <br/>
+          Transparência e segurança na forma de pagamento
+        </p>
 			</div>
 		</div>
 	</div>
 </div>
 
-
-<!--Começo da Timeline-->
-<div class="section">
-  <div class="col s12 scrollspy" id="homepage-timeline">
-	<section id="cd-timeline" class="cd-container">
-		<div class="cd-timeline-block cssanimations">
-			<div class="cd-timeline-img cd-picture">
-				<img src="assets/imagens/mobile-phone.svg">
-			</div> <!-- cd-timeline-img -->
-
-			<div class="cd-timeline-content">
-				<h5>Title of section 1</h5>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p>
-				<a class="cd-read-more">Read more</a>
-				<span class="cd-date">Jan 14</span>
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
-
-		<div class="cd-timeline-block cssanimations">
-			<div class="cd-timeline-img cd-movie">
-				<img src="assets/imagens/mobile-phone.svg">
-			</div> <!-- cd-timeline-img -->
-
-			<div class="cd-timeline-content">
-				<h5>Title of section 2</h5>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde?</p>
-				<a class="cd-read-more">Read more</a>
-				<span class="cd-date">Jan 18</span>
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
-
-		<div class="cd-timeline-block cssanimations">
-			<div class="cd-timeline-img cd-picture">
-				<img src="assets/imagens/mobile-phone.svg">
-			</div> <!-- cd-timeline-img -->
-
-			<div class="cd-timeline-content">
-				<h5>Title of section 3</h5>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, obcaecati, quisquam id molestias eaque asperiores voluptatibus cupiditate error assumenda delectus odit similique earum voluptatem doloremque dolorem ipsam quae rerum quis. Odit, itaque, deserunt corporis vero ipsum nisi eius odio natus ullam provident pariatur temporibus quia eos repellat consequuntur perferendis enim amet quae quasi repudiandae sed quod veniam dolore possimus rem voluptatum eveniet eligendi quis fugiat aliquam sunt similique aut adipisci.</p>
-				<a class="cd-read-more">Read more</a>
-				<span class="cd-date">Jan 24</span>
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
-
-		<div class="cd-timeline-block cssanimations">
-			<div class="cd-timeline-img cd-location">
-				<img src="assets/imagens/mobile-phone.svg">
-			</div> <!-- cd-timeline-img -->
-
-			<div class="cd-timeline-content">
-				<h5>Title of section 4</h5>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p>
-				<a class="cd-read-more">Read more</a>
-				<span class="cd-date">Feb 14</span>
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
-
-		<div class="cd-timeline-block cssanimations">
-			<div class="cd-timeline-img cd-location">
-				<img src="assets/imagens/mobile-phone.svg">
-			</div> <!-- cd-timeline-img -->
-
-			<div class="cd-timeline-content">
-				<h5>Title of section 5</h5>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum.</p>
-				<a class="cd-read-more">Read more</a>
-				<span class="cd-date">Feb 18</span>
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
- 
-		<div class="cd-timeline-block cssanimations">
-			<div class="cd-timeline-img cd-movie">
-				<img src="assets/imagens/mobile-phone.svg">
-			</div> <!-- cd-timeline-img -->
-
-			<div class="cd-timeline-content">
-				<h5>Final Section</h5>
-				<p>This is the content of the last section</p>
-				<span class="cd-date">Feb 26</span>
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
-	</section> <!-- cd-timeline -->
-  </div>
-</div>
-<!--Fim da timeline-->
 
 <!--Começo de pacotes-->
 
@@ -154,53 +77,72 @@
 	<h4>Pacotes </h4>
 	<div class="row">
 		<div class="col s12 m4 l4">
-			<div class="card">
-				<div class="card-image waves-effect waves-block waves-light">
-					<img class="activator" src="assets/imagens/castelo.jpg">
+			<div class="card waves-block waves-light">
+				<div class="card-image">
+					<img class="responsive-img" src="assets/imagens/expresso.jpg">
+					<span class="card-title" style="background: rgba(0,0,0,0.6)"> Expresso</span>
 				</div>
-				<div class="card-content">
-					<span class="card-title activator grey-text text-darken-4">Pacote 1 <i class="material-icons right">more_vert</i></span>
-					<p>R$ 150,00</p>
-				</div>
-				<div class="card-reveal">
-					<span class="card-title grey-text text-darken-4">Pacote 1 <i class="material-icons right">close</i></span>
-					<ul class="collection">
-						<li class="collection-item" *ngFor="let item of ['item 1','item 2','item 3','item 4','item 5','item 6']">{{item}}</li>
+				<div class="card-content card-altura">
+					<h5>Faça uma pausa rápida com um lanchinho depois de uma reunião!</h5><br/>
+					<b>Conteúdo do pacote:</b>
+					<ul>
+						<li>Coxinhas</li>
+						<li>Empadas de frango</li>
+						<li>Salgadinhos de queijo </li>
 					</ul>
+				</div>
+				<div class="card-action">
+					<a class="waves-effect waves-light btn red btn-large" routerLink="/organizer/event/create">Peça agora</a>
 				</div>
 			</div>
 		</div>
 		<div class="col s12 m4 l4">
-			<div class="card">
-				<div class="card-image waves-effect waves-block waves-light">
-					<img class="activator" src="assets/imagens/castelo.jpg">
+			<div class="card waves-block waves-light">
+				<div class="card-image">
+					<img class="responsive-img" src="assets/imagens/cerveja_artesanal.png">
+					<span class="card-title" style="background: rgba(0,0,0,0.6)">Casual</span>
 				</div>
-				<div class="card-content">
-					<span class="card-title activator grey-text text-darken-4">Pacote 2 <i class="material-icons right">more_vert</i></span>
-					<p>R$ 200,00</p>
-				</div>
-				<div class="card-reveal">
-					<span class="card-title grey-text text-darken-4">Pacote 2 <i class="material-icons right">close</i></span>
-					<ul class="collection">
-						<li class="collection-item" *ngFor="let item of ['item 1','item 2','item 3','item 4','item 5','item 6']">{{item}}</li>
+				<div class="card-content card-altura">
+					<h5>Um bom momento para realizar aquele <i>networking</i> na empresa!</h5><br/>
+					<b>Conteúdo do pacote:</b>
+					<ul>
+						<li>Coxinhas</li>
+						<li>Empadas de frango</li>
+						<li>Salgadinhos de queijo </li>
+						<li>Pães de queijo</li>
+						<li>Brigadeiros</li>
+						<li>Surpresas de uva</li>
+						<li>Refrigerantes</li>
 					</ul>
+				</div>
+				<div class="card-action">
+					<a class="waves-effect waves-light btn red btn-large" routerLink="/organizer/event/create">Peça agora</a>
 				</div>
 			</div>
 		</div>
 		<div class="col s12 m4 l4">
-			<div class="card">
-				<div class="card-image waves-effect waves-block waves-light">
-					<img class="activator" src="assets/imagens/castelo.jpg">
+			<div class="card waves-block waves-light">
+				<div class="card-image">
+					<img class="responsive-img" src="assets/imagens/brigadeiro.jpg">
+					<span class="card-title" style="background: rgba(0,0,0,0.6)">Festa</span>
 				</div>
-				<div class="card-content">
-					<span class="card-title activator grey-text text-darken-4">Pacote 3 <i class="material-icons right">more_vert</i></span>
-					<p>R$ 300,00</p>
-				</div>
-				<div class="card-reveal">
-					<span class="card-title grey-text text-darken-4">Pacote 3 <i class="material-icons right">close</i></span>
-					<ul class="collection">
-						<li class="collection-item" *ngFor="let item of ['item 1','item 2','item 3','item 4','item 5','item 6']">{{item}}</li>
+				<div class="card-content card-altura">
+					<h5>Descontraia o ambiente da sua empresa com os aniversariantes do mês!</h5><br/>
+					<b>Conteúdo do pacote:</b>
+					<ul>
+						<li>Coxinhas</li>
+						<li>Empadas de frango</li>
+						<li>Salgadinhos de queijo </li>
+						<li>Pães de queijo</li>
+						<li>Brigadeiros</li>
+						<li>Surpresas de uva</li>
+						<li>Refrigerantes</li>
+						<li>Sucos</li>
+						<li>Tortas</li>
 					</ul>
+				</div>
+				<div class="card-action">
+					<a class="waves-effect waves-light btn red btn-large" routerLink="/organizer/event/create">Peça agora</a>
 				</div>
 			</div>
 		</div>
@@ -210,16 +152,154 @@
 
 <!--Fim de pacotes-->
 
-<!--Começo de contatos-->
-<!--<div class="parallax-container picture-height">
-  <div class="parallax"><img src="assets/imagens/castelo.jpg"></div>
+
+<!--Começo de pacotes-->
+
+<!--<div class="section section-pacotes ">
+  <h4>Pacotes </h4>
+  <div class="row">
+    <div >-->
+      <!-- Teal page content  -->
+      <!--<div class="row">-->
+        <!-- EXPRESSO -->
+        <!--<div class="col s4 m4" >
+          <div class="card large  waves-block waves-light" style="min-height: 725px;" >
+            <div class="card-image ">
+              <img class="responsive-img" src="assets/imagens/expresso.jpg">
+              <span class="card-title" style="background: rgba(0,0,0,0.6)"> Expresso</span>
+            </div>
+            <div class="card-content">
+              <h5>Faça uma pausa rápida com um lanchinho depois de uma reunião!</h5><br/>
+              <b>Conteúdo do pacote:</b>
+              <ul>
+                <li>Coxinhas</li>
+                <li>Empadas de frango</li>
+                <li>Salgadinhos de queijo </li>
+              </ul>
+            </div>
+            <div class="card-action">
+              <a class="waves-effect waves-light btn red btn-large" routerLink="/organizer/event/create">Peça agora</a>
+            </div>
+          </div>
+        </div>-->
+        <!-- CASUAL -->
+        <!--<div class="col s4 m4" >
+          <div class="card large waves-block waves-light" style="min-height: 725px;" >
+            <div class="card-image ">
+              <img class="responsive-img" src="assets/imagens/cerveja_artesanal.png">
+              <span class="card-title" style="background: rgba(0,0,0,0.6)">Casual</span>
+            </div>
+            <div class="card-content">
+              <h5>Um bom momento para realizar aquele <i>networking</i> na empresa!</h5><br/>
+              <b>Conteúdo do pacote:</b>
+              <ul>
+                <li>Coxinhas</li>
+                <li>Empadas de frango</li>
+                <li>Salgadinhos de queijo </li>
+                <li>Pães de queijo</li>
+                <li>Brigadeiros</li>
+                <li>Surpresas de uva</li>
+                <li>Refrigerantes</li>
+              </ul>
+            </div>
+            <div class="card-action">
+              <a class="waves-effect waves-light btn red btn-large" routerLink="/organizer/event/create">Peça agora</a>
+            </div>
+          </div>
+        </div>-->
+        <!-- FESTA -->
+        <!--<div class="col s12 m4 l4" >
+          <div class="card large waves-block waves-light" style="min-height: 725px;" >
+            <div class="card-image ">
+              <img class="responsive-img" src="assets/imagens/brigadeiro.jpg">
+              <span class="card-title" style="background: rgba(0,0,0,0.6)">Festa</span>
+            </div>
+            <div class="card-content">
+              <h5>Descontraia o ambiente da sua empresa com os aniversariantes do mês!</h5><br/>
+              <b>Conteúdo do pacote:</b>
+              <ul>
+                <li>Coxinhas</li>
+                <li>Empadas de frango</li>
+                <li>Salgadinhos de queijo </li>
+                <li>Pães de queijo</li>
+                <li>Brigadeiros</li>
+                <li>Surpresas de uva</li>
+                <li>Refrigerantes</li>
+                <li>Sucos</li>
+                <li>Tortas</li>
+              </ul>
+            </div>
+            <div class="card-action">
+              <a class="waves-effect waves-light btn red btn-large" routerLink="/organizer/event/create">Peça agora</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
 </div>-->
-<!--Fim de contatos-->
+<!--Fim de pacotes-->
+
+<!--Começo da Timeline-->
+<div class="section">
+  <div class="col s12 scrollspy" id="homepage-timeline" style="font-family: sans-serif">
+	<section id="cd-timeline" class="cd-container">
+		<div class="cd-timeline-block cssanimations">
+      <div  class="cd-timeline-img cd-picture containerIcon">
+          <i class="small material-icons  updateIcon">event</i>
+      </div>
+
+			<div class="cd-timeline-content">
+				<h5>Adicione poucas informações básicas</h5>
+				<p>Você só vai precisar nos informar os seguintes dados: data do evento, quantidade de pessoas, duração (em horas)
+          e o endereço de onde acontecerá o evento.</p>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+
+		<div class="cd-timeline-block cssanimations">
+      <div  class="cd-timeline-img cd-movie containerIcon">
+        <i class="small material-icons  updateIcon">view_list</i>
+      </div>
+
+			<div class="cd-timeline-content">
+				<h5>Escolha o pacote que encaixe com suas necessidades</h5>
+				<p> Nós iremos providenciar os pacotes com as quantidades de cada item e, também, o orçamento do pacote escolhido.
+          Você pode alterar a quantia de cada item.
+        </p>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+
+		<div class="cd-timeline-block cssanimations">
+      <div  class="cd-timeline-img cd-picture containerIcon">
+        <i class="small material-icons  updateIcon">info</i>
+      </div>
+
+			<div class="cd-timeline-content">
+				<h5>Algumas informações adicionais</h5>
+				<p> Caso você não seja cadastrado ainda, será necessário nos informar alguns dados mais concretos para sua identificação e cobrança do pacote.</p>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+
+		<div class="cd-timeline-block cssanimations">
+      <div  class="cd-timeline-img cd-location containerIcon">
+        <i class="small material-icons  updateIcon">payment</i>
+      </div>
+
+			<div class="cd-timeline-content">
+				<h5>Pagamento</h5>
+				<p>Realize o pagamento do seu pacote através da interface do PagSeguro, uma plataforma de intermediação de pagamento promovida pela UOL.
+          Você poderá escolher a melhor opção de pagamento: cartão de crédito ou débito, boleto bancário ou saldo no próprio PagSeguro.</p>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+	</section> <!-- cd-timeline -->
+  </div>
+</div>
+<!--Fim da timeline-->
 
 <!--Rodapé-->
 
 <nav>
-	<div class="nav-wrapper teal">
+	<div class="nav-wrapper grey darken-4">
 		<div class="container">
 			EventSoup
 		</div>
