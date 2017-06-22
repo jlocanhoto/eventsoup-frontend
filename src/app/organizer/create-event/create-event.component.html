@@ -1,40 +1,38 @@
 <div class="container">
-	<ol class="progress-meter progress-container">
-		<li class="progress-point todo">Início</li><li class="progress-point todo">Seleção de pacotes</li><li class="progress-point todo">Confirmação</li><li class="progress-point todo">Pagamento</li>
-	</ol>
-	<br/><br/>
-	<h4 class="header">Novo Evento</h4>
 
 	<div class="row">
-		<form class="col s12">
-			<div class="row">
-				<div class="input-field col s6">
-					<input id="data" type="date" class="datepicker">
-					<label for="data">Data do evento</label>
+		<div class="col s12 m10 l10 xl10 offset-m1 offset-l1 offset-xl1">
+			<ol class="progress-meter progress-container">
+				<li class="progress-point todo">Início</li><li class="progress-point todo">Seleção de pacotes</li><li class="progress-point todo">Confirmação</li><li class="progress-point todo">Pagamento</li>
+			</ol>
+			<br/><br/>
+			<h4 class="header">Novo Evento</h4>
+			<form>
+				<div class="row">
+					<div class="input-field col s12 m6 l6 xl6">
+						<input id="data" type="date" class="datepicker">
+						<label for="data">Data do evento</label>
+					</div>
+					<div class="input-field col s12 m6 l6 xl6">
+						<input id="qtd" type="text" [(ngModel)]="qtd" name="qtd">
+						<label for="qtd">Quantidade de Pessoas</label>
+					</div>
 				</div>
-				<div class="input-field col s2">
-					<input id="qtd" type="text" [(ngModel)]="qtd" name="qtd">
-					<label for="qtd">Quantidade de Pessoas</label>
+				<div class="row">
+					<div class="input-field col s12 m6 l6 xl6">
+						<input id="bairro" type="text" [(ngModel)]="bairro" name="bairro">
+						<label for="bairro">Bairro</label>
+					</div>
+					<div class="input-field col s12 m6 l6 xl6">
+						<input id="rua" type="text" [(ngModel)]="rua" name="rua">
+						<label for="rua">Rua</label>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s3">
-					<input id="bairro" type="text" [(ngModel)]="bairro" name="bairro">
-					<label for="bairro">Bairro</label>
-				</div>
-				<div class="input-field col s6">
-					<input id="rua" type="text" [(ngModel)]="rua" name="rua">
-					<label for="rua">Rua</label>
-				</div>
-				<div class="input-field col s3">
-					<input id="numero" type="text" [(ngModel)]="numero" name="numero">
-					<label for="numero">Número</label>
-				</div>
-			</div>
 
-		</form>
+			</form>
 
-		<button (click)="createEvent()" class="{{checkRequiredData()}} waves-effect waves-light">Avançar</button>
+			<button (click)="createEvent()" class="{{checkRequiredData()}} waves-effect waves-light">Avançar</button>
+		</div>
 <!-- 		<button (click)="goBack()" class="btn-flat waves-effect waves-light">Voltar</button> -->
 	</div>
 </div>
