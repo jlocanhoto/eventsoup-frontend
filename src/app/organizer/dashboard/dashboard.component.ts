@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { OrganizerService } from './../organizer.service';
+
 declare let $;
 
 @Component({
@@ -9,18 +11,19 @@ declare let $;
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  eventos: any;
+
+  constructor(private service: OrganizerService) { }
 
   ngOnInit() {
-    $('.tap-target').tapTarget('open');
-  }
-
-  open() {
-    $('.tap-target').tapTarget('open');
-  }
-  ngAfterViewInit() {
-    $.getScript('assets/modernizr.js');
-    $.getScript("assets/main.js");
+    // $('.tap-target').tapTarget('open');
+    this.service.getEventos("sdfsdf").subscribe(
+    res => {
+      this.eventos = res
+      // console.log(this.eventos);
+      $.getScript('assets/modernizr.js');
+      $.getScript("assets/main.js");
+    });
   }
 
 }

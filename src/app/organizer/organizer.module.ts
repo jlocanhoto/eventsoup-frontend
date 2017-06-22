@@ -11,6 +11,7 @@ import { DashboardComponent }       from './dashboard/dashboard.component';
 import { OrganizerRoutingModule }   from './organizer-routing.module';
 import { PurchaseComponent }        from './purchase/purchase.component';
 import { FinishComponent }          from './finish/finish.component';
+import { OrganizerService } from './organizer.service';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { FinishComponent }          from './finish/finish.component';
   	FinishComponent
   ],
   providers: [
+    OrganizerService
   ]
 })
 export class OrganizerModule { }
