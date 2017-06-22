@@ -11,7 +11,7 @@
 			<div class="card">
 				<div class="card-content">
 					<form action="">
-						<span class="card-title">Dados de Cobança</span>
+						<span class="card-title">Informações sobre você</span>
 						<p>Já está cadastrado? Clique <a href="">aqui</a> para entrar</p>
 						<div class="row">
 					        <div class="input-field col s6">
@@ -77,8 +77,8 @@
 
 							    <label id="">Pessoa Física ou Jurídica</label>
 							</div>
-						</div>	
-						
+						</div>
+
 						<div *ngIf="isPessoaFisica()">
 							<div class="row">
 								<div class="input-field col s5">
@@ -101,17 +101,17 @@
 							</div>
 						</div>
 
-						<span class="card-title">Informações Adicionais</span>
+						<span class="card-title">Informações sobre o evento</span>
 						<div class="row">
 							<div class="input-field col s7">
 								<input id="titulo" type="text" [(ngModel)]="titulo" name="titulo">
-								<label for="titulo">Dê um título ao seu evento</label>
+								<label for="titulo">Título</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s7">
 	         					<textarea id="info" class="materialize-textarea" [(ngModel)]="info" name="info"></textarea>
-	          					<label for="info">Informações Adicionais</label>
+	          					<label for="info">Descrição</label>
 	        				</div>
 						</div>
 					</form>
@@ -144,7 +144,7 @@
 				</div>
 
 				<!-- <div class="divider"></div> -->
-				
+
 				<div class="card-content">
 					<h5 class="card-title">Entrega</h5>
 					<b>Horário</b>
@@ -158,7 +158,7 @@
 					<b>Taxa de Entrega: R$ 10</b><br /><br />
 					<button class="btn w100 waves-effect waves-light">Redefinir Dados</button>
 				</div>
-				
+
 				<div class="divider"></div>
 
 				<div class="card-content">
