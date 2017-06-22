@@ -3,7 +3,6 @@ import { CommonModule } 		        from '@angular/common';
 import { FormsModule }              from '@angular/forms';
 //import { RouterModule }             from '@angular/router';
 
-import { ProgressTrackerComponent } from './progress-tracker/progress-tracker.component';
 import { CreateEventComponent }		  from './create-event/create-event.component';
 import { SelectPackageComponent }   from './select-package/select-package.component';
 import { ConfirmDetailsComponent }  from './confirm-details/confirm-details.component';
@@ -27,7 +26,6 @@ import { FinishComponent }          from './finish/finish.component';
   	SelectPackageComponent,
   	ConfirmDetailsComponent,
   	OrganizerComponent,
-    ProgressTrackerComponent,
   	DashboardComponent,
   	PurchaseComponent,
   	FinishComponent
