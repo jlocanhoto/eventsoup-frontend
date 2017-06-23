@@ -26,13 +26,13 @@ export class SelectPackageComponent implements OnInit {
 
 	selPackClass 	: string[] 	= ["panel panel-primary",
 								   "panel panel-yellow",
-								   "panel panel-red", 
+								   "panel panel-red",
 								   "panel panel-green",
 								   "panel panel-black"];
 
 	colors		 	: string[] 	= ["blue lighten-4",
 								   "yellow lighten-4",
-								   "red lighten-4", 
+								   "red lighten-4",
 								   "green lighten-4",
 								   "brown lighten-4"];
 
@@ -41,33 +41,33 @@ export class SelectPackageComponent implements OnInit {
 	newEvent		: any = JSON.parse(localStorage.newEvent);
 
 	pacoteExpresso		: any = {"name": "Expresso",
-							 "img": "salgados_doces.jpg",
+							 "img": "expresso.jpg",
 							 "desc": "Pausa para um lanche após uma reunião",
 							 "items": [
-								{"nome": "Coxinha"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
-								{"nome": "Empada"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15},
-								{"nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15}
+								{"nome": "Coxinhas"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
+								{"nome": "Empadas de frango"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15},
+								{"nome": "Salgadinhos de queijo"	,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15}
 								//{"nome": "Descartáveis"				, "check": false},
 								//{"nome": "Mesas e cadeiras"			, "check": false}
 							]};
-				
+
 	pacoteCasual	: any = {"name": "Casual",
 							 "img": "cerveja_artesanal.png",
 							 "desc": "Um bom momento para trocar uma ideia",
 							 "items": [
-								{"nome": "Brigadeiro"			,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
-								{"nome": "Surpresa de uva"		,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
-								{"nome": "Refrigerante"			,	"type": "liquido",	"qtd": this.newEvent.qtdPeople*0.5, "precoUnitario": 5.5},
-								{"nome": "Pão de queijo"		,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2}
+								{"nome": "Pães de queijo"		,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
+								{"nome": "Brigadeiros"			,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
+								{"nome": "Surpresas de uva"		,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
+								{"nome": "Refrigerantes"			,	"type": "liquido",	"qtd": this.newEvent.qtdPeople*0.5, "precoUnitario": 5.5}
 								//"Outras bebidas"	];
 							]};
 
 	pacoteFesta	: any = {"name": "Festa",
-							 "img": "bolo_de_rolo.jpg",
+							 "img": "brigadeiro.jpg",
 							 "desc": "Descontraia com os aniversáriantes do mês",
 							 "items": [
 								{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
-							]};	
+							]};
 
 /*
 	pacoteEmpresarial		: any = {"name": "Empresarial",
@@ -96,9 +96,9 @@ export class SelectPackageComponent implements OnInit {
 
 	constructor (private eventService	: EventService,
 				 private route			: ActivatedRoute,
-				 private location		: Location,		 
+				 private location		: Location,
 				 private router			: Router		) {
-				
+
 					for(let i = 0; i < this.pacotes.length; i++)
 					{
 						this.selectedPacks.push({"name": this.pacotes[i].name,
