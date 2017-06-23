@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     // $('.tap-target').tapTarget('open');
-    this.service.getEventos("sdfsdf").subscribe(
+    this.service.getEventos(localStorage.getItem("token")).subscribe(
     res => {
       this.eventos = res
       // console.log(this.eventos);

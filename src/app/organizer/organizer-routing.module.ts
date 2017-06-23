@@ -14,10 +14,10 @@ const ORGANIZER_ROUTES: Routes = [
     { path: 'organizer', component: OrganizerComponent, children: [
         {path: '', component: DashboardComponent },
         {path: 'event/create', component: CreateEventComponent},
-  		{path: 'event/:id/packages', component: SelectPackageComponent},
-  		{path: 'event/:id/confirmation', component: ConfirmDetailsComponent},
-  		{path: 'event/:id/purchase', component: PurchaseComponent},
-  		{path: 'event/:id/finish', component: FinishComponent}
+  		{path: 'event/packages', component: SelectPackageComponent},
+  		{path: 'event/confirmation', component: ConfirmDetailsComponent},
+  		{path: 'event/purchase', component: PurchaseComponent},
+  		{path: 'event/finish', component: FinishComponent}
     ] },
     { path: 'login', component: LoginComponent },
 ]

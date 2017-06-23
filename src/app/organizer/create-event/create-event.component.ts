@@ -43,6 +43,7 @@ export class CreateEventComponent {
 	*/
 	requiredData	: boolean = false;
 
+
 	constructor(private location		: Location,
 				private router			: Router,
 				private eventService	: EventService) {
@@ -148,6 +149,7 @@ export class CreateEventComponent {
 	}
 
 	createEvent(): void {
+		/*console.log(this.date.obj)
 		this.newEvent 				= new Event();
 		//this.newEvent.title 		= this.title;
 		this.newEvent.date			= this.date;
@@ -189,8 +191,18 @@ export class CreateEventComponent {
 			let path = ['/organizer', 'event', that.newEvent.id, 'packages'];
 			//let path = ['/home'];
 			that.router.navigate(path);
-		});
+		});*/
 
+		// let path = ['/organizer', 'event', 'packages'];
+			//let path = ['/home'];
+			this.router.navigate(['/organizer', 'event', 'packages'], {
+				queryParams: {
+					"data": this.date.obj,
+					"quant_pessoas": this.qtd,
+					"bairro": this.bairro,
+					"rua": this.rua
+				}
+			});
 
 		/*
 		let path = ['/event', this.newEvent.id, 'packages'];
