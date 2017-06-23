@@ -4,5 +4,9 @@
 <input type="text" [(ngModel)]="cpf_cnpj">
 <input type="text" [(ngModel)]="senha">
 
+<button (click)="login()">Login</button>
+<button (click)="getToken()">Token</button>
+<button routerLink="/">home</button>
+
 {{senha}}
 {{cpf_cnpj}}

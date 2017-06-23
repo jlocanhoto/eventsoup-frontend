@@ -1,3 +1,4 @@
+import { EventService } from './../event/event.service';
 import { Component, OnInit } from '@angular/core';
 
 declare var $:any;
@@ -9,7 +10,7 @@ declare var $:any;
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { 
+  constructor(private service: EventService) { 
   }
 
   ngOnInit() {
