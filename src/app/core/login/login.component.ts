@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router }            from '@angular/router';
 
-import { EventService } from './../../event/event.service';
+import { EventService }      from './../../event/event.service';
+import { User }              from '../user';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +11,21 @@ import { EventService } from './../../event/event.service';
 })
 export class LoginComponent implements OnInit {
 
-  cpf_cnpj = "12345678998"
-  senha = "senha"
+  user    : User = new User();
+  title     : string = 'Eventsoup';
+  loading    : boolean =  false;
+  errorMsg  : string = '';
+  returnUrl  : string = '/home';
+  password1  : string = '';
+  password2  : string = '';
 
-  constructor(private service: EventService) { }
+  serverUrl  : string = 'https://eventsoup-backend.herokuapp.com/'
+  registerUrl  : string = this.serverUrl + 'usuarios/crud-contratante/';
+
+  flagReg    : boolean = false;
+
+  constructor(private service        : EventService,
+              private router         : Router) { }
 
   ngOnInit() {
     if (this.service.getToken() != null) {
@@ -21,22 +34,65 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
   login() {
-    this.service.setToken(this.cpf_cnpj, this.senha).subscribe(
+    this.loading = true;
+
+    this.service.setToken(this.user.cpf_cnpj, this.user.password).subscribe(
       res => {
-        console.log("teste")
-        console.log(res);
-        console.log("teste")
+        console.log("response: " + res);
+
+        let path = [this.returnUrl];
+        this.router.navigate(path);
       },
       erro => {
-        console.log("erro")
-        console.log(erro)
-        console.log("erro")
+        console.log("ERROR TO AUTHENTICATE: " + erro);
+        this.loading = false;
       });
+  }
+
+  logon(user: User){
+
   }
 
   getToken() {
     console.log(this.service.getToken());
+  }
+
+  register() {
+    if ((this.user.nome !== '') &&
+      (this.user.email !== '') &&
+      (this.user.cpf_cnpj !== '') &&
+      (this.user.telefone !== '') &&
+      (this.user.celular !== '') &&
+      (this.password1 !== '') &&
+      (this.password2 !== '') &&
+      (this.password1 === this.password2)) {
+      
+        this.user.password = this.password1;
+      
+        this.service.registerUser(this.user)
+          .subscribe(
+          data => {
+            this.login();
+                  },
+                  error => {
+                      console.log("ERROR TO AUTHENTICATE");
+                      this.loading = false;
+                  });
+    }
+  }
+
+  registerIntent() {
+    this.flagReg = true;
+  }
+
+  haveAccount() {
+    this.flagReg = false;
+  }
+
+  onSubmit() {
+    console.log("enter pressed");
   }
 
 }

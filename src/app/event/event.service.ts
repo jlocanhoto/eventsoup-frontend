@@ -2,6 +2,7 @@ import { Injectable } 								from '@angular/core';
 import { Headers, Http, Response, RequestOptions }	from '@angular/http';
 
 import { Observable }								from 'rxjs/Observable';
+import { User }              						from '../core/user';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -164,5 +165,32 @@ export class EventService {
 		return localStorage.getItem('token');
 	}
 
-	
+
+	registerUser(user: User) {
+		let url = this.serverUrl + '/usuarios/crud-fornecedor-buffet/';
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let options = new RequestOptions({ headers: headers });
+
+		let json = {
+			"nome"    : user.nome,
+			"email"    : user.email,
+			"telefone"  : user.telefone,
+			"cpf_cnpj"  : user.cpf_cnpj,
+			"password1" : user.password,
+			"password2"  : user.password
+		};
+
+		return this.http.post(url, JSON.stringify(json), options)
+				.map((response: Response) => {
+					// login successful if there's a jwt token in the response
+					let resp = response.json();
+					// store user details and jwt token in local storage to keep user logged in between page refreshes
+					//localStorage.setItem('currentUser', resp.token);
+					console.log(resp);
+				})
+				.catch( erro =>{
+					console.log(erro);
+					return Observable.throw(erro);
+				});
+  	}
 }
