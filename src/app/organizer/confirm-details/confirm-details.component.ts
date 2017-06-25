@@ -34,8 +34,8 @@ export class ConfirmDetailsComponent implements OnInit {
 	rua				: any = "";
 	cep				: any = "";
 
-	selectedPack		: any = JSON.parse(localStorage.selectedPack);
-	eventInfo			: any = JSON.parse(localStorage.newEvent);
+	selectedPack	: any;
+	eventInfo		: any;
 
 
 	data:Date;
