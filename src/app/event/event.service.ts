@@ -167,14 +167,15 @@ export class EventService {
 
 
 	registerUser(user: User) {
-		let url = this.serverUrl + '/usuarios/crud-fornecedor-buffet/';
+		let url = this.serverUrl + ((localStorage.usertype === 'contratante')?'/usuarios/crud-fornecedor-buffet/':'/usuarios/crud-contratante/');
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
-
+		console.log(this.serverUrl)
 		let json = {
 			"nome"    : user.nome,
 			"email"    : user.email,
 			"telefone"  : user.telefone,
+			"celular"	: user.celular,
 			"cpf_cnpj"  : user.cpf_cnpj,
 			"password1" : user.password,
 			"password2"  : user.password
