@@ -40,13 +40,18 @@ export class SelectPackageComponent implements OnInit {
 	timeEating		: number 	= 0;
 	newEvent		: any = JSON.parse(localStorage.newEvent);
 
+	data:Date;
+	qtd_pessoas: number;
+	bairro_q: string;
+	rua_q:string;
+
 	pacoteExpresso		: any = {"name": "Expresso",
 							 "img": "expresso.jpg",
 							 "desc": "Pausa para um lanche após uma reunião",
 							 "items": [
-								{"nome": "Coxinhas"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
-								{"nome": "Empadas de frango"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15},
-								{"nome": "Salgadinhos de queijo"	,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15}
+								{"nome": "Coxinhas"					,	"type": "salgado",	"qtd": 5, "precoUnitario": 0.2},
+								{"nome": "Empadas de frango"		,	"type": "salgado",	"qtd": 5, "precoUnitario": 0.15},
+								{"nome": "Salgadinhos de queijo"	,	"type": "salgado",	"qtd": 5, "precoUnitario": 0.15}
 								//{"nome": "Descartáveis"				, "check": false},
 								//{"nome": "Mesas e cadeiras"			, "check": false}
 							]};
@@ -55,10 +60,10 @@ export class SelectPackageComponent implements OnInit {
 							 "img": "cerveja_artesanal.png",
 							 "desc": "Um bom momento para trocar uma ideia",
 							 "items": [
-								{"nome": "Pães de queijo"		,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
-								{"nome": "Brigadeiros"			,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
-								{"nome": "Surpresas de uva"		,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
-								{"nome": "Refrigerantes"			,	"type": "liquido",	"qtd": this.newEvent.qtdPeople*0.5, "precoUnitario": 5.5}
+								{"nome": "Pães de queijo"		,	"type": "salgado",	"qtd": 5, "precoUnitario": 0.2},
+								{"nome": "Brigadeiros"			,	"type": "doce",	"qtd": 3, "precoUnitario": 0.3},
+								{"nome": "Surpresas de uva"		,	"type": "doce",	"qtd": 3, "precoUnitario": 0.3},
+								{"nome": "Refrigerantes"		,	"type": "liquido",	"qtd": 0.5, "precoUnitario": 5.5}
 								//"Outras bebidas"	];
 							]};
 
@@ -94,12 +99,6 @@ export class SelectPackageComponent implements OnInit {
 	selectedPacks	: any = [];
 	qtySelPacks		: number = 0;
 
-
-	data:Date;
-	qtd_pessoas: number;
-	bairro_q: string;
-	rua_q:string;
-
 	constructor (private eventService	: EventService,
 				 private route			: ActivatedRoute,
 				 private location		: Location,
@@ -120,23 +119,24 @@ export class SelectPackageComponent implements OnInit {
 				  .switchMap((params: Params) => this.eventService.getEvent(+params['id']))
 				  .subscribe((event) => this.event = event);
 		*/
-
-		this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
-		this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
-
 		// console.dir(this.newEvent);
 
 		// pega os dados informados na página anterior
 		this.route.queryParams.subscribe(
 			query => {
-				this.data = new Date(query["data"])
-				this.qtd_pessoas = query["quant_pessoas"]
-				this.bairro_q = query["bairro"]
-				this.rua_q = query["rua"]
+				this.data = new Date(query["data"]);
+				this.qtd_pessoas = query["quant_pessoas"];
+				this.bairro_q = query["bairro"];
+				this.rua_q = query["rua"];
+
+				this.updatePackageItems();
 				// console.log(this.data.getFullYear())
 				// console.log(this.qtd_pessoas)
 				// console.log(this.bairro_q)
 				// console.log(this.rua_q);
+				
+				this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
+				this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
 			}
 		);
 	}
@@ -145,6 +145,17 @@ export class SelectPackageComponent implements OnInit {
 		$('.chip').css('cursor', 'pointer');
 	}
 
+	updatePackageItems() {
+		for (let i = 0; i < this.pacotes.length; i++)
+		{
+			let items = this.pacotes[i].items;
+
+			for (let j = 0; j < items.length; j++)
+			{
+				items[j].qtd *= this.qtd_pessoas;
+			}
+		}
+	}
 
 	selectPackage(pkg){
 		console.log(pkg)
