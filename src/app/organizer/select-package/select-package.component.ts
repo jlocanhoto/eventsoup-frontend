@@ -71,7 +71,7 @@ export class SelectPackageComponent implements OnInit {
 							 "img": "brigadeiro.jpg",
 							 "desc": "Descontraia com os aniversáriantes do mês",
 							 "items": [
-								{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
+								{"nome": "Torta"				,	"type": "torta",	"qtd": 1, "precoUnitario": 40}
 							]};
 
 /*
@@ -152,6 +152,7 @@ export class SelectPackageComponent implements OnInit {
 
 			for (let j = 0; j < items.length; j++)
 			{
+				if(items[j].type !== 'torta')
 				items[j].qtd *= this.qtd_pessoas;
 			}
 		}
