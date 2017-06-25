@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   title     : string = 'Eventsoup';
   loading    : boolean =  false;
   errorMsg  : string = '';
-  returnUrl  : string = '/home';
+  returnUrl  : string = '/' + localStorage.usertype;
   password1  : string = '';
   password2  : string = '';
 
@@ -65,12 +65,9 @@ export class LoginComponent implements OnInit {
       (this.user.cpf_cnpj !== '') &&
       (this.user.telefone !== '') &&
       (this.user.celular !== '') &&
-      (this.password1 !== '') &&
+      (this.user.password !== '') &&
       (this.password2 !== '') &&
-      (this.password1 === this.password2)) {
-      
-        this.user.password = this.password1;
-      
+      (this.user.password === this.password2)) {
         this.service.registerUser(this.user)
           .subscribe(
           data => {

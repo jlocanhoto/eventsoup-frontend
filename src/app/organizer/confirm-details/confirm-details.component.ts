@@ -23,6 +23,7 @@ export class ConfirmDetailsComponent implements OnInit {
 	complemento		: any = "";
 	sobrenome		: any = "";
 	telefone		: any = "";
+	celular			: any = "";
 	numero			: any = "";
 	bairro			: any = "";
 	titulo			: any = "";

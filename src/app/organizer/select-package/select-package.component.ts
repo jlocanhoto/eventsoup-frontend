@@ -41,7 +41,7 @@ export class SelectPackageComponent implements OnInit {
 	newEvent		: any = JSON.parse(localStorage.newEvent);
 
 	pacoteExpresso		: any = {"name": "Expresso",
-							 "img": "salgados_doces.jpg",
+							 "img": "expresso.jpg",
 							 "desc": "Pausa para um lanche após uma reunião",
 							 "items": [
 								{"nome": "Coxinha"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
@@ -63,7 +63,7 @@ export class SelectPackageComponent implements OnInit {
 							]};
 
 	pacoteFesta	: any = {"name": "Festa",
-							 "img": "bolo_de_rolo.jpg",
+							 "img": "brigadeiro.jpg",
 							 "desc": "Descontraia com os aniversáriantes do mês",
 							 "items": [
 								{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}

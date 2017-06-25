@@ -35,4 +35,8 @@ export class HomepageComponent implements OnInit {
     $("body").removeAttr( 'style' );
   }
 
+  goto(type: string){
+    localStorage.setItem('usertype', type);
+  }
+
 }
