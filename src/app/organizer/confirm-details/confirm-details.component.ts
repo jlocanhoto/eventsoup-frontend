@@ -113,11 +113,11 @@ export class ConfirmDetailsComponent implements OnInit {
 		// }
 	}
 
-	// isPessoaFisica(): boolean {
-	// 	this.tipoSelecionado = $("select").val();
+	isPessoaFisica(): boolean {
+		this.tipoSelecionado = $("select").val();
 
-	// 	return (this.tipoSelecionado === null) || (this.tipoSelecionado == 1);
-	// }
+		return (this.tipoSelecionado === null) || (this.tipoSelecionado == 1);
+	}
 
 	goBack(): void {
 		this.location.back();
