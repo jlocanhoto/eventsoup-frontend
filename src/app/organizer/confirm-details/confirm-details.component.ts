@@ -10,8 +10,6 @@ declare var $ : any;
   styleUrls: ['./confirm-details.component.css']
 })
 export class ConfirmDetailsComponent implements OnInit {
-	selectedPackages = [];
-	packageNames = [];
 	tipos : any[] = [
        {id: 1, name: "Pessoa Física"},
        {id: 2, name: "Pessoa Jurídica"}
