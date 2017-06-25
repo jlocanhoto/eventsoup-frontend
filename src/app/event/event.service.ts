@@ -2,6 +2,7 @@ import { Injectable } 								from '@angular/core';
 import { Headers, Http, Response, RequestOptions }	from '@angular/http';
 
 import { Observable }								from 'rxjs/Observable';
+import { User }              						from '../core/user';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -12,24 +13,25 @@ import { Event }									from './event';
 @Injectable()
 export class EventService {
 	serverUrl	 : string = 'https://eventsoup-backend.herokuapp.com';
-	getEventsUrl : string = this.serverUrl + '/eventos/crud-eventos/list-owner-eventos/';
-	postEventUrl : string = this.serverUrl + '/eventos/crud-eventos/';
-	deleEventUrl : string = this.serverUrl + '/eventos/crud-eventos/'; //+ slug do evento
-	token 		 : string = localStorage.currentUser;
-
+	// getEventsUrl : string = this.serverUrl + '/eventos/crud-eventos/list-owner-eventos/';
+	// postEventUrl : string = this.serverUrl + '/eventos/crud-eventos/';
+	// deleEventUrl : string = this.serverUrl + '/eventos/crud-eventos/'; //+ slug do evento
+	// private token: string = localStorage.currentUser; 
 	//private eventsUrl = 'api/events';
 	//private headers = new Headers({'Content-Type': 'application/json'});
 
-	constructor(private http: Http) { }
+	constructor(private http: Http) { 
+		console.log("construiu")
+	}
 
-	createAuthorizationHeader(headers: Headers) {
-   	 	headers.append('Authorization',"JWT " + this.token);
-  	}
+	// createAuthorizationHeader(headers: Headers) {
+   	//  	headers.append('Authorization',"JWT " + this.token);
+  	// }
 
-  	createContentType(headers: Headers, type: string){
-  		headers.append('Content-Type', type);
-  		//console.log(headers);
-  	}
+  	// createContentType(headers: Headers, type: string){
+  	// 	headers.append('Content-Type', type);
+  	// 	//console.log(headers);
+  	// }
 
   	/*
 	getEvents(): Promise<Event[]> {
@@ -40,15 +42,15 @@ export class EventService {
 	}
 	*/
 
-	getEvents(): Observable<Event[]> {
-		let headers = new Headers();
-		this.createAuthorizationHeader(headers);
-		let options = new RequestOptions({ headers: headers, withCredentials: true});
+	// getEvents(): Observable<Event[]> {
+	// 	let headers = new Headers();
+	// 	this.createAuthorizationHeader(headers);
+	// 	let options = new RequestOptions({ headers: headers, withCredentials: true});
 		
-		return this.http.get(this.getEventsUrl, options)
-			.map(this.extractData)
-			.catch(this.handleError);
-	}
+	// 	return this.http.get(this.getEventsUrl, options)
+	// 		.map(this.extractData)
+	// 		.catch(this.handleError);
+	// }
 	/*
 	getEvent(id: number): Promise<Event> {
 		const url = `${this.eventsUrl}/${id}`;
@@ -60,10 +62,10 @@ export class EventService {
 	}
 	*/
 	// Walber code:
-	getEvent(id: number): Observable<Event> {
-		return this.getEvents()
-				   .map((events) => events.find(event => event.id === id));
-	}
+	// getEvent(id: number): Observable<Event> {
+	// 	return this.getEvents()
+	// 			   .map((events) => events.find(event => event.id === id));
+	// }
 	
 	/*
 	create(title: string): Promise<Event> {
@@ -74,43 +76,43 @@ export class EventService {
 				   .catch(this.handleError);
 	}
 	*/
-	create(event: Event): Observable<Event> {
-		var headers = new Headers();
-		this.createAuthorizationHeader(headers);
-		this.createContentType(headers, "application/json");
+	// create(event: Event): Observable<Event> {
+	// 	var headers = new Headers();
+	// 	this.createAuthorizationHeader(headers);
+	// 	this.createContentType(headers, "application/json");
 
-		var options = new RequestOptions({ headers: headers });
+	// 	var options = new RequestOptions({ headers: headers });
 		 	
-		//console.log(event)
+	// 	//console.log(event)
 
-		var json = {
-			"nome" : 				event.title,
-			"data": 				event.date,
-			"endereco":				event.place,
-			"orcamento":			event.budget,
-			"quantidade_pessoas": 	event.qtdPeople,
-		}
-		/*
-		if (event.restrictions !== ""){
-			json["restricoes"] = event.restrictions;
-		}
-		*/
+	// 	var json = {
+	// 		"nome" : 				event.title,
+	// 		"data": 				event.date,
+	// 		"endereco":				event.place,
+	// 		"orcamento":			event.budget,
+	// 		"quantidade_pessoas": 	event.qtdPeople,
+	// 	}
+	// 	/*
+	// 	if (event.restrictions !== ""){
+	// 		json["restricoes"] = event.restrictions;
+	// 	}
+	// 	*/
 
-		return this.http.post(this.postEventUrl, JSON.stringify(json), options)
-					.map(res => res.json().data as Event)
-					.catch(this.handleError);
-	}
+	// 	return this.http.post(this.postEventUrl, JSON.stringify(json), options)
+	// 				.map(res => res.json().data as Event)
+	// 				.catch(this.handleError);
+	// }
 
-	private handleError(error: Response | any): any {
-		//console.error('An error occurred', error); // for demo purposes only
-		//return Promise.reject(error.message || error);
-		return Observable.throw(error);
-	}
+	// private handleError(error: Response | any): any {
+	// 	//console.error('An error occurred', error); // for demo purposes only
+	// 	//return Promise.reject(error.message || error);
+	// 	return Observable.throw(error);
+	// }
 
-	private extractData(res: Response) {
-		let body = res.json();
-		return body.results || {};
-	}
+	// private extractData(res: Response) {
+	// 	let body = res.json();
+	// 	return body.results || {};
+	// }
 
 	/*
 	update(event: Event): Promise<Event> {
@@ -123,18 +125,72 @@ export class EventService {
 				   .catch(this.handleError);
 	}*/
 
-	delete(slug: string): Promise<void> {
-		const url = this.deleEventUrl + slug + '/';
+	// delete(slug: string): Promise<void> {
+	// 	const url = this.deleEventUrl + slug + '/';
 
-		let headers = new Headers();
-		this.createAuthorizationHeader(headers);
-		//this.createContentType(headers, "application/x-www-form-urlencoded");
-		let options = new RequestOptions({ headers: headers, withCredentials: true});
+	// 	let headers = new Headers();
+	// 	this.createAuthorizationHeader(headers);
+	// 	//this.createContentType(headers, "application/x-www-form-urlencoded");
+	// 	let options = new RequestOptions({ headers: headers, withCredentials: true});
 	
-		return this.http.delete(url, options)
-				.toPromise()
-				.then(() => null)
-				.catch(this.handleError);
+	// 	return this.http.delete(url, options)
+	// 			.toPromise()
+	// 			.then(() => null)
+	// 			.catch(this.handleError);
+	// }
+
+
+
+
+	// Login
+
+	setToken(cpf, senha) {
+		let url = this.serverUrl + '/api-token-auth/';
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let options = new RequestOptions({ headers: headers });
+		console.log("teste aqui");
+		
+		return this.http.post(url, { cpf_cnpj: cpf, password: senha }, options)
+			.map( res => {
+				let data = res.json();
+				localStorage.setItem('token', data.token);
+				return data.token;
+			}).catch( erro => {
+				console.log(erro);
+				return Observable.throw(erro);
+			});
 	}
-	
+
+	getToken() {
+		return localStorage.getItem('token');
+	}
+
+
+	registerUser(user: User) {
+		let url = this.serverUrl + '/usuarios/crud-fornecedor-buffet/';
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let options = new RequestOptions({ headers: headers });
+
+		let json = {
+			"nome"    : user.nome,
+			"email"    : user.email,
+			"telefone"  : user.telefone,
+			"cpf_cnpj"  : user.cpf_cnpj,
+			"password1" : user.password,
+			"password2"  : user.password
+		};
+
+		return this.http.post(url, JSON.stringify(json), options)
+				.map((response: Response) => {
+					// login successful if there's a jwt token in the response
+					let resp = response.json();
+					// store user details and jwt token in local storage to keep user logged in between page refreshes
+					//localStorage.setItem('currentUser', resp.token);
+					console.log(resp);
+				})
+				.catch( erro =>{
+					console.log(erro);
+					return Observable.throw(erro);
+				});
+  	}
 }

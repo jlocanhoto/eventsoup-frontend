@@ -51,7 +51,7 @@
 								<label for="telefone">Telefone</label>
 							</div>
 							<div class="input-field col s3">
-								<input id="bairro" type="text" [(ngModel)]="bairro" name="bairro">
+								<input id="bairro" type="text" [(ngModel)]="celular" name="bairro">
 								<label for="bairro">Celular</label>
 							</div>
 						</div>
@@ -72,23 +72,23 @@
 						<div class="row">
 							<div class="input-field col s6">
 							    <select [(ngModel)]="tipoSelecionado" id="tipoSelecionado" name="tipoSelecionado">
-							      <option *ngFor="let c of tipos" [value]="c.id">{{c.name}}</option>
+							      <option *ngFor="let c of tipos" [value]="c.id" checked>{{c.name}}</option>
 							    </select>
 
 							    <label id="">Pessoa Física ou Jurídica</label>
 							</div>
 						</div>
 
-						<div *ngIf="isPessoaFisica()">
+						<!--<div *ngIf="isPessoaFisica()">
 							<div class="row">
 								<div class="input-field col s5">
 									<input id="cpf" type="text" [(ngModel)]="cpf" name="cpf">
 									<label for="cpf">CPF </label>
 								</div>
 							</div>
-						</div>
+						</div>-->
 
-						<div *ngIf="!isPessoaFisica()">
+						<!--<div *ngIf="!isPessoaFisica()">
 							<div class="row">
 								<div class="input-field col s7">
 									<input id="razaosocial" type="text" [(ngModel)]="razaosocial" name="razaosocial">
@@ -99,7 +99,7 @@
 									<label for="cnpj">CNPJ </label>
 								</div>
 							</div>
-						</div>
+						</div>-->
 
 						<span class="card-title">Informações sobre o evento</span>
 						<div class="row">

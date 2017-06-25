@@ -2,3 +2,13 @@
     background-color: green;
     color: white;
 }
+
+.containerIcon {
+  display: table;
+}
+
+.updateIcon {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}

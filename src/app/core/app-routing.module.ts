@@ -5,6 +5,8 @@ import { CreateEventComponent }     from '../organizer/create-event/create-event
 import { SelectPackageComponent }   from '../organizer/select-package/select-package.component';
 import { ConfirmDetailsComponent }  from '../organizer/confirm-details/confirm-details.component'
 import { HomepageComponent }        from '../homepage/homepage.component';
+import { LoginComponent } from './login/login.component';
+
 /*
 import { DashboardComponent }   	  from '../event-organizer/dashboard/dashboard.component';
 import { EventDetailComponent } 	  from '../shared/event-detail.component';
@@ -19,10 +21,10 @@ const routes: Routes = [
   {path: '', component: HomepageComponent },
   {path: 'event/create', component: CreateEventComponent},
   {path: 'event/:id/packages', component: SelectPackageComponent},
-  {path: 'event/:id/confirm-details', component: ConfirmDetailsComponent}
-  /*{ path: '', redirectTo: '/home', pathMatch: 'full' 			                              },
+  {path: 'event/:id/confirm-details', component: ConfirmDetailsComponent},
+  // { path: '', redirectTo: '/home', pathMatch: 'full' 			                              },
   { path: 'login'                , component: LoginComponent                            },
-  { path: 'home'                 , component: SkeletonComponent, children: [
+  /*{ path: 'home'                 , component: SkeletonComponent, children: [
     { path: ''			                 , component: DashboardComponent     , outlet: 'spa'},
     { path: 'detail/:id'			       , component: EventDetailComponent 	 , outlet: 'spa'},
     { path: 'event/create'		       , component: CreateEventComponent	 , outlet: 'spa'},

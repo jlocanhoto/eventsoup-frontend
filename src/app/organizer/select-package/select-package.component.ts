@@ -94,6 +94,12 @@ export class SelectPackageComponent implements OnInit {
 	selectedPacks	: any = [];
 	qtySelPacks		: number = 0;
 
+
+	data:Date;
+	qtd_pessoas: number;
+	bairro_q: string;
+	rua_q:string;
+
 	constructor (private eventService	: EventService,
 				 private route			: ActivatedRoute,
 				 private location		: Location,
@@ -118,7 +124,21 @@ export class SelectPackageComponent implements OnInit {
 		this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
 		this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
 
-		console.dir(this.newEvent);
+		// console.dir(this.newEvent);
+
+		// pega os dados informados na página anterior
+		this.route.queryParams.subscribe(
+			query => {
+				this.data = new Date(query["data"])
+				this.qtd_pessoas = query["quant_pessoas"]
+				this.bairro_q = query["bairro"]
+				this.rua_q = query["rua"]
+				// console.log(this.data.getFullYear())
+				// console.log(this.qtd_pessoas)
+				// console.log(this.bairro_q)
+				// console.log(this.rua_q);
+			}
+		);
 	}
 
 	ngAfterViewInit(): void {
@@ -132,11 +152,13 @@ export class SelectPackageComponent implements OnInit {
 
 	}
 
+/*
+	// Não utilizado
 	selectItem(event, indexPackage, indexItem) {
-		/*
-		console.log(this.pacotes[indexPackage].name,
-					this.pacotes[indexPackage].items[indexItem].nome);
-		*/
+		
+		// console.log(this.pacotes[indexPackage].name,
+		// 			this.pacotes[indexPackage].items[indexItem].nome);
+		
 		var target = event.target || event.srcElement || event.currentTarget;
 		if (this.pacotes[indexPackage].items[indexItem].check === false) {
 			$(target).css({'background': '#a5d6a7', 'font-weight': 'bold'});
@@ -150,6 +172,9 @@ export class SelectPackageComponent implements OnInit {
 		this.getSelectedItems();
 	}
 
+*/
+/*
+	// Não utilizado
 	selectAll(indexPackage) {
 		let i = indexPackage;
 		//console.log('.chips_'+i);
@@ -162,11 +187,14 @@ export class SelectPackageComponent implements OnInit {
 
 		this.getSelectedItems();
 	}
+*/
 
+/*
+	// Não utilizado
 	getCheck(indexPackage, indexItem) {
 		return this.pacotes[indexPackage].items[indexItem].check;
 	}
-
+*/
 	checkRequiredData(): string {
 		let flag = (this.selectedPack.items !== undefined);
 
@@ -179,6 +207,8 @@ export class SelectPackageComponent implements OnInit {
 		return str;
 	}
 
+/*
+	// Não utilizado
 	getSelectedItems(): void {
 		for (let i = 0; i < this.pacotes.length; i++)
 		{
@@ -205,26 +235,34 @@ export class SelectPackageComponent implements OnInit {
 
 		//console.log(this.selectedPacks);
 	}
-
+*/
 	confirmDetails(): void {
 		//console.log(this.event);
 		//if (this.event !== undefined) {
-			localStorage.setItem('selectedPack', JSON.stringify(this.selectedPack));
+			// localStorage.setItem('selectedPack', JSON.stringify(this.selectedPack));
 
-			if (localStorage.newEvent !== undefined) {
-				let event = JSON.parse(localStorage.newEvent)
+			// if (localStorage.newEvent !== undefined) {
+			// 	let event = JSON.parse(localStorage.newEvent)
 
 				//event.packageID = this.selectedPack.toString();
 				//localStorage.setItem('newEvent', JSON.stringify(event));
 
 				//let path = ['/home'];
-				let path = ['/organizer', 'event', event.id, 'confirmation'];
-				console.log(path)
+				// let path = ['/organizer', 'event', event.id, 'confirmation'];
+				// console.log(path)
 				//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
-				this.router.navigate(path);
+		this.router.navigate(['/organizer', 'event', 'confirmation'], {
+			queryParams: {
+				"data": this.data,
+				"quant_pessoas": this.qtd_pessoas,
+				"bairro": this.bairro_q,
+				"rua": this.rua_q,
+				"pacote": JSON.stringify(this.selectedPack)
+			}
+		});
 				//let path = ['/event', this.event.id, 'purchase'];
 				//this.router.navigate(path);
-			}
+			// }
 		/*}
 		else {
 			console.log('EVENT NOT FOUND!');
@@ -243,7 +281,10 @@ export class SelectPackageComponent implements OnInit {
 		return budget;
 	}
 
+/*
+	// Não utilizado
 	goBack(): void {
 		this.location.back();
 	}
+*/
 }
