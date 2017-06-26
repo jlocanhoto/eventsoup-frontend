@@ -20,8 +20,6 @@ export class LoginFormsComponent implements OnInit {
   password1  : string = '';
   password2  : string = '';
 
-  modalAction  : string = '';
-
   serverUrl  : string = 'https://eventsoup-backend.herokuapp.com/'
   registerUrl  : string = this.serverUrl + 'usuarios/crud-contratante/';
 
@@ -34,6 +32,27 @@ export class LoginFormsComponent implements OnInit {
     if (this.service.getToken() != null) {
       // Redirecionar para login
       console.log("Redirecionar para login");
+    }
+
+    setInterval(() => { this.eraseData() }, 300);
+  }
+
+  eraseInputs() {
+    this.user.nome      = '';
+    this.user.email     = '';
+    this.user.cpf_cnpj  = '';
+    this.user.telefone  = '';
+    this.user.celular   = '';
+    this.user.password  = '';
+    this.errorMsg       = '';
+    this.password1      = '';
+    this.password2      = '';
+  }
+
+  eraseData() {
+    if (localStorage.eraseInput === 'true') {
+      localStorage.removeItem('eraseInput');
+      this.eraseInputs();
     }
   }
 
@@ -52,10 +71,15 @@ export class LoginFormsComponent implements OnInit {
           //console.log('confirmation');
           $('#modal_login').modal('close');
         }
+
+        this.eraseInputs();
+        this.loading = false;
       },
       erro => {
         console.log("ERROR TO AUTHENTICATE: " + erro);
         this.loading = false;
+
+        this.eraseInputs();
       });
   }
 
@@ -76,15 +100,16 @@ export class LoginFormsComponent implements OnInit {
       (this.user.password !== '') &&
       (this.password2 !== '') &&
       (this.user.password === this.password2)) {
-        this.service.registerUser(this.user)
-          .subscribe(
-          data => {
-            this.login();
-                  },
-                  error => {
-                      console.log("ERROR TO AUTHENTICATE");
-                      this.loading = false;
-                  });
+         this.service.registerUser(this.user)
+             .subscribe((data) => {
+                           this.login();
+                         },
+                        (error) => {
+                             console.log("ERROR TO AUTHENTICATE");
+                             this.loading = false;
+
+                             this.eraseInputs();
+                         });
     }
   }
 
