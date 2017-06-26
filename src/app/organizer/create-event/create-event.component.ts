@@ -60,7 +60,7 @@ export class CreateEventComponent {
 		    weekdaysShort: [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
 		    today: 'hoje',
 		    clear: 'limpar',
-		    close: 'fechar',
+		    close: 'ok',
 		    format: 'dddd, d !de mmmm !de yyyy',
 		    formatSubmit: 'yyyy/mm/dd'
 		});
