@@ -66,13 +66,24 @@ export class CreateEventComponent {
 		});
 
 		var that = this;
+		var weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
 			selectYears: 10, // Creates a dropdown of 15 years to control year
+			onStart: function() {
+				$('.picker__weekday').each(function(index) {
+					$(this).text(weekdays[index]);
+				});
+			},
 			onClose: function() {
 				that.date = this.get('select');
 				console.log(that.date)
+			},
+			onSet: function() {
+				$('.picker__weekday').each(function(index) {
+					$(this).text(weekdays[index]);
+				});
 			}
 		});
 
