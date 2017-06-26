@@ -1,95 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
+import { Component }       from '@angular/core';
+import { Router, ActivatedRoute }  from '@angular/router';
 
-import { EventService }      from './../../event/event.service';
-import { User }              from '../user';
+import { EventService }            from './../../event/event.service';
+import { User }                    from '../user';
+
+declare var $ : any;
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-
-  user    : User = new User();
-  title     : string = 'Eventsoup';
-  loading    : boolean =  false;
-  errorMsg  : string = '';
-  returnUrl  : string = '/' + localStorage.usertype;
-  password1  : string = '';
-  password2  : string = '';
-
-  serverUrl  : string = 'https://eventsoup-backend.herokuapp.com/'
-  registerUrl  : string = this.serverUrl + 'usuarios/crud-contratante/';
-
-  flagReg    : boolean = false;
-
-  constructor(private service        : EventService,
-              private router         : Router) { }
-
-  ngOnInit() {
-    if (this.service.getToken() != null) {
-      // Redirecionar para login
-      console.log("Redirecionar para login");
-    }
+export class LoginComponent {
+  ngAfterViewInit() {
+    var newRule = ` input:-webkit-autofill,
+                    input:-webkit-autofill:hover,
+                    input:-webkit-autofill:focus,
+                    input:-webkit-autofill:active {
+                        -webkit-text-fill-color: white;
+                    }`;
+    $("style").append(newRule);
+    //$("<style>body { background: black; }</style>").appendTo( "head" )
   }
-
-
-  login() {
-    this.loading = true;
-
-    this.service.setToken(this.user.cpf_cnpj, this.user.password).subscribe(
-      res => {
-        console.log("response: " + res);
-
-        let path = [this.returnUrl];
-        this.router.navigate(path);
-      },
-      erro => {
-        console.log("ERROR TO AUTHENTICATE: " + erro);
-        this.loading = false;
-      });
-  }
-
-  logon(user: User){
-
-  }
-
-  getToken() {
-    console.log(this.service.getToken());
-  }
-
-  register() {
-    if ((this.user.nome !== '') &&
-      (this.user.email !== '') &&
-      (this.user.cpf_cnpj !== '') &&
-      (this.user.telefone !== '') &&
-      (this.user.celular !== '') &&
-      (this.user.password !== '') &&
-      (this.password2 !== '') &&
-      (this.user.password === this.password2)) {
-        this.service.registerUser(this.user)
-          .subscribe(
-          data => {
-            this.login();
-                  },
-                  error => {
-                      console.log("ERROR TO AUTHENTICATE");
-                      this.loading = false;
-                  });
-    }
-  }
-
-  registerIntent() {
-    this.flagReg = true;
-  }
-
-  haveAccount() {
-    this.flagReg = false;
-  }
-
-  onSubmit() {
-    console.log("enter pressed");
-  }
-
 }

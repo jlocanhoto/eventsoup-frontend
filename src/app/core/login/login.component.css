@@ -24,15 +24,9 @@ body{
 	z-index: 0;
 }
 
-.pointer{
-	cursor: pointer;
-}
-
 .container{
 	width: 90%;
-
 	/* background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg); */
-
 }
 
 .grad{
@@ -68,18 +62,14 @@ body{
 	color: #9eff5e !important;
 }
 
+.whitetext {
+	color: #fff;
+}
+
 ::-webkit-input-placeholder{
 	color: rgba(255,255,255,0.6);
 }
 
 ::-moz-input-placeholder{
 	color: rgba(255,255,255,0.6);
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-    -webkit-text-fill-color: white;
 }

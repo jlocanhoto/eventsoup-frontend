@@ -1,0 +1,40 @@
+<!--URL: /login-->
+<div class="input-field whitetext">
+	<input [(ngModel)]="user.cpf_cnpj" type="text" placeholder="CPF/CNPJ" name="user"><br />
+</div>
+
+<div *ngIf="flagReg">
+	<div class="input-field whitetext">
+	<input [(ngModel)]="user.nome" type="text" placeholder="Nome completo" name="nome"><br />
+	</div>
+
+	<div class="input-field whitetext">
+	<input [(ngModel)]="user.email" type="text" placeholder="E-mail" name="email"><br />
+	</div>
+
+	<div class="input-field whitetext">
+	<input [(ngModel)]="user.telefone" type="text" placeholder="Telefone" name="telefone"><br />
+	</div>
+
+	<div class="input-field whitetext">
+	<input [(ngModel)]="user.celular" type="text" placeholder="Celular" name="celular"><br/>
+	</div>
+</div>
+
+<div class="input-field whitetext">
+	<input [(ngModel)]="user.password" type="password" placeholder="Senha" name="password"><br />
+</div>
+
+<div *ngIf="flagReg" class="input-field whitetext">
+	<input [(ngModel)]="password2" type="password" placeholder="Confirmar senha" name="password"><br />
+	<button class="waves-effect waves-light btn" (click)="register()">Registrar-se</button>
+	<p class="message whitetext right">Já possui uma conta? <span style="cursor:pointer;" class="green-text" (click)="haveAccount()">Fazer login</span></p>
+</div>
+
+<div class="input-field">
+	<div *ngIf="!flagReg">
+		<div class="error">{{errorMsg}}</div>
+		<button class="waves-effect waves-light btn" (click)="login()">Login</button>
+		<p class="message whitetext right">Não está registrado? <span style="cursor:pointer;" class="green-text" (click)="registerIntent()">Criar conta</span></p>
+	</div>
+</div>
