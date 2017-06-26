@@ -166,7 +166,7 @@
 						<div class="col s4">{{item.qtd}}</div>
 					</div>
 					<br />
-					<b>Subtotal: R$ {{calcBudget()}}</b>
+					<b>Subtotal: R$ {{calcBudget()}},00</b>
 				</div>
 
 				<!-- <div class="divider"></div> -->
@@ -181,7 +181,7 @@
 						{{eventInfo.rua}}, {{eventInfo.numero}} - {{eventInfo.bairro}}
 					</p>
 					<br />
-					<b>Taxa de Entrega: R$ 10</b><br /><br />
+					<b>Taxa de Entrega: R$ 10,00</b><br /><br />
 					<button (click)="redefine()" class="btn w100 waves-effect waves-light">Redefinir Dados</button>
 				</div>
 
@@ -190,7 +190,7 @@
 				<div class="card-content">
 					<h5 class="card-title">Valor Total</h5>
 					<p>Este pacote inclui pratos, copos e talheres descartáveis para {{eventInfo.qtd}} pessoas</p><br />
-					<b>R$ {{10 + calcBudget()}}</b><br /><br />
+					<h3><b>R$ {{10 + calcBudget()}},00</b></h3>
 				</div>
 
 				<div class="card-action">
