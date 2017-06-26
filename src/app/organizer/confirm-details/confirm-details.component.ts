@@ -1,6 +1,6 @@
-import { Component, OnInit } 	from '@angular/core';
-import { Location }				from '@angular/common';
-import { ActivatedRoute, Router }				from '@angular/router';
+import { Component, OnInit } 		from '@angular/core';
+import { Location }					from '@angular/common';
+import { ActivatedRoute, Router }	from '@angular/router';
 
 declare var $ : any;
 
@@ -71,6 +71,7 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	ngAfterViewInit() {
 		$('select').material_select();
+		$('.modal').modal();
 	}
 
 	calcBudget(){
