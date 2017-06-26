@@ -35,12 +35,26 @@ export class ConfirmDetailsComponent implements OnInit {
 	selectedPack	: any;
 	eventInfo		: any;
 
+	logged 			: boolean = false;
 
-	data:Date;
-	qtd_pessoas: number;
-	bairro_q: string;
-	rua_q:string;
-	pacote:any;
+	__complemento	: any = "CIn - UFPE";
+	__sobrenome		: any = "Oliveira Canhoto";
+	__telefone		: any = "(81) 3333-4444";
+	__celular		: any = "(81) 99999-8888";
+	__numero		: any = "1235";
+	__bairro		: any = "Cidade Universitária";
+	__email			: any = "ufpe@ufpe.br";
+	__nome			: any = "João Lucas";
+	__rua			: any = "Av. Prof. Moraes Rego";
+	__cep			: any = "50670-901";
+
+	regAddr			: boolean = false;
+
+	data			: Date;
+	qtd_pessoas		: number;
+	bairro_q		: string;
+	rua_q			: string;
+	pacote			: any;
 
 	constructor(private location: Location,
 				private route: ActivatedRoute,
@@ -67,11 +81,72 @@ export class ConfirmDetailsComponent implements OnInit {
 				// console.log(this.pacote);
 			}
 		);
+
+		$(".fill-addr2").addClass("active");
+		this.bairro		 = this.bairro_q;
+		this.rua		 = this.rua_q;
 	}
 
 	ngAfterViewInit() {
 		$('select').material_select();
-		$('.modal').modal();
+		$('.modal').modal({
+			complete: () => {
+				if (localStorage.token !== undefined) {
+					localStorage.removeItem('token');
+					console.log('User logged in');
+					this.logged = true;
+
+					$('#filled-in-box').prop('disabled', false);
+
+					this.fulfillFormData();
+				}
+				else {
+					console.log('User closed modal');
+				}
+
+				localStorage.setItem('eraseInput', 'true');
+			}
+		});
+
+		$('#filled-in-box').bind('change', () => {
+			this.toggleAddr();
+		});
+	}
+
+	fulfillFormData() {
+		if (this.logged) {
+			$(".fill-user").addClass("active");
+			this.nome		 = this.__nome;
+			this.sobrenome	 = this.__sobrenome;
+			this.email		 = this.__email;
+			this.telefone	 = this.__telefone;
+			this.celular	 = this.__celular;
+		}
+		else {
+			$(".fill-user").removeClass("active");
+			this.nome		 = "";
+			this.sobrenome	 = "";
+			this.email		 = "";
+			this.telefone	 = "";
+			this.celular	 = "";
+		}
+
+		if (this.regAddr) {
+			$(".fill-addr").addClass("active");
+			this.complemento = this.__complemento;			
+			this.numero		 = this.__numero;
+			this.bairro		 = this.__bairro;						
+			this.rua		 = this.__rua;
+			this.cep		 = this.__cep;
+		}
+		else {
+			$(".fill-addr").removeClass("active");
+			this.complemento = "";
+			this.numero		 = "";
+			this.bairro		 = this.bairro_q;
+			this.rua		 = this.rua_q;
+			this.cep		 = "";
+		}
 	}
 
 	calcBudget(){
@@ -84,6 +159,16 @@ export class ConfirmDetailsComponent implements OnInit {
 		}
 
 		return budget;
+	}
+
+	redefine(): void {
+		console.log('redefinir');
+	}
+
+	toggleAddr(): void {
+		this.regAddr = !this.regAddr;
+		this.fulfillFormData();
+		//console.log(this.regAddr);
 	}
 
 	purchase(): void {
