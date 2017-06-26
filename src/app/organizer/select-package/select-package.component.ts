@@ -38,7 +38,7 @@ export class SelectPackageComponent implements OnInit {
 
 	peopleQty		: number[] 	= [1, 0, 0, 0, 0, 0];
 	timeEating		: number 	= 0;
-	newEvent		: any = JSON.parse(localStorage.newEvent);
+	newEvent		: any;
 
 	data:Date;
 	qtd_pessoas: number;
