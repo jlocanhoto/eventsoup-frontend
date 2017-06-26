@@ -173,18 +173,21 @@
 
 				<div class="card-content">
 					<h5 class="card-title">Entrega</h5>
-					<b>Horário</b>
+					<b>Horário do evento:</b>
 					<div class="row">
                     	<div class="input-field col s12">
-	                        <label for="timepicker_ampm_dark">Time am/pm ( dark theme )</label>
-	                        <input id="timepicker_ampm_dark" class="timepicker" type="time">
+	                        <input id="timepicker" class="timepicker" type="text">
+	                        <label for="timepicker">Selecione um horário</label>
 	                    </div>
 	                </div>
 					<!-- <input id="horario" type="text"> -->
-					<br />
-					<b>Local: </b>
-					<p>
-						{{eventInfo.rua}}, {{eventInfo.numero}} - {{eventInfo.bairro}}
+					<b>Local:</b>
+					<p id="end_entrega">
+						<!-- {{eventInfo.rua}}, {{eventInfo.numero}} - {{eventInfo.bairro}} -->
+						{{rua}}<span *ngIf="numero !== ''">, {{numero}}</span> <span *ngIf="complemento !== ''">- {{complemento}}</span>
+						<br/>
+						{{bairro}} - CEP: {{cep}}
+						Recife, PE - Brasil
 					</p>
 					<br />
 					<b>Taxa de Entrega: R$ 10,00</b><br /><br />

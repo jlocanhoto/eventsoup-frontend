@@ -112,7 +112,16 @@ export class ConfirmDetailsComponent implements OnInit {
 			this.toggleAddr();
 		});
 
-		$('#timepicker_ampm_dark').pickatime({
+		$('#numero').bind('change', () => {
+			if (this.numero === "") {
+				this.eventInfo.numero = 0;
+			}
+			else {
+				this.eventInfo.numero = this.numero;
+			}
+		});
+
+		$('#timepicker').pickatime({
 			default: 'now', // Set default time
 			fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
 			twelvehour: false, // Use AM/PM or 24-hour format
