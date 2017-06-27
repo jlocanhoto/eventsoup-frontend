@@ -26,48 +26,53 @@ export class SelectPackageComponent implements OnInit {
 
 	selPackClass 	: string[] 	= ["panel panel-primary",
 								   "panel panel-yellow",
-								   "panel panel-red", 
+								   "panel panel-red",
 								   "panel panel-green",
 								   "panel panel-black"];
 
 	colors		 	: string[] 	= ["blue lighten-4",
 								   "yellow lighten-4",
-								   "red lighten-4", 
+								   "red lighten-4",
 								   "green lighten-4",
 								   "brown lighten-4"];
 
 	peopleQty		: number[] 	= [1, 0, 0, 0, 0, 0];
 	timeEating		: number 	= 0;
-	newEvent		: any = JSON.parse(localStorage.newEvent);
+	newEvent		: any;
+
+	data:Date;
+	qtd_pessoas: number;
+	bairro_q: string;
+	rua_q:string;
 
 	pacoteExpresso		: any = {"name": "Expresso",
-							 "img": "salgados_doces.jpg",
+							 "img": "expresso.jpg",
 							 "desc": "Pausa para um lanche após uma reunião",
 							 "items": [
-								{"nome": "Coxinha"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
-								{"nome": "Empada"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15},
-								{"nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15}
+								{"nome": "Coxinhas"					,	"type": "salgado",	"qtd": 5, "precoUnitario": 0.2},
+								{"nome": "Empadas de frango"		,	"type": "salgado",	"qtd": 5, "precoUnitario": 0.15},
+								{"nome": "Salgadinhos de queijo"	,	"type": "salgado",	"qtd": 5, "precoUnitario": 0.15}
 								//{"nome": "Descartáveis"				, "check": false},
 								//{"nome": "Mesas e cadeiras"			, "check": false}
 							]};
-				
+
 	pacoteCasual	: any = {"name": "Casual",
 							 "img": "cerveja_artesanal.png",
 							 "desc": "Um bom momento para trocar uma ideia",
 							 "items": [
-								{"nome": "Brigadeiro"			,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
-								{"nome": "Surpresa de uva"		,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
-								{"nome": "Refrigerante"			,	"type": "liquido",	"qtd": this.newEvent.qtdPeople*0.5, "precoUnitario": 5.5},
-								{"nome": "Pão de queijo"		,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2}
+								{"nome": "Pães de queijo"		,	"type": "salgado",	"qtd": 5, "precoUnitario": 0.2},
+								{"nome": "Brigadeiros"			,	"type": "doce",	"qtd": 3, "precoUnitario": 0.3},
+								{"nome": "Surpresas de uva"		,	"type": "doce",	"qtd": 3, "precoUnitario": 0.3},
+								{"nome": "Refrigerantes"		,	"type": "liquido",	"qtd": 0.5, "precoUnitario": 5.5}
 								//"Outras bebidas"	];
 							]};
 
 	pacoteFesta	: any = {"name": "Festa",
-							 "img": "bolo_de_rolo.jpg",
+							 "img": "brigadeiro.jpg",
 							 "desc": "Descontraia com os aniversáriantes do mês",
 							 "items": [
-								{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
-							]};	
+								{"nome": "Torta"				,	"type": "torta",	"qtd": 1, "precoUnitario": 40}
+							]};
 
 /*
 	pacoteEmpresarial		: any = {"name": "Empresarial",
@@ -96,9 +101,9 @@ export class SelectPackageComponent implements OnInit {
 
 	constructor (private eventService	: EventService,
 				 private route			: ActivatedRoute,
-				 private location		: Location,		 
+				 private location		: Location,
 				 private router			: Router		) {
-				
+
 					for(let i = 0; i < this.pacotes.length; i++)
 					{
 						this.selectedPacks.push({"name": this.pacotes[i].name,
@@ -114,17 +119,44 @@ export class SelectPackageComponent implements OnInit {
 				  .switchMap((params: Params) => this.eventService.getEvent(+params['id']))
 				  .subscribe((event) => this.event = event);
 		*/
+		// console.dir(this.newEvent);
 
-		this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
-		this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
+		// pega os dados informados na página anterior
+		this.route.queryParams.subscribe(
+			query => {
+				this.data = new Date(query["data"]);
+				this.qtd_pessoas = query["quant_pessoas"];
+				this.bairro_q = query["bairro"];
+				this.rua_q = query["rua"];
 
-		console.dir(this.newEvent);
+				this.updatePackageItems();
+				// console.log(this.data.getFullYear())
+				// console.log(this.qtd_pessoas)
+				// console.log(this.bairro_q)
+				// console.log(this.rua_q);
+				
+				this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
+				this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
+			}
+		);
 	}
 
 	ngAfterViewInit(): void {
 		$('.chip').css('cursor', 'pointer');
 	}
 
+	updatePackageItems() {
+		for (let i = 0; i < this.pacotes.length; i++)
+		{
+			let items = this.pacotes[i].items;
+
+			for (let j = 0; j < items.length; j++)
+			{
+				if(items[j].type !== 'torta')
+				items[j].qtd *= this.qtd_pessoas;
+			}
+		}
+	}
 
 	selectPackage(pkg){
 		console.log(pkg)
@@ -132,11 +164,13 @@ export class SelectPackageComponent implements OnInit {
 
 	}
 
+/*
+	// Não utilizado
 	selectItem(event, indexPackage, indexItem) {
-		/*
-		console.log(this.pacotes[indexPackage].name,
-					this.pacotes[indexPackage].items[indexItem].nome);
-		*/
+		
+		// console.log(this.pacotes[indexPackage].name,
+		// 			this.pacotes[indexPackage].items[indexItem].nome);
+		
 		var target = event.target || event.srcElement || event.currentTarget;
 		if (this.pacotes[indexPackage].items[indexItem].check === false) {
 			$(target).css({'background': '#a5d6a7', 'font-weight': 'bold'});
@@ -150,6 +184,9 @@ export class SelectPackageComponent implements OnInit {
 		this.getSelectedItems();
 	}
 
+*/
+/*
+	// Não utilizado
 	selectAll(indexPackage) {
 		let i = indexPackage;
 		//console.log('.chips_'+i);
@@ -162,11 +199,14 @@ export class SelectPackageComponent implements OnInit {
 
 		this.getSelectedItems();
 	}
+*/
 
+/*
+	// Não utilizado
 	getCheck(indexPackage, indexItem) {
 		return this.pacotes[indexPackage].items[indexItem].check;
 	}
-
+*/
 	checkRequiredData(): string {
 		let flag = (this.selectedPack.items !== undefined);
 
@@ -179,6 +219,8 @@ export class SelectPackageComponent implements OnInit {
 		return str;
 	}
 
+/*
+	// Não utilizado
 	getSelectedItems(): void {
 		for (let i = 0; i < this.pacotes.length; i++)
 		{
@@ -205,26 +247,34 @@ export class SelectPackageComponent implements OnInit {
 
 		//console.log(this.selectedPacks);
 	}
-
+*/
 	confirmDetails(): void {
 		//console.log(this.event);
 		//if (this.event !== undefined) {
-			localStorage.setItem('selectedPack', JSON.stringify(this.selectedPack));
+			// localStorage.setItem('selectedPack', JSON.stringify(this.selectedPack));
 
-			if (localStorage.newEvent !== undefined) {
-				let event = JSON.parse(localStorage.newEvent)
+			// if (localStorage.newEvent !== undefined) {
+			// 	let event = JSON.parse(localStorage.newEvent)
 
 				//event.packageID = this.selectedPack.toString();
 				//localStorage.setItem('newEvent', JSON.stringify(event));
 
 				//let path = ['/home'];
-				let path = ['/organizer', 'event', event.id, 'confirmation'];
-				console.log(path)
+				// let path = ['/organizer', 'event', event.id, 'confirmation'];
+				// console.log(path)
 				//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
-				this.router.navigate(path);
+		this.router.navigate(['/organizer', 'event', 'confirmation'], {
+			queryParams: {
+				"data": this.data,
+				"quant_pessoas": this.qtd_pessoas,
+				"bairro": this.bairro_q,
+				"rua": this.rua_q,
+				"pacote": JSON.stringify(this.selectedPack)
+			}
+		});
 				//let path = ['/event', this.event.id, 'purchase'];
 				//this.router.navigate(path);
-			}
+			// }
 		/*}
 		else {
 			console.log('EVENT NOT FOUND!');
@@ -243,7 +293,10 @@ export class SelectPackageComponent implements OnInit {
 		return budget;
 	}
 
+/*
+	// Não utilizado
 	goBack(): void {
 		this.location.back();
 	}
+*/
 }

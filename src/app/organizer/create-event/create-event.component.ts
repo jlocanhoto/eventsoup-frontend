@@ -26,9 +26,9 @@ export class CreateEventComponent {
 	budget			: string = "";
 	bairro			: string = "";
 	rua				: string = "";
-	numero			: number =	0;
+	numero			: number;
 
-	qtd				: number = 0;
+	qtd				: number;
 
 
 	//restrictions	: boolean[];
@@ -42,6 +42,7 @@ export class CreateEventComponent {
 	option			: any = undefined;
 	*/
 	requiredData	: boolean = false;
+
 
 	constructor(private location		: Location,
 				private router			: Router,
@@ -59,19 +60,30 @@ export class CreateEventComponent {
 		    weekdaysShort: [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
 		    today: 'hoje',
 		    clear: 'limpar',
-		    close: 'fechar',
+		    close: 'ok',
 		    format: 'dddd, d !de mmmm !de yyyy',
 		    formatSubmit: 'yyyy/mm/dd'
 		});
 
 		var that = this;
+		var weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
 			selectYears: 10, // Creates a dropdown of 15 years to control year
+			onStart: function() {
+				$('.picker__weekday').each(function(index) {
+					$(this).text(weekdays[index]);
+				});
+			},
 			onClose: function() {
 				that.date = this.get('select');
 				console.log(that.date)
+			},
+			onSet: function() {
+				$('.picker__weekday').each(function(index) {
+					$(this).text(weekdays[index]);
+				});
 			}
 		});
 
@@ -148,6 +160,7 @@ export class CreateEventComponent {
 	}
 
 	createEvent(): void {
+		/*console.log(this.date.obj)
 		this.newEvent 				= new Event();
 		//this.newEvent.title 		= this.title;
 		this.newEvent.date			= this.date;
@@ -189,8 +202,18 @@ export class CreateEventComponent {
 			let path = ['/organizer', 'event', that.newEvent.id, 'packages'];
 			//let path = ['/home'];
 			that.router.navigate(path);
-		});
+		});*/
 
+		// let path = ['/organizer', 'event', 'packages'];
+			//let path = ['/home'];
+			this.router.navigate(['/organizer', 'event', 'packages'], {
+				queryParams: {
+					"data": this.date.obj,
+					"quant_pessoas": this.qtd,
+					"bairro": this.bairro,
+					"rua": this.rua
+				}
+			});
 
 		/*
 		let path = ['/event', this.newEvent.id, 'packages'];
