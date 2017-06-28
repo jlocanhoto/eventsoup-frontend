@@ -210,7 +210,8 @@ export class ConfirmDetailsComponent implements OnInit {
 				"rua": this.rua_q,
 				"pacote": JSON.stringify(this.selectedPack),
 				"nome": this.titulo,
-				"descricao": this.info
+				"descricao": this.info,
+				"orcamento": this.calcBudget()
 			}
 		});
 			//let path = ['/event', this.event.id, 'purchase'];
