@@ -1,8 +1,8 @@
-import { Component } 			from '@angular/core';
-import { Location }				from '@angular/common';
-import { ActivatedRoute, Router }				from '@angular/router';
+import { Component } 						from '@angular/core';
+import { Location }							from '@angular/common';
+import { ActivatedRoute, Router }			from '@angular/router';
 
-import { OrganizerService } from './../organizer.service';
+import { OrganizerService }					from './../organizer.service';
 
 @Component({
   selector: 'app-purchase',
