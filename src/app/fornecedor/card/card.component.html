@@ -1,42 +1,56 @@
-<div class="row">
-  <div class="col s12 m12 l12 xl11">
-    <div class="card row" [class.borda-card]="botao">
-        <div class="col s12 m8 l9 xl9 card-esquerda">
-            <ul class="collection with-header">
-              <li class="collection-header" [class.borda-card]="botao"><h5>Codigo: {{codigo}}</h5></li>
-              <li class="collection-item" *ngFor="let item of getItens()" [class.borda-card]="botao">
-                <span class="title">Item: {{ item.nome }}, quantidade: {{ item.quantidade }} {{item.unidade}}</span>
-              </li>
-            </ul>
-            <a class="modal-trigger collection-item" href="#{{url}}" *ngIf="maisItens">ver mais</a>
-        </div>
-        <div class="col s12 m4 l3 xl3 center-align card-direita">
-          <div class="hide-on-small-and-down">
-            <h5>{{getDias()}}</h5>
-            <h5>{{getTimer()}}</h5>
-          </div>
-          <div class="show-on-small hide-on-med-and-up">
-            <h5>{{getDias()}}<span *ngIf="getDias() != ''">, </span>{{getTimer()}}</h5>
-          </div>
-          <a class="waves-effect waves-light btn" (click)="click()">{{getBotao()}}</a>
-        </div>
-      </div>
-  </div>
-</div>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
 
-<div>
-  <!-- Modal Structure -->
-  <div [id]="url" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <ul class="collection with-header">
-        <li class="collection-header"><h5>Codigo: {{codigo}}</h5></li>
-        <li class="collection-item" *ngFor="let item of itens">
-          <span class="title">Item: {{ item.nome }}, quantidade: {{ item.quantidade }} {{item.unidade}}</span>
+
+<div class="col s12 m6 l6 xl6 " style="">
+
+  <div class="card  ">
+    <div class="event-date halfway-fab">
+      <span>{{mes}}</span>
+      <div class="number">{{dia}}</div>
+    </div>
+
+    <div class="card-content">
+      <h5>Codigo: {{codigo}}</h5>
+      <div style="height: 30px">
+        <h6 style="float:left">Stauts: {{statusEntrega}}  </h6>
+        <h6 style="float: right"> Hora da Entrega: {{horario}}hrs</h6>
+      </div>
+
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Itens</div>
+          <div class="collapsible-body">
+            <table>
+              <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr *ngFor="let item of getItens()">
+                <td>{{ item.nome }}</td>
+                <td>{{ item.quantidade }} {{item.unidade}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">place</i>Endereço</div>
+          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
         </li>
       </ul>
+
     </div>
-    <div class="modal-footer">
-      <a class="modal-action modal-close waves-effect waves-green btn-flat ">OK</a>
+
+    <div class="card-action">
+      <a class="btnPronto" (click)="click()">{{getBotao()}}</a>
+      <a href="#"></a>
     </div>
   </div>
 </div>
