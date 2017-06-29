@@ -30,17 +30,6 @@ export class CreateEventComponent {
 
 	qtd				: number;
 
-
-	//restrictions	: boolean[];
-	/*
-	qtyPeopleOpts	: any[] = [{i: 0, qty: {min:   1, max:  25}, text: "Até 25 pessoas"   			},
-							   {i: 1, qty: {min:  25, max:  50}, text: "Entre 25 e 50 pessoas"  	},
-							   {i: 2, qty: {min:  50, max: 100}, text: "Entre 50 e 100 pessoas" 	},
-							   {i: 3, qty: {min: 100, max: 200}, text: "Entre 100 e 200 pessoas"	},
-							   {i: 4, qty: {min:  -1, max:  -1}, text: "Informar outra quantidade"}];
-
-	option			: any = undefined;
-	*/
 	requiredData	: boolean = false;
 
 
@@ -92,140 +81,27 @@ export class CreateEventComponent {
 		
 		$('.money').mask("#.##0,00", options);
 	}
-	/*
-	checkBoxBehaviour(current: any): void {
-		var inputs = document.getElementsByTagName('input');
-
-		for(let i = 0; i < inputs.length; i++){
-			if(inputs[i].type === 'checkbox' && inputs[i].className !== current)
-				inputs[i].checked = false;
-		}
-	}
-
-	getRestrictions(): string {
-		var restrictions = "";
-
-		var inputs = document.getElementsByTagName('input');
-
-		for(let i = 0; i < inputs.length; i++){
-			if(inputs[i].type === 'checkbox' && inputs[i].checked)
-				restrictions = inputs[i].className.toLowerCase();;
-		}
-
-		return restrictions;
-	}
-	*/
-	addEvent(cb: (that : any) => void): void {
-		var p1 = new Promise((resolve, reject) => {
-			//this.eventService.getEvents().subscribe((events) => {
-				//console.log(events);
-				//console.log(events.length);
-				//this.newEvent.id = events.length;
-				this.newEvent.id = 1;
-				/*this.eventService.create(this.newEvent).subscribe((events) => {
-					resolve(this);
-				});*/
-				//console.log(this.newEvent);
-				//console.log(EVENTS.length);
-				resolve(this);
-				
-			//})
-		});
-
-		p1.then((that) => { cb(that); });
-	}
-
-	/*
-	addEvent(): void {
-		this.newEvent.id = this.events.length;
-
-		this.events.push(this.newEvent);
-		//console.log(events);
-	}
-	*/
-
 	private moneyNotation(money: string): number {
 		return parseFloat(money.replace(".",";").replace(",",".").replace(";",","));
 	}
 
 	createEvent(): void {
-		/*console.log(this.date.obj)
-		this.newEvent 				= new Event();
-		//this.newEvent.title 		= this.title;
-		this.newEvent.date			= this.date;
-		//this.newEvent.time			= {begin: this.timeBegin, end: this.timeEnd};
-		//this.newEvent.place			= this.place;
-
-		this.newEvent.budget		= this.moneyNotation(this.budget);
-		//this.newEvent.restrictions 	= this.getRestrictions();
-
-		this.newEvent.qtdPeople		= this.qtd;
-		
-		this.newEvent.bairro		= this.bairro;
-		
-		this.newEvent.rua			= this.rua;
-		
-		this.newEvent.numero		= this.numero;
-
-		this.addEvent(function(that) {
-			let json = {
-				"id": that.newEvent.id,
-				//"title": that.newEvent.title,
-				"date": that.newEvent.date,
-				//"place": that.newEvent.place,
-				"budget": that.newEvent.budget,
-
-				"qtdPeople" : that.newEvent.qtdPeople,
-
-				"bairro" : that.newEvent.bairro,
-
-				"rua" : that.newEvent.rua,
-
-				"numero" : that.newEvent.numero
-				//"restrictions": that.newEvent.restrictions,
-				//"packageID": ''
-			};
-
-			localStorage.setItem('newEvent', JSON.stringify(json));
-
-			let path = ['/organizer', 'event', that.newEvent.id, 'packages'];
-			//let path = ['/home'];
-			that.router.navigate(path);
-		});*/
-
-		// let path = ['/organizer', 'event', 'packages'];
-			//let path = ['/home'];
-			this.router.navigate(['/organizer', 'event', 'packages'], {
-				queryParams: {
-					"data": this.date.obj,
-					"quant_pessoas": this.qtd,
-					"bairro": this.bairro,
-					"rua": this.rua
-				}
-			});
-
-		/*
-		let path = ['/event', this.newEvent.id, 'packages'];
-		
-		this.router.navigate(path);
-		*/
+		this.router.navigate(['/organizer', 'event', 'packages'], {
+			queryParams: {
+				"data": this.date.obj,
+				"quant_pessoas": this.qtd,
+				"bairro": this.bairro,
+				"rua": this.rua
+			}
+		});
 	}
-	/*
-	checkOptionOther(): boolean {
-		return ((this.option !== undefined) && (this.option.i === this.qtyPeopleOpts.length-1));
-	}
-	*/
 	checkRequiredData(): string {
 		let flag = true;
-		//flag = flag && (this.title !== "");
-		//flag = flag && (this.date !== "");
 		flag = flag && ($('.datepicker').val() !== "");
 		flag = flag && (this.rua !== "");
 		flag = flag && (this.bairro !== "");
 		flag = flag && (this.numero !== 0);
 		flag = flag && (this.qtd !== 0);
-		//flag = flag && ($('.money').val().length > 3);
-		//flag = flag && (this.option !== undefined);
 
 		let str = "btn disabled";
 

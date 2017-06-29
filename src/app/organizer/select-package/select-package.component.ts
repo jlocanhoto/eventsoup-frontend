@@ -38,15 +38,15 @@ export class SelectPackageComponent implements OnInit {
 
 	peopleQty		: number[] 	= [1, 0, 0, 0, 0, 0];
 	timeEating		: number 	= 0;
-	newEvent		: any = JSON.parse(localStorage.newEvent);
+	newEvent		: any;
 
 	pacoteExpresso		: any = {"name": "Expresso",
 							 "img": "expresso.jpg",
 							 "desc": "Pausa para um lanche após uma reunião",
 							 "items": [
-								{"nome": "Coxinha"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2},
-								{"nome": "Empada"				,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15},
-								{"nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.15}
+								{"nome": "Coxinha"				,	"type": "salgado",	"qtd": 0, "precoUnitario": 0.2},
+								{"nome": "Empada"				,	"type": "salgado",	"qtd": 0, "precoUnitario": 0.15},
+								{"nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": 0*5, "precoUnitario": 0.15}
 								//{"nome": "Descartáveis"				, "check": false},
 								//{"nome": "Mesas e cadeiras"			, "check": false}
 							]};
@@ -55,10 +55,10 @@ export class SelectPackageComponent implements OnInit {
 							 "img": "cerveja_artesanal.png",
 							 "desc": "Um bom momento para trocar uma ideia",
 							 "items": [
-								{"nome": "Brigadeiro"			,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
-								{"nome": "Surpresa de uva"		,	"type": "doce",	"qtd": this.newEvent.qtdPeople*3, "precoUnitario": 0.3},
-								{"nome": "Refrigerante"			,	"type": "liquido",	"qtd": this.newEvent.qtdPeople*0.5, "precoUnitario": 5.5},
-								{"nome": "Pão de queijo"		,	"type": "salgado",	"qtd": this.newEvent.qtdPeople*5, "precoUnitario": 0.2}
+								{"nome": "Brigadeiro"			,	"type": "doce",	"qtd": 0*3, "precoUnitario": 0.3},
+								{"nome": "Surpresa de uva"		,	"type": "doce",	"qtd": 0*3, "precoUnitario": 0.3},
+								{"nome": "Refrigerante"			,	"type": "liquido",	"qtd": 0*0.5, "precoUnitario": 5.5},
+								{"nome": "Pão de queijo"		,	"type": "salgado",	"qtd": 0*5, "precoUnitario": 0.2}
 								//"Outras bebidas"	];
 							]};
 
@@ -68,20 +68,6 @@ export class SelectPackageComponent implements OnInit {
 							 "items": [
 								{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
 							]};	
-
-/*
-	pacoteEmpresarial		: any = {"name": "Empresarial",
-							 "img": "vegan_burguers.jpg",
-							 "desc": "Receba seu convidade VIP com um evento requintado",
-							 "items": [
-								{"nome": "Salgados"						, "check": false},
-								{"nome": "Doces"						, "check": false},
-								{"nome": "Tortas" 						, "check": false},
-								{"nome": "Bebidas"						, "check": false},
-								{"nome": "Sobremesas"					, "check": false},
-								{"nome": "Frutas"						, "check": false}
-							]};
-*/
 
 
 	selectedPack	: any = {};
@@ -99,33 +85,15 @@ export class SelectPackageComponent implements OnInit {
 	qtd_pessoas: number;
 	bairro_q: string;
 	rua_q:string;
+	orcamento: number;
 
 	constructor (private eventService	: EventService,
 				 private route			: ActivatedRoute,
 				 private location		: Location,		 
 				 private router			: Router		) {
-				
-					for(let i = 0; i < this.pacotes.length; i++)
-					{
-						this.selectedPacks.push({"name": this.pacotes[i].name,
-												"items": [] });
-					}
-
-					//console.log(this.selectedPacks);
 				}
 
 	ngOnInit(): void {
-		//console.log(this.event)
-		/*this.route.params
-				  .switchMap((params: Params) => this.eventService.getEvent(+params['id']))
-				  .subscribe((event) => this.event = event);
-		*/
-
-		this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
-		this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
-
-		// console.dir(this.newEvent);
-
 		// pega os dados informados na página anterior
 		this.route.queryParams.subscribe(
 			query => {
@@ -133,12 +101,57 @@ export class SelectPackageComponent implements OnInit {
 				this.qtd_pessoas = query["quant_pessoas"]
 				this.bairro_q = query["bairro"]
 				this.rua_q = query["rua"]
-				// console.log(this.data.getFullYear())
-				// console.log(this.qtd_pessoas)
-				// console.log(this.bairro_q)
-				// console.log(this.rua_q);
+				this.definePacote()
 			}
 		);
+		// this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
+		// this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
+		
+		//console.log(this.event)
+		for(let i = 0; i < this.pacotes.length; i++)
+			{
+				this.selectedPacks.push({"name": this.pacotes[i].name,
+										"items": [] });
+			}
+
+
+		// console.dir(this.newEvent);
+	}
+
+	definePacote() {
+		this.pacoteExpresso = {"name": "Expresso",
+								"img": "expresso.jpg",
+								"desc": "Pausa para um lanche após uma reunião",
+								"items": [
+									{"nome": "Coxinha"				,	"type": "salgado",	"qtd": this.qtd_pessoas, "precoUnitario": 0.2},
+									{"nome": "Empada"				,	"type": "salgado",	"qtd": this.qtd_pessoas*5, "precoUnitario": 0.15},
+									{"nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": this.qtd_pessoas*5, "precoUnitario": 0.15}
+									//{"nome": "Descartáveis"				, "check": false},
+									//{"nome": "Mesas e cadeiras"			, "check": false}
+								]};
+					
+		this.pacoteCasual = {"name": "Casual",
+								"img": "cerveja_artesanal.png",
+								"desc": "Um bom momento para trocar uma ideia",
+								"items": [
+									{"nome": "Brigadeiro"			,	"type": "doce",	"qtd": this.qtd_pessoas*3, "precoUnitario": 0.3},
+									{"nome": "Surpresa de uva"		,	"type": "doce",	"qtd": this.qtd_pessoas*3, "precoUnitario": 0.3},
+									{"nome": "Refrigerante"			,	"type": "liquido",	"qtd": this.qtd_pessoas*0.5, "precoUnitario": 5.5},
+									{"nome": "Pão de queijo"		,	"type": "salgado",	"qtd": this.qtd_pessoas*5, "precoUnitario": 0.2}
+									//"Outras bebidas"	];
+								]};
+
+		this.pacoteFesta = {"name": "Festa",
+								"img": "brigadeiro.jpg",
+								"desc": "Descontraia com os aniversáriantes do mês",
+								"items": [
+									{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
+								]};
+
+		this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
+		this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
+
+		this.pacotes = [this.pacoteExpresso, this.pacoteCasual, this.pacoteFesta]
 	}
 
 	ngAfterViewInit(): void {
@@ -149,52 +162,9 @@ export class SelectPackageComponent implements OnInit {
 	selectPackage(pkg){
 		console.log(pkg)
 		this.selectedPack = pkg;
-
+		this.orcamento = this.calcBudget()
 	}
 
-/*
-	// Não utilizado
-	selectItem(event, indexPackage, indexItem) {
-		
-		// console.log(this.pacotes[indexPackage].name,
-		// 			this.pacotes[indexPackage].items[indexItem].nome);
-		
-		var target = event.target || event.srcElement || event.currentTarget;
-		if (this.pacotes[indexPackage].items[indexItem].check === false) {
-			$(target).css({'background': '#a5d6a7', 'font-weight': 'bold'});
-			this.pacotes[indexPackage].items[indexItem].check = true;
-		}
-		else {
-			$(target).css({'background': '', 'font-weight': ''});
-			this.pacotes[indexPackage].items[indexItem].check = false;
-		}
-
-		this.getSelectedItems();
-	}
-
-*/
-/*
-	// Não utilizado
-	selectAll(indexPackage) {
-		let i = indexPackage;
-		//console.log('.chips_'+i);
-
-		for (let j = 0; j < this.pacotes[i].items.length; j++)
-		{
-			this.pacotes[i].items[j].check = true;
-			$('.chips_'+i).css({'background': '#a5d6a7', 'font-weight': 'bold'});
-		}
-
-		this.getSelectedItems();
-	}
-*/
-
-/*
-	// Não utilizado
-	getCheck(indexPackage, indexItem) {
-		return this.pacotes[indexPackage].items[indexItem].check;
-	}
-*/
 	checkRequiredData(): string {
 		let flag = (this.selectedPack.items !== undefined);
 
@@ -207,66 +177,17 @@ export class SelectPackageComponent implements OnInit {
 		return str;
 	}
 
-/*
-	// Não utilizado
-	getSelectedItems(): void {
-		for (let i = 0; i < this.pacotes.length; i++)
-		{
-			for (let j = 0; j < this.pacotes[i].items.length; j++)
-			{
-				let flag = this.pacotes[i].items[j].check;
-				let name = this.pacotes[i].items[j].nome;
-				let index = this.selectedPacks[i].items.indexOf(name);
-
-				if (flag) {
-					if (index === -1) {
-						this.selectedPacks[i].items.push(name);
-						this.qtySelPacks++;
-					}
-				}
-				else {
-					if (index !== -1) {
-						this.selectedPacks[i].items.splice(index, 1);
-						this.qtySelPacks--;
-					}
-				}
-			}
-		}
-
-		//console.log(this.selectedPacks);
-	}
-*/
 	confirmDetails(): void {
-		//console.log(this.event);
-		//if (this.event !== undefined) {
-			// localStorage.setItem('selectedPack', JSON.stringify(this.selectedPack));
-
-			// if (localStorage.newEvent !== undefined) {
-			// 	let event = JSON.parse(localStorage.newEvent)
-
-				//event.packageID = this.selectedPack.toString();
-				//localStorage.setItem('newEvent', JSON.stringify(event));
-
-				//let path = ['/home'];
-				// let path = ['/organizer', 'event', event.id, 'confirmation'];
-				// console.log(path)
-				//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
 		this.router.navigate(['/organizer', 'event', 'confirmation'], {
 			queryParams: {
 				"data": this.data,
 				"quant_pessoas": this.qtd_pessoas,
 				"bairro": this.bairro_q,
 				"rua": this.rua_q,
-				"pacote": JSON.stringify(this.selectedPack)
+				"pacote": JSON.stringify(this.selectedPack),
+				"orcamento": this.orcamento
 			}
 		});
-				//let path = ['/event', this.event.id, 'purchase'];
-				//this.router.navigate(path);
-			// }
-		/*}
-		else {
-			console.log('EVENT NOT FOUND!');
-		}*/
 	}
 
 	calcBudget(){
@@ -277,7 +198,9 @@ export class SelectPackageComponent implements OnInit {
 				budget += this.selectedPack.items[i].qtd * this.selectedPack.items[i].precoUnitario;
 			}
 		}
-
+		// this.orcamento = budget
+		
+		console.log("this.orcamento")
 		return budget;
 	}
 

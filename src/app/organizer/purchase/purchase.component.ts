@@ -18,6 +18,7 @@ export class PurchaseComponent {
 	pacote:any;
 	nome:any;
 	descricao:any;
+	orcamento: number;
 
 	constructor(private location: Location,
 				private route: ActivatedRoute,
@@ -38,11 +39,12 @@ export class PurchaseComponent {
 				this.pacote = query["pacote"]
 				this.nome = query["nome"]
 				this.descricao= query["descricao"]
-				// console.log(this.data.getFullYear())
+				this.orcamento = query["orcamento"]
+				console.log(this.pacote)
 				// console.log(this.qtd_pessoas)
 				// console.log(this.bairro_q)
 				// console.log(this.rua_q);
-				// console.log(this.pacote);
+				// console.log(this.orcamento);
 				// console.log(this.nome);
 				// console.log(this.descricao);
 			}
@@ -50,20 +52,11 @@ export class PurchaseComponent {
 	}
 
 	finish() {
-		// if (localStorage.newEvent !== undefined) {
-		// 	let event = JSON.parse(localStorage.newEvent)
-
-			//event.packageID = this.selectedPack.toString();
-			//localStorage.setItem('newEvent', JSON.stringify(event));
-
-			//let path = ['/home'];
-			// let path = ['/organizer', 'event', event.id, 'finish'];
-			//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
 		this.service.criarEvento(localStorage.getItem("token"), {
 			"nome": this.nome,
 			"quantidade_pessoas": this.qtd_pessoas,
 			"data": this.data.getFullYear() + "-" + this.data.getMonth() + "-" + this.data.getDay() + "T" + this.data.getHours() + ":" + this.data.getMinutes(),
-			"orcamento": 5002
+			"orcamento": this.orcamento
 		}).subscribe(
 			res => {
 				console.log("success purchase")
@@ -75,10 +68,12 @@ export class PurchaseComponent {
 				console.log("erro purchase")
 			}
 		);
-		this.router.navigate(['/organizer', 'event', 'finish']);
-			//let path = ['/event', this.event.id, 'purchase'];
-			//this.router.navigate(path);
+
+		// for (let i; i<this.pacote.items;i++){
+		// 	let item = this.pacote.items[i];
+
 		// }
+		this.router.navigate(['/organizer', 'event', 'finish']);
 	}
 
 }

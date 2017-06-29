@@ -148,7 +148,7 @@
 				<div class="card-content">
 					<h5 class="card-title">Entrega</h5>
 					<b>Horário</b>
-					<input id="horario" type="text">
+					<input #hora id="horario" class="timepicker" type="time">
 					<br />
 					<b>Local: </b>
 					<p>
@@ -156,7 +156,7 @@
 					</p>
 					<br />
 					<b>Taxa de Entrega: R$ 10</b><br /><br />
-					<button class="btn w100 waves-effect waves-light">Redefinir Dados</button>
+					<button class="btn w100 waves-effect waves-light" >Redefinir Dados</button>
 				</div>
 
 				<div class="divider"></div>
@@ -168,13 +168,11 @@
 				</div>
 
 				<div class="card-action">
-			        <button (click)="purchase()" class="btn red waves-effect waves-light">Realizar Pagamento
+			        <button (click)="purchase(hora.value)" class="btn red waves-effect waves-light">Realizar Pagamento
 						<i class="material-icons right">done</i>
 					</button>
 			    </div>
 			</div>
 		</div>
 	</div>
-
-
 </div>
