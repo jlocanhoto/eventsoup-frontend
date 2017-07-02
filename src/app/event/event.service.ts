@@ -196,29 +196,11 @@ export class EventService {
   	}
 
 	get_redirect_code() : any{
-		let url = 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout/';
+		let url = this.serverUrl + '/pagseguro/comprar';
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
-		
-		let json = {
-			'email': 'nilson.delimajr@gmail.com',
-			'token': 'F62303D851DF4417A53EF811CC48806A',
-			'currency': 'BRL',
-			'itemId1': '0001',
-			'itemDescription1': 'Pacote Expresso',
-			'itemAmount1': '525.00',
-			'itemQuantity1': '1',
-			'senderName': 'Nilson de Lima Jr.',
-			'senderAreaCode': '81',
-			'senderPhone': '987288049',
-			'senderEmail': 'nlj@sandbox.pagseguro.com.br',
-			'senderCPF': '09783502433',
-			'shippingAddressRequired': 'false',
-			'acceptPaymentMethodGroup': 'CREDIT_CARD,BOLETO,EFT',
-			'extraAmount': '15.45',
-		};
 
-		return this.http.post(url, JSON.stringify(json), options)
+		return this.http.get(url, options)
 				.map((response: Response) => {
 					// login successful if there's a jwt token in the response
 					let resp = response.json();
