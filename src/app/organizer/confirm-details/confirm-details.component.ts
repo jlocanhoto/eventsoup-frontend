@@ -208,28 +208,32 @@ export class ConfirmDetailsComponent implements OnInit {
 			//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
 		let code = this.service.get_redirect_code().subscribe(
 			res => {
-				let token = JSON.parse(res).checkoutCode
-				console.log("success purchase")
-				console.log(token)
+				console.log("success purchase");
+				console.log(res.checkoutCode)
+
+
+				let lightbox = PagSeguroLightbox({
+								code: res.checkoutCode
+							},
+							{
+								success: function(transactionCode){
+								alert("Operação de pagamento efetuada com sucesso. Aguardar confirmação do pagseguro.");
+							},
+								abort: function(){
+								alert("Operação de pagamento não efetuada.");
+							}
+						});
+
+				if(!lightbox){
+					location.href = "https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
+				}
+
+			},
+
+			erro => {
+			console.log("ERROR TO AUTHENTICATE: " + erro);
 			}
-		);;
-
-
-		let lightbox = PagSeguroLightbox({
-						code: code
-					},
-					{
-						success: function(transactionCode){
-						alert("Operação de pagamento efetuada com sucesso. Aguardar confirmação do pagseguro.");
-					},
-						abort: function(){
-						alert("Operação de pagamento não efetuada.");
-					}
-				});
-
-		if(!lightbox){
-			location.href = "https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
-		}
+		);
 
 /*		this.router.navigate(['/organizer', 'event', 'purchase'], {
 			queryParams: {
