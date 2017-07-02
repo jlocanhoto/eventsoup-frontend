@@ -208,13 +208,9 @@ export class ConfirmDetailsComponent implements OnInit {
 			//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
 		let code = this.service.get_redirect_code().subscribe(
 			res => {
+				let token = JSON.parse(res).checkoutCode
 				console.log("success purchase")
-				console.log(res)
-			},
-			erro => {
-				console.log("erro purchase")
-				console.log(erro)
-				console.log("erro purchase")
+				console.log(token)
 			}
 		);;
 
