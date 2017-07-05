@@ -148,5 +148,11 @@ header .intro-text .intro-lead-in {
   }
 }
 
+.coisas-item p{
+	padding: 0 20px 0 20px;
+	text-align: justify;
+    text-justify: inter-word;
+}
+
 
 .material-icons.cor { color: #1b5e20; }

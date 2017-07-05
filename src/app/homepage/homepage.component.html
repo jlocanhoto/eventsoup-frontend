@@ -4,19 +4,23 @@
         <div class="nav-wrapper grey darken-4">
             <a routerLink="" class="logo">event<span>soup</span></a>
             <!--<a routerLink="" class="brand-logo">EventSoup</a>-->
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a routerLink="/login" (click)="goto('fornecedor')">Entrar Fornecedor</a></li>
-				<li><a routerLink="/login" (click)="goto('organizer')">Entrar Contratante</a></li>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">				
+				<li><a href="#pacotes" class="linkArea">Pacotes</a></li>
+				<li><a href="#comofunciona" class="linkArea">Como funciona</a></li>
+				<li><a href="#sobre" class="linkArea">Sobre nós</a></li>
+                <!--<li><a routerLink="/login" (click)="goto('fornecedor')">Entrar Fornecedor</a></li>
+				<li><a routerLink="/login" (click)="goto('organizer')">Entrar Contratante</a></li>-->
             </ul>
             <a href="javascript.void(0)" data-activates="slide-out" class="button-collapse right"><i class="material-icons white-text">menu</i></a>
         </div>
     </nav>
 </div>
-
+<!--
 <ul id="slide-out" class="side-nav">
 	<li><a routerLink="/login" (click)="goto('fornecedor')">Entrar Fornecedor</a></li>
 	<li><a routerLink="/login" (click)="goto('organizer')">Entrar Contratante</a></li>
 </ul>
+-->
 <!--Fim do Menu-->
 
 <div class="parallax-container picture-height">
@@ -35,43 +39,11 @@
     </header>
 </div>
 
-<!--Começo das 3 coisa-->
-<div class="section section-pacotes">
-	<div class="row">
-		<div  class="col s12 m4 l4 coisas-item">
-			<div class="center">
-        <i class="large material-icons cor">trending_up</i>
-				<h5>NOSSA MISSÃO</h5>
-				<p class="light center">Entregar para os nossos clientes, de acordo com suas reais necessidades, os melhores fornecedores da cidade para o seu evento empresarial de maneira prática e rápida, sem a necessidade de entrar em contato com estes serviços um a um.</p>
-			</div>
-		</div>
-		<div class="col s12 m4 l4 coisas-item">
-			<div class="center">
-        <i class="large  material-icons cor">supervisor_account</i>
-				<h5>QUEM SOMOS</h5>
-				<p class="light center">Somos uma equipe unida de cientistas e engenheiros da computação motivados e engajados em solucionar a
-                                problemática das muitas e longas etapas para a realização de um evento corporativo, independentemente do seu tamanho.</p>
-			</div>
-		</div>
-		<div class="col s12 m4 l4 coisas-item">
-			<div class="center promo promo-example">
-        <i class="large material-icons cor">star</i>
-				<h5>NOSSOS VALORES</h5>
-				<p class="light center">
-          Praticidade da compra à entrega <br/>
-          Menor custo <br/>
-          Parcerias estratégicas <br/>
-          Qualidade no atendimento ao cliente <br/>
-          Transparência e segurança no pagamento
-        </p>
-			</div>
-		</div>
-	</div>
-</div>
+
 
 
 <!--Começo de pacotes-->
-
+<a name="pacotes" id="pacotes"></a>
 <div class="section section-pacotes">
 	<h4>Pacotes </h4>
 	<div class="row">
@@ -151,8 +123,11 @@
 <!--Fim de pacotes-->
 
 <!--Começo da Timeline-->
+<a name="comofunciona" id="comofunciona"></a>
 <div class="section">
+	
   <div class="col s12 scrollspy" id="homepage-timeline" style="font-family: sans-serif">
+  
 	<section id="cd-timeline" class="cd-container">
 		<div class="cd-timeline-block cssanimations">
       <div  class="cd-timeline-img cd-picture containerIcon">
@@ -160,9 +135,9 @@
       </div>
 
 			<div class="cd-timeline-content">
-				<h5>Adicione poucas informações básicas</h5>
-				<p>Você só vai precisar nos informar os seguintes dados: data do evento, quantidade de pessoas, duração (em horas)
-          e o endereço de onde acontecerá o evento.</p>
+				<h5>Adicione informações básicas</h5>
+				<p>Você só vai precisar nos informar os seguintes dados: <b>data do evento, quantidade de pessoas, duração (em horas)
+          e o endereço de onde acontecerá o evento</b>.</p>
 			</div> <!-- cd-timeline-content -->
 		</div> <!-- cd-timeline-block -->
 
@@ -173,8 +148,8 @@
 
 			<div class="cd-timeline-content">
 				<h5>Escolha o pacote que encaixe com suas necessidades</h5>
-				<p> Nós iremos providenciar os pacotes com as quantidades de cada item e, também, o orçamento do pacote escolhido.
-          Você pode alterar a quantia de cada item.
+				<p> Nós iremos providenciar os pacotes com as quantidades de cada item e, também, o orçamento do pacote escolhido.<br/>
+          <b>Você pode alterar a quantia de cada item</b>.
         </p>
 			</div> <!-- cd-timeline-content -->
 		</div> <!-- cd-timeline-block -->
@@ -185,7 +160,7 @@
       </div>
 
 			<div class="cd-timeline-content">
-				<h5>Algumas informações adicionais</h5>
+				<h5>Informações adicionais</h5>
 				<p> Caso você não seja cadastrado ainda, será necessário nos informar alguns dados mais concretos para sua identificação e cobrança do pacote.</p>
 			</div> <!-- cd-timeline-content -->
 		</div> <!-- cd-timeline-block -->
@@ -198,13 +173,48 @@
 			<div class="cd-timeline-content">
 				<h5>Pagamento</h5>
 				<p>Realize o pagamento do seu pacote através da interface do PagSeguro, uma plataforma de intermediação de pagamento promovida pela UOL.
-          Você poderá escolher a melhor opção de pagamento: cartão de crédito ou débito, boleto bancário ou saldo no próprio PagSeguro.</p>
+          <b>Você poderá escolher a melhor opção de pagamento: cartão de crédito ou débito, boleto bancário ou saldo no próprio PagSeguro</b>.</p>
 			</div> <!-- cd-timeline-content -->
 		</div> <!-- cd-timeline-block -->
 	</section> <!-- cd-timeline -->
   </div>
 </div>
 <!--Fim da timeline-->
+
+<!--Começo das 3 coisa-->
+<a name="sobre" id="sobre"></a>
+<div class="section section-pacotes">
+	<div class="row">
+		<div  class="col s12 m4 l4 coisas-item">
+			<div class="center">
+        <i class="large material-icons cor">trending_up</i>
+				<h5>NOSSA MISSÃO</h5>
+				<p class="light center">Entregar para os nossos clientes, de acordo com suas reais necessidades, os melhores fornecedores da cidade para o seu evento empresarial de maneira prática e rápida, sem a necessidade de entrar em contato com estes serviços um a um.</p>
+			</div>
+		</div>
+		<div class="col s12 m4 l4 coisas-item">
+			<div class="center">
+        <i class="large  material-icons cor">supervisor_account</i>
+				<h5>QUEM SOMOS</h5>
+				<p class="light center">Somos uma equipe unida de cientistas e engenheiros da computação motivados e engajados em solucionar a
+                                problemática das muitas e longas etapas para a realização de um evento corporativo, independentemente do seu tamanho.</p>
+			</div>
+		</div>
+		<div class="col s12 m4 l4 coisas-item">
+			<div class="center promo promo-example">
+        <i class="large material-icons cor">star</i>
+				<h5>NOSSOS VALORES</h5>
+				<p class="light center">
+          + Praticidade da compra à entrega <br/>
+          + Menor custo <br/>
+          + Parcerias estratégicas <br/>
+          + Qualidade no atendimento ao cliente <br/>
+          + Transparência e segurança no pagamento
+        </p>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!--Rodapé-->
 
