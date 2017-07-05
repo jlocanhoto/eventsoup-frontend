@@ -11,12 +11,20 @@ declare var $:any;
 export class HomepageComponent implements OnInit {
 
   constructor(private service: EventService) { 
+	
   }
 
   ngOnInit() {
     $('.parallax').parallax();
     $(".button-collapse").sideNav();
     $('.scrollspy').scrollSpy();
+	
+	$(document).on('click', '.linkArea', function(event){
+		event.preventDefault();
+		$('html, body').animate({
+			scrollTop: $( $.attr(this, 'href') ).offset().top - 64
+		}, 500);
+	});
   }
 
   ngAfterViewInit() {
