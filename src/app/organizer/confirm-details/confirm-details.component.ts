@@ -2,7 +2,10 @@ import { Component, OnInit } 		from '@angular/core';
 import { Location }					from '@angular/common';
 import { ActivatedRoute, Router }	from '@angular/router';
 
+import { EventService }				from './../../event/event.service';
+
 declare var $ : any;
+declare var PagSeguroLightbox : any;
 
 @Component({
   selector: 'confirm-details',
@@ -60,7 +63,8 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	constructor(private location: Location,
 				private route: ActivatedRoute,
-				private router	: Router	) { }
+				private router	: Router	,
+				private service : EventService) { }
 
 	ngOnInit() {
 
@@ -199,8 +203,13 @@ export class ConfirmDetailsComponent implements OnInit {
 			alert("Selecione o horário do evento")
 			return;
 		}
+		if (this.titulo < 1) {
+			alert("Defina um titulo para o evento")
+			return;
+		}
 		hora = hora.split(':')
-		alert(hora[0])
+		// alert(hora[0])
+		
 		let data = new Date(this.data.getFullYear(),this.data.getMonth(),
 					this.data.getDate(), hora[0], hora[1])
 		this.router.navigate(['/organizer', 'event', 'purchase'], {
@@ -215,6 +224,36 @@ export class ConfirmDetailsComponent implements OnInit {
 				"orcamento": this.orcamento
 			}
 		});
+/*
+		let code = this.service.get_redirect_code().subscribe(
+			res => {
+				console.log("success purchase");
+				console.log(res.checkoutCode)
+
+
+				let lightbox = PagSeguroLightbox({
+								code: res.checkoutCode
+							},
+							{
+								success: function(transactionCode){
+								alert("Operação de pagamento efetuada com sucesso. Aguardar confirmação do pagseguro.");
+							},
+								abort: function(){
+								alert("Operação de pagamento não efetuada.");
+							}
+						});
+
+				if(!lightbox){
+					location.href = "https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
+				}
+
+			},
+
+			erro => {
+			console.log("ERROR TO AUTHENTICATE: " + erro);
+			}
+		);
+		*/
 	}
 
 	isPessoaFisica(): boolean {
