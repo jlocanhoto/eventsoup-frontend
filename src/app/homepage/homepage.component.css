@@ -120,7 +120,8 @@ header .intro-text .intro-lead-in {
 }
 
 .card-altura {
-  height: 450px;
+  height: 335px;
+  padding: 15px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -146,3 +147,12 @@ header .intro-text .intro-lead-in {
     font-size: 14px;
   }
 }
+
+.coisas-item p{
+	padding: 0 20px 0 20px;
+	text-align: justify;
+    text-justify: inter-word;
+}
+
+
+.material-icons.cor { color: #1b5e20; }
