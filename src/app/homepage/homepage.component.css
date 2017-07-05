@@ -120,7 +120,8 @@ header .intro-text .intro-lead-in {
 }
 
 .card-altura {
-  height: 450px;
+  height: 335px;
+  padding: 15px;
 }
 
 @media only screen and (max-width: 600px) {
