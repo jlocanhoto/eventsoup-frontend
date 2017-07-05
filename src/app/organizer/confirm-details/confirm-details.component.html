@@ -37,7 +37,7 @@
 					    </div>
 					    <div class="row">
 					        <div class="input-field col s6">
-					          <input id="email" type="text" [(ngModel)]="email" name="email" class="validate">
+					          <input id="email" type="email" [(ngModel)]="email" name="email" class="validate">
 					          <label class="fill-user" for="email">E-mail</label>
 					        </div>
 							<div class="input-field col s3">
@@ -90,7 +90,7 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s2">
-								<input id="numero" type="text" [(ngModel)]="numero" name="numero">
+								<input id="numero" type="number" [(ngModel)]="numero" name="numero">
 								<label class="fill-addr" for="numero">Número</label>
 							</div>
 							<div class="input-field col s5">
@@ -176,7 +176,7 @@
 					<b>Horário do evento:</b>
 					<div class="row">
                     	<div class="input-field col s12">
-	                        <input id="timepicker" class="timepicker" type="text">
+	                        <input #hora id="timepicker" class="timepicker" type="text">
 	                        <label for="timepicker">Selecione um horário</label>
 	                    </div>
 	                </div>

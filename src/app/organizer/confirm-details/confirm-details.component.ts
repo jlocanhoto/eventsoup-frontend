@@ -41,7 +41,6 @@ export class ConfirmDetailsComponent implements OnInit {
 	rua_q:string;
 	pacote:any;
 	orcamento: number;
-	hora: any;
 
 	logged 			: boolean = false;
 
@@ -195,10 +194,18 @@ export class ConfirmDetailsComponent implements OnInit {
 		//console.log(this.regAddr);
 	}
 
-	purchase(): void {
+	purchase(hora): void {
+		if(hora.length < 3){
+			alert("Selecione o horário do evento")
+			return;
+		}
+		hora = hora.split(':')
+		alert(hora[0])
+		let data = new Date(this.data.getFullYear(),this.data.getMonth(),
+					this.data.getDate(), hora[0], hora[1])
 		this.router.navigate(['/organizer', 'event', 'purchase'], {
 			queryParams: {
-				"data": this.data,
+				"data": data,
 				"quant_pessoas": this.qtd_pessoas,
 				"bairro": this.bairro_q,
 				"rua": this.rua_q,
