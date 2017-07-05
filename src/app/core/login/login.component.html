@@ -8,53 +8,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col s3 m3 l3 xl3 offset-m6 offset-l6 offset-xl6 ">
-
-			<div *ngIf="!flagReg">
-				<input>
-				<input>
-				<input>
-			</div>
-
-			<div class="input-field white-text">
-				<input [(ngModel)]="user.cpf_cnpj" type="text" placeholder="CPF/CNPJ" name="user"><br />
-			</div>
-
-			<div *ngIf="flagReg">
-				<div class="input-field white-text">
-				<input [(ngModel)]="user.nome" type="text" placeholder="Nome completo" name="nome"><br />
-				</div>
-
-				<div class="input-field white-text">
-				<input [(ngModel)]="user.email" type="text" placeholder="E-mail" name="email"><br />
-				</div>
-
-				<div class="input-field white-text">
-				<input [(ngModel)]="user.telefone" type="text" placeholder="Telefone" name="telefone"><br />
-				</div>
-
-				<div class="input-field white-text">
-				<input [(ngModel)]="user.celular" type="text" placeholder="Celular" name="celular"><br/>
-				</div>
-			</div>
-
-			<div class="input-field white-text">
-				<input [(ngModel)]="user.password" type="password" placeholder="Senha" name="password"><br />
-			</div>
-
-			<div *ngIf="flagReg" class="input-field white-text">
-				<input [(ngModel)]="password2" type="password" placeholder="Confirmar senha" name="password"><br />
-				<a class="waves-effect waves-light btn" (click)="register()">Registrar-se</a>
-				<p class="message">Já possui uma conta? <span class="pointer green-text" (click)="haveAccount()">Fazer login</span></p>
-			</div>
-
-			<div class="input-field">
-				<div *ngIf="!flagReg">
-					<div class="error">{{errorMsg}}</div>
-					<a class="waves-effect waves-light btn" (click)="login()">Login</a>
-					<p class="message white-text">Não está registrado? <span class="pointer green-text" (click)="registerIntent()">Criar conta</span></p>
-				</div>
-			</div>
-
+			<login-forms></login-forms>
 	    </div>
     </div>
 </div>

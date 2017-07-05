@@ -26,13 +26,13 @@ export class SelectPackageComponent implements OnInit {
 
 	selPackClass 	: string[] 	= ["panel panel-primary",
 								   "panel panel-yellow",
-								   "panel panel-red", 
+								   "panel panel-red",
 								   "panel panel-green",
 								   "panel panel-black"];
 
 	colors		 	: string[] 	= ["blue lighten-4",
 								   "yellow lighten-4",
-								   "red lighten-4", 
+								   "red lighten-4",
 								   "green lighten-4",
 								   "brown lighten-4"];
 
@@ -40,17 +40,18 @@ export class SelectPackageComponent implements OnInit {
 	timeEating		: number 	= 0;
 	newEvent		: any;
 
+
 	pacoteExpresso		: any = {"name": "Expresso",
 							 "img": "expresso.jpg",
 							 "desc": "Pausa para um lanche após uma reunião",
 							 "items": [
 								{"nome": "Coxinha"				,	"type": "salgado",	"qtd": 0, "precoUnitario": 0.2},
 								{"nome": "Empada"				,	"type": "salgado",	"qtd": 0, "precoUnitario": 0.15},
-								{"nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": 0*5, "precoUnitario": 0.15}
-								//{"nome": "Descartáveis"				, "check": false},
+								{"nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": 0, "precoUnitario": 0.15}
+							//{"nome": "Descartáveis"				, "check": false},
 								//{"nome": "Mesas e cadeiras"			, "check": false}
 							]};
-				
+
 	pacoteCasual	: any = {"name": "Casual",
 							 "img": "cerveja_artesanal.png",
 							 "desc": "Um bom momento para trocar uma ideia",
@@ -66,8 +67,8 @@ export class SelectPackageComponent implements OnInit {
 							 "img": "brigadeiro.jpg",
 							 "desc": "Descontraia com os aniversáriantes do mês",
 							 "items": [
-								{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
-							]};	
+								{"nome": "Torta"				,	"type": "torta",	"qtd": 1, "precoUnitario": 40}
+							]};
 
 
 	selectedPack	: any = {};
@@ -80,7 +81,6 @@ export class SelectPackageComponent implements OnInit {
 	selectedPacks	: any = [];
 	qtySelPacks		: number = 0;
 
-
 	data:Date;
 	qtd_pessoas: number;
 	bairro_q: string;
@@ -89,9 +89,8 @@ export class SelectPackageComponent implements OnInit {
 
 	constructor (private eventService	: EventService,
 				 private route			: ActivatedRoute,
-				 private location		: Location,		 
-				 private router			: Router		) {
-				}
+				 private location		: Location,
+				 private router			: Router		) {	}
 
 	ngOnInit(): void {
 		// pega os dados informados na página anterior
@@ -117,7 +116,6 @@ export class SelectPackageComponent implements OnInit {
 
 		// console.dir(this.newEvent);
 	}
-
 	definePacote() {
 		this.pacoteExpresso = {"name": "Expresso",
 								"img": "expresso.jpg",
@@ -148,11 +146,25 @@ export class SelectPackageComponent implements OnInit {
 									{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
 								]};
 
+
 		this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
 		this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
 
 		this.pacotes = [this.pacoteExpresso, this.pacoteCasual, this.pacoteFesta]
 	}
+
+		// updatePackageItems() {
+	// 	for (let i = 0; i < this.pacotes.length; i++)
+	// 	{
+	// 		let items = this.pacotes[i].items;
+
+	// 		for (let j = 0; j < items.length; j++)
+	// 		{
+	// 			if(items[j].type !== 'torta')
+	// 			items[j].qtd *= this.qtd_pessoas;
+	// 		}
+	// 	}
+	// }
 
 	ngAfterViewInit(): void {
 		$('.chip').css('cursor', 'pointer');

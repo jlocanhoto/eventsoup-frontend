@@ -12,70 +12,94 @@
 				<div class="card-content">
 					<form action="">
 						<span class="card-title">Informações sobre você</span>
-						<p>Já está cadastrado? Clique <a href="">aqui</a> para entrar</p>
+						<p *ngIf="!logged">Já está cadastrado? Clique <a href="#modal_login">aqui</a> para entrar</p>
+						<!-- Modal Structure -->
+						<div id="modal_login" class="modal">
+							<div class="modal-content">
+								<login-forms></login-forms>
+							</div>
+							<!--
+							<div class="modal-footer">
+								<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Login</a>
+								<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+							</div>
+							-->
+						</div>
 						<div class="row">
 					        <div class="input-field col s6">
 					          <input id="nome" name="nome" type="text" [(ngModel)]="nome">
-					          <label for="nome">Nome</label>
+					          <label class="fill-user" for="nome">Nome</label>
 					        </div>
 					        <div class="input-field col s6">
 					          <input id="sobrenome" type="text" name="sobrenome" [(ngModel)]="sobrenome">
-					          <label for="sobrenome">Sobrenome</label>
+					          <label class="fill-user" for="sobrenome">Sobrenome</label>
 					        </div>
 					    </div>
-						<div class="row">
-							<div class="input-field col s3">
-								<input id="bairro" type="text" [(ngModel)]="bairro" name="bairro">
-								<label for="bairro">Bairro</label>
-							</div>
-							<div class="input-field col s6">
-								<input id="rua" type="text" [(ngModel)]="rua" name="rua">
-								<label for="rua">Rua</label>
-							</div>
-							<div class="input-field col s3">
-								<input id="numero" type="text" [(ngModel)]="numero" name="numero">
-								<label for="numero">Número</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s3">
-								<input id="complemento" type="text" [(ngModel)]="complemento" name="complemento">
-								<label for="complemento">Complemento </label>
-							</div>
-							<div class="input-field col s3">
-								<input id="cep" type="text" [(ngModel)]="cep" name="cep">
-								<label for="cep">CEP</label>
-							</div>
-							<div class="input-field col s3">
-								<input id="telefone" type="text" [(ngModel)]="telefone" name="telefone">
-								<label for="telefone">Telefone</label>
-							</div>
-							<div class="input-field col s3">
-								<input id="bairro" type="text" [(ngModel)]="celular" name="bairro">
-								<label for="bairro">Celular</label>
-							</div>
-						</div>
-						<div class="row">
+					    <div class="row">
 					        <div class="input-field col s6">
 					          <input id="email" type="text" [(ngModel)]="email" name="email" class="validate">
-					          <label for="email">E-mail</label>
+					          <label class="fill-user" for="email">E-mail</label>
 					        </div>
-					        <div class="input-field col s3">
+							<div class="input-field col s3">
+								<input id="telefone" type="text" [(ngModel)]="telefone" name="telefone">
+								<label class="fill-user" for="telefone">Telefone</label>
+							</div>
+							<div class="input-field col s3">
+								<input id="celular" type="text" [(ngModel)]="celular" name="celular">
+								<label class="fill-user" for="celular">Celular</label>
+							</div>
+					        <!--
+					        <div *ngIf="!logged" class="input-field col s3">
 					          <input id="senha" type="password" [(ngModel)]="senha" name="senha">
 					          <label for="senha">Senha</label>
 					        </div>
-					        <div class="input-field col s">
+					        <div *ngIf="!logged" class="input-field col s3">
 					          <input id="confirmpass" type="password" [(ngModel)]="confirmpass" name="confirmpass">
 					          <label for="confirmpass">Confirme sua senha</label>
 					        </div>
+					        -->
 					    </div>
-						<div class="row">
-							<div class="input-field col s6">
+					    <div class="row">
+
+							<div *ngIf="!logged" class="input-field col s3">
 							    <select [(ngModel)]="tipoSelecionado" id="tipoSelecionado" name="tipoSelecionado">
 							      <option *ngFor="let c of tipos" [value]="c.id" checked>{{c.name}}</option>
 							    </select>
-
 							    <label id="">Pessoa Física ou Jurídica</label>
+							</div>
+							<div *ngIf="!logged" class="input-field col s9">
+								<button class="waves-effect waves-light btn right">Registrar-se</button>
+							</div>
+						</div>
+					    <span class="card-title">Endereço de entrega</span>
+					    <form action="">
+							<p>
+								<input type="checkbox" class="filled-in" id="filled-in-box" disabled />
+								<label for="filled-in-box">Utilizar endereço cadastrado</label>
+							</p>
+						</form>
+						<div class="row">
+							<div class="input-field col s3">
+								<input id="cep" type="text" [(ngModel)]="cep" name="cep">
+								<label class="fill-addr" for="cep">CEP</label>
+							</div>
+							<div class="input-field col s9">
+								<input id="rua" type="text" [(ngModel)]="rua" name="rua">
+								<label class="fill-addr2" for="rua">Rua</label>
+							</div>							
+						</div>
+						<div class="row">
+							<div class="input-field col s2">
+								<input id="numero" type="text" [(ngModel)]="numero" name="numero">
+								<label class="fill-addr" for="numero">Número</label>
+							</div>
+							<div class="input-field col s5">
+								<input id="complemento" type="text" [(ngModel)]="complemento" name="complemento">
+								<label class="fill-addr" for="complemento">Complemento </label>
+							</div>
+							<div class="input-field col s5">
+								<input id="bairro" type="text" [(ngModel)]="bairro" name="bairro">
+								<label class="fill-addr2" for="bairro">Bairro</label>
 							</div>
 						</div>
 
@@ -105,13 +129,15 @@
 						<div class="row">
 							<div class="input-field col s7">
 								<input id="titulo" type="text" [(ngModel)]="titulo" name="titulo">
-								<label for="titulo">Título</label>
+								<label for="titulo">Título (opcional)</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s7">
-	         					<textarea id="info" class="materialize-textarea" [(ngModel)]="info" name="info"></textarea>
-	          					<label for="info">Descrição</label>
+	         					<textarea id="info" class="materialize-textarea" [(ngModel)]="info" name="info" placeholder="Exemplos:
+- Workshop de empreendedorismo voltado ao público universitário.
+- Evento de divulgação da empresa em que a prefeitura vai estar presente."></textarea>
+	          					<label for="info">Descrição (opcional)</label>
 	        				</div>
 						</div>
 					</form>
@@ -140,23 +166,32 @@
 						<div class="col s4">{{item.qtd}}</div>
 					</div>
 					<br />
-					<b>Subtotal: R$ {{calcBudget()}}</b>
+					<b>Subtotal: R$ {{calcBudget()}},00</b>
 				</div>
 
 				<!-- <div class="divider"></div> -->
 
 				<div class="card-content">
 					<h5 class="card-title">Entrega</h5>
-					<b>Horário</b>
-					<input #hora id="horario" class="timepicker" type="time">
-					<br />
-					<b>Local: </b>
-					<p>
-						{{eventInfo.rua}}, {{eventInfo.numero}} - {{eventInfo.bairro}}
+					<b>Horário do evento:</b>
+					<div class="row">
+                    	<div class="input-field col s12">
+	                        <input id="timepicker" class="timepicker" type="text">
+	                        <label for="timepicker">Selecione um horário</label>
+	                    </div>
+	                </div>
+					<!-- <input id="horario" type="text"> -->
+					<b>Local:</b>
+					<p id="end_entrega">
+						<!-- {{eventInfo.rua}}, {{eventInfo.numero}} - {{eventInfo.bairro}} -->
+						{{rua}}<span *ngIf="numero !== ''">, {{numero}}</span> <span *ngIf="complemento !== ''">- {{complemento}}</span>
+						<br/>
+						{{bairro}} - CEP: {{cep}}
+						Recife, PE - Brasil
 					</p>
 					<br />
-					<b>Taxa de Entrega: R$ 10</b><br /><br />
-					<button class="btn w100 waves-effect waves-light" >Redefinir Dados</button>
+					<b>Taxa de Entrega: R$ 10,00</b><br /><br />
+					<button (click)="redefine()" class="btn w100 waves-effect waves-light">Redefinir Dados</button>
 				</div>
 
 				<div class="divider"></div>
@@ -164,7 +199,7 @@
 				<div class="card-content">
 					<h5 class="card-title">Valor Total</h5>
 					<p>Este pacote inclui pratos, copos e talheres descartáveis para {{eventInfo.qtd}} pessoas</p><br />
-					<b>R$ {{10 + calcBudget()}}</b><br /><br />
+					<h3><b>R$ {{10 + calcBudget()}},00</b></h3>
 				</div>
 
 				<div class="card-action">

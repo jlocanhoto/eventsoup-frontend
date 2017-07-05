@@ -11,14 +11,16 @@ import { DashboardComponent }       from './dashboard/dashboard.component';
 import { OrganizerRoutingModule }   from './organizer-routing.module';
 import { PurchaseComponent }        from './purchase/purchase.component';
 import { FinishComponent }          from './finish/finish.component';
-import { OrganizerService } from './organizer.service';
+import { OrganizerService }         from './organizer.service';
+import { LoginModule }              from '../core/login/login.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     //RouterModule,
-    OrganizerRoutingModule
+    OrganizerRoutingModule,
+    LoginModule
   ],
   exports: [
   ],

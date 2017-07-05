@@ -11,14 +11,14 @@ import { OrganizerService } from './../organizer.service';
 })
 export class PurchaseComponent {
 
-	data:Date;
-	qtd_pessoas: number;
-	bairro_q: string;
-	rua_q:string;
-	pacote:any;
-	nome:any;
-	descricao:any;
-	orcamento: number;
+	data			:	Date;
+	qtd_pessoas		:	number;
+	bairro_q		:	string;
+	rua_q			:	string;
+	pacote			:	any;
+	nome			:	any;
+	descricao		:	any;
+	orcamento		:	number;
 
 	constructor(private location: Location,
 				private route: ActivatedRoute,
@@ -38,15 +38,8 @@ export class PurchaseComponent {
 				this.rua_q = query["rua"]
 				this.pacote = query["pacote"]
 				this.nome = query["nome"]
-				this.descricao= query["descricao"]
+				this.descricao = query["descricao"]
 				this.orcamento = query["orcamento"]
-				console.log(this.pacote)
-				// console.log(this.qtd_pessoas)
-				// console.log(this.bairro_q)
-				// console.log(this.rua_q);
-				// console.log(this.orcamento);
-				// console.log(this.nome);
-				// console.log(this.descricao);
 			}
 		);
 	}

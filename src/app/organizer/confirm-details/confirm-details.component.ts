@@ -1,6 +1,6 @@
-import { Component, OnInit } 	from '@angular/core';
-import { Location }				from '@angular/common';
-import { ActivatedRoute, Router }				from '@angular/router';
+import { Component, OnInit } 		from '@angular/core';
+import { Location }					from '@angular/common';
+import { ActivatedRoute, Router }	from '@angular/router';
 
 declare var $ : any;
 
@@ -10,8 +10,6 @@ declare var $ : any;
   styleUrls: ['./confirm-details.component.css']
 })
 export class ConfirmDetailsComponent implements OnInit {
-	selectedPackages = [];
-	packageNames = [];
 	tipos : any[] = [
        {id: 1, name: "Pessoa Física"},
        {id: 2, name: "Pessoa Jurídica"}
@@ -43,6 +41,23 @@ export class ConfirmDetailsComponent implements OnInit {
 	rua_q:string;
 	pacote:any;
 	orcamento: number;
+	hora: any;
+
+	logged 			: boolean = false;
+
+	__complemento	: any = "CIn - UFPE";
+	__sobrenome		: any = "Oliveira Canhoto";
+	__telefone		: any = "(81) 3333-4444";
+	__celular		: any = "(81) 99999-8888";
+	__numero		: any = "1235";
+	__bairro		: any = "Cidade Universitária";
+	__email			: any = "ufpe@ufpe.br";
+	__nome			: any = "João Lucas";
+	__rua			: any = "Av. Prof. Moraes Rego";
+	__cep			: any = "50670-901";
+
+	regAddr			: boolean = false;
+
 
 	constructor(private location: Location,
 				private route: ActivatedRoute,
@@ -63,16 +78,99 @@ export class ConfirmDetailsComponent implements OnInit {
 				this.selectedPack = JSON.parse(this.pacote);
 			}
 		);
-		$('.timepicker').pickatime({
-			// default: 'now',
-			twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-			donetext: 'OK',
-			autoclose: true,
-		});
+		// $('.timepicker').pickatime({
+		// 	// default: 'now',
+		// 	twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+		// 	donetext: 'OK',
+		// 	autoclose: true,
+		// });
+
+		$(".fill-addr2").addClass("active");
+		this.bairro		 = this.bairro_q;
+		this.rua		 = this.rua_q;
 	}
 
 	ngAfterViewInit() {
 		$('select').material_select();
+		$('.modal').modal({
+			complete: () => {
+				if (localStorage.token !== undefined) {
+					localStorage.removeItem('token');
+					console.log('User logged in');
+					this.logged = true;
+
+					$('#filled-in-box').prop('disabled', false);
+
+					this.fulfillFormData();
+				}
+				else {
+					console.log('User closed modal');
+				}
+
+				localStorage.setItem('eraseInput', 'true');
+			}
+		});
+
+		$('#filled-in-box').bind('change', () => {
+			this.toggleAddr();
+		});
+
+		$('#numero').bind('change', () => {
+			if (this.numero === "") {
+				this.eventInfo.numero = 0;
+			}
+			else {
+				this.eventInfo.numero = this.numero;
+			}
+		});
+
+		$('#timepicker').pickatime({
+			default: 'now', // Set default time
+			fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+			twelvehour: false, // Use AM/PM or 24-hour format
+			donetext: 'OK', // text for done-button
+			cleartext: 'Limpar', // text for clear-button
+			canceltext: 'Cancelar', // Text for cancel-button
+			autoclose: false, // automatic close timepicker
+			ampmclickable: true, // make AM PM clickable
+			aftershow: function(){} //Function for after opening timepicker  
+		});
+	}
+
+	fulfillFormData() {
+		if (this.logged) {
+			$(".fill-user").addClass("active");
+			this.nome		 = this.__nome;
+			this.sobrenome	 = this.__sobrenome;
+			this.email		 = this.__email;
+			this.telefone	 = this.__telefone;
+			this.celular	 = this.__celular;
+		}
+		else {
+			$(".fill-user").removeClass("active");
+			this.nome		 = "";
+			this.sobrenome	 = "";
+			this.email		 = "";
+			this.telefone	 = "";
+			this.celular	 = "";
+		}
+
+		if (this.regAddr) {
+			$(".fill-addr").addClass("active");
+			this.complemento = this.__complemento;			
+			this.numero		 = this.__numero;
+			this.bairro		 = this.__bairro;						
+			this.rua		 = this.__rua;
+			this.cep		 = this.__cep;
+		}
+		else {
+			$(".fill-addr").removeClass("active");
+			this.complemento = "";
+			this.numero		 = "";
+			this.bairro		 = this.bairro_q;
+			this.rua		 = this.rua_q;
+			this.cep		 = "";
+		}
 	}
 
 	calcBudget(){
@@ -87,12 +185,20 @@ export class ConfirmDetailsComponent implements OnInit {
 		return budget;
 	}
 
-	purchase(hora:string): void {
-		if (hora.length < 5 || this.titulo.length < 1) return;
-		let data = new Date(this.data.getFullYear(),this.data.getMonth(),this.data.getDate(),parseInt(hora.slice(0,2)),parseInt(hora.slice(3,5)))
+	redefine(): void {
+		console.log('redefinir');
+	}
+
+	toggleAddr(): void {
+		this.regAddr = !this.regAddr;
+		this.fulfillFormData();
+		//console.log(this.regAddr);
+	}
+
+	purchase(): void {
 		this.router.navigate(['/organizer', 'event', 'purchase'], {
 			queryParams: {
-				"data": data,
+				"data": this.data,
 				"quant_pessoas": this.qtd_pessoas,
 				"bairro": this.bairro_q,
 				"rua": this.rua_q,
@@ -104,11 +210,11 @@ export class ConfirmDetailsComponent implements OnInit {
 		});
 	}
 
-	// isPessoaFisica(): boolean {
-	// 	this.tipoSelecionado = $("select").val();
+	isPessoaFisica(): boolean {
+		this.tipoSelecionado = $("select").val();
 
-	// 	return (this.tipoSelecionado === null) || (this.tipoSelecionado == 1);
-	// }
+		return (this.tipoSelecionado === null) || (this.tipoSelecionado == 1);
+	}
 
 	goBack(): void {
 		this.location.back();

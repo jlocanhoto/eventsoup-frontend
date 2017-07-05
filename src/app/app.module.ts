@@ -11,12 +11,11 @@ import { FornecedorModule }     from './fornecedor/fornecedor.module';
 import { HomepageModule }       from './homepage/homepage.module';
 import { OrganizerModule }      from './organizer/organizer.module';
 import { EventService }         from './event/event.service';
-import { LoginComponent } from './core/login/login.component';
+import { LoginModule }          from './core/login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +24,7 @@ import { LoginComponent } from './core/login/login.component';
     FornecedorModule,
     HomepageModule,
     OrganizerModule,
+    LoginModule,
     //AppRoutingModule
     HomePageRoutingModule
   ],

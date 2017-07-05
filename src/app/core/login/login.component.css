@@ -24,15 +24,9 @@ body{
 	z-index: 0;
 }
 
-.pointer{
-	cursor: pointer;
-}
-
 .container{
 	width: 90%;
-
 	/* background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg); */
-
 }
 
 .grad{
@@ -66,6 +60,10 @@ body{
 .header div span{
 	/* color: #5379fa !important; */
 	color: #9eff5e !important;
+}
+
+.whitetext {
+	color: #fff;
 }
 
 ::-webkit-input-placeholder{
