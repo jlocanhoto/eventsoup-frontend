@@ -2,7 +2,10 @@ import { Component, OnInit } 		from '@angular/core';
 import { Location }					from '@angular/common';
 import { ActivatedRoute, Router }	from '@angular/router';
 
+import { EventService }				from './../../event/event.service';
+
 declare var $ : any;
+declare var PagSeguroLightbox : any;
 
 @Component({
   selector: 'confirm-details',
@@ -58,7 +61,8 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	constructor(private location: Location,
 				private route: ActivatedRoute,
-				private router	: Router	) { }
+				private router	: Router,
+				private service : EventService) { }
 
 	ngOnInit() {
 		// this.selectedPackages = JSON.parse(localStorage.selectedPacks);
@@ -202,7 +206,36 @@ export class ConfirmDetailsComponent implements OnInit {
 			//let path = ['/home'];
 			// let path = ['/organizer', 'event', event.id, 'purchase'];
 			//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
-		this.router.navigate(['/organizer', 'event', 'purchase'], {
+		let code = this.service.get_redirect_code().subscribe(
+			res => {
+				console.log("success purchase");
+				console.log(res.checkoutCode)
+
+
+				let lightbox = PagSeguroLightbox({
+								code: res.checkoutCode
+							},
+							{
+								success: function(transactionCode){
+								alert("Operação de pagamento efetuada com sucesso. Aguardar confirmação do pagseguro.");
+							},
+								abort: function(){
+								alert("Operação de pagamento não efetuada.");
+							}
+						});
+
+				if(!lightbox){
+					location.href = "https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
+				}
+
+			},
+
+			erro => {
+			console.log("ERROR TO AUTHENTICATE: " + erro);
+			}
+		);
+
+/*		this.router.navigate(['/organizer', 'event', 'purchase'], {
 			queryParams: {
 				"data": this.data,
 				"quant_pessoas": this.qtd_pessoas,
@@ -213,7 +246,8 @@ export class ConfirmDetailsComponent implements OnInit {
 				"descricao": this.info,
 				"orcamento": this.calcBudget()
 			}
-		});
+		});*/
+
 			//let path = ['/event', this.event.id, 'purchase'];
 			//this.router.navigate(path);
 		// }
