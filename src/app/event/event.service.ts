@@ -216,4 +216,23 @@ export class EventService {
 					return Observable.throw(erro);
 				});
   	}
+
+	get_redirect_code() : any{
+		let url = this.serverUrl + '/pagseguro/comprar';
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let options = new RequestOptions({ headers: headers });
+
+		return this.http.get(url, options)
+				.map((response: Response) => {
+					// login successful if there's a jwt token in the response
+					let resp = response.json();
+					// store user details and jwt token in local storage to keep user logged in between page refreshes
+					//localStorage.setItem('currentUser', resp.token);
+					console.log(resp);
+				})
+				.catch( erro =>{
+					console.log(erro);
+					return Observable.throw(erro);
+				});
+	}
 }
