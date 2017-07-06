@@ -8,7 +8,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "preinstall": "npm install -g http-server",
+    "preinstall": "npm install http-server",
     "postinstall": "ng build --aot -prod",
     "e2e": "ng e2e"
   },
@@ -27,6 +27,7 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "express": "^4.15.3",
+    "http-server": "^0.10.0",
     "jquery-mask-plugin": "^1.14.11",
     "materialize-clockpicker": "^1.0.1",
     "rxjs": "^5.1.0",

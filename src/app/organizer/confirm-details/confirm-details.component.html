@@ -37,7 +37,7 @@
 					    </div>
 					    <div class="row">
 					        <div class="input-field col s6">
-					          <input id="email" type="text" [(ngModel)]="email" name="email" class="validate">
+					          <input id="email" type="email" [(ngModel)]="email" name="email" class="validate">
 					          <label class="fill-user" for="email">E-mail</label>
 					        </div>
 							<div class="input-field col s3">
@@ -90,7 +90,7 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s2">
-								<input id="numero" type="text" [(ngModel)]="numero" name="numero">
+								<input id="numero" type="number" [(ngModel)]="numero" name="numero">
 								<label class="fill-addr" for="numero">Número</label>
 							</div>
 							<div class="input-field col s5">
@@ -149,24 +149,17 @@
 			<div class="card">
 				<h5 class ="green padding20 white-text">Seu Pedido</h5>
 				<div class="card-content">
-					<div class="row mb5" *ngFor="let item of selectedPack.items">
-
-						<div *ngIf="item.type==='liquido'">
-							<div class="col s8">
-								{{item.nome}} (L)
-							</div>
-						</div>
-
-						<div *ngIf="item.type!=='liquido'">
+					<div class="row mb5" *ngFor="let item of selectedPack.itens">
+						<div>
 							<div class="col s8" >
 								{{item.nome}}
 							</div>
 						</div>
 
-						<div class="col s4">{{item.qtd}}</div>
+						<div class="col s4">{{item.quantidade_item}}</div>
 					</div>
 					<br />
-					<b>Subtotal: R$ {{calcBudget()}},00</b>
+					<b>Subtotal: R$ {{calcBudget()}}</b>
 				</div>
 
 				<!-- <div class="divider"></div> -->
@@ -176,7 +169,7 @@
 					<b>Horário do evento:</b>
 					<div class="row">
                     	<div class="input-field col s12">
-	                        <input id="timepicker" class="timepicker" type="text">
+	                        <input #hora id="timepicker" class="timepicker" type="text">
 	                        <label for="timepicker">Selecione um horário</label>
 	                    </div>
 	                </div>
@@ -203,13 +196,11 @@
 				</div>
 
 				<div class="card-action">
-			        <button (click)="purchase()" class="btn red waves-effect waves-light">Realizar Pagamento
+			        <button (click)="purchase(hora.value)" class="btn red waves-effect waves-light">Realizar Pagamento
 						<i class="material-icons right">done</i>
 					</button>
 			    </div>
 			</div>
 		</div>
 	</div>
-
-
 </div>

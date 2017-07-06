@@ -2,7 +2,10 @@ import { Component, OnInit } 		from '@angular/core';
 import { Location }					from '@angular/common';
 import { ActivatedRoute, Router }	from '@angular/router';
 
+import { OrganizerService }         from '../organizer.service';
+
 declare var $ : any;
+declare var PagSeguroLightbox : any;
 
 @Component({
   selector: 'confirm-details',
@@ -32,8 +35,15 @@ export class ConfirmDetailsComponent implements OnInit {
 	rua				: any = "";
 	cep				: any = "";
 
-	selectedPack	: any;
-	eventInfo		: any;
+	selectedPack		: any;
+	eventInfo			: any;
+
+	data:Date;
+	qtd_pessoas: number;
+	bairro_q: string;
+	rua_q:string;
+	pacote:any;
+	orcamento: number;
 
 	logged 			: boolean = false;
 
@@ -50,19 +60,28 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	regAddr			: boolean = false;
 
-	data			: Date;
-	qtd_pessoas		: number;
-	bairro_q		: string;
-	rua_q			: string;
-	pacote			: any;
+	token:any;
+
 
 	constructor(private location: Location,
 				private route: ActivatedRoute,
-				private router	: Router	) { }
+				private router	: Router	,
+				private service: OrganizerService) { 
+					this.token = localStorage.getItem("token");
+
+				}
 
 	ngOnInit() {
-		// this.selectedPackages = JSON.parse(localStorage.selectedPacks);
-		// this.eventInfo = JSON.parse(localStorage.newEvent);
+		this.service.getEventos(this.token).subscribe(
+			res => {
+				// this.eventos = res
+				// console.log(this.eventos);
+				// $.getScript('assets/modernizr.js');
+				// $.getScript("assets/main.js");
+				this.logged = true
+				$('#filled-in-box').prop('disabled', false);
+				this.fulfillFormData();
+		});
 
 		// pega os dados informados na página anterior
 		this.route.queryParams.subscribe(
@@ -72,15 +91,18 @@ export class ConfirmDetailsComponent implements OnInit {
 				this.bairro_q = query["bairro"]
 				this.rua_q = query["rua"]
 				this.pacote = query["pacote"]
+				this.orcamento = query["orcamento"];
 				this.eventInfo = {"rua": this.rua_q, "bairro": this.bairro_q, "numero": 0}
 				this.selectedPack = JSON.parse(this.pacote);
-				// console.log(this.data.getFullYear())
-				// console.log(this.qtd_pessoas)
-				// console.log(this.bairro_q)
-				// console.log(this.rua_q);
-				// console.log(this.pacote);
+				console.log("pacote",this.pacote, "teste")
 			}
 		);
+		// $('.timepicker').pickatime({
+		// 	// default: 'now',
+		// 	twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+		// 	donetext: 'OK',
+		// 	autoclose: true,
+		// });
 
 		$(".fill-addr2").addClass("active");
 		this.bairro		 = this.bairro_q;
@@ -92,7 +114,7 @@ export class ConfirmDetailsComponent implements OnInit {
 		$('.modal').modal({
 			complete: () => {
 				if (localStorage.token !== undefined) {
-					localStorage.removeItem('token');
+					// localStorage.removeItem('token');
 					console.log('User logged in');
 					this.logged = true;
 
@@ -172,10 +194,10 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	calcBudget(){
 		let budget = 0;
-		if(this.selectedPack.items !== undefined)
+		if(this.selectedPack.itens !== undefined)
 		{
-			for(let i = 0; i < this.selectedPack.items.length; i++){
-				budget += this.selectedPack.items[i].qtd * this.selectedPack.items[i].precoUnitario;
+			for(let i = 0; i < this.selectedPack.itens.length; i++){
+				budget += this.selectedPack.itens[i].quantidade_item * this.selectedPack.itens[i].precoUnitario;
 			}
 		}
 
@@ -192,30 +214,72 @@ export class ConfirmDetailsComponent implements OnInit {
 		//console.log(this.regAddr);
 	}
 
-	purchase(): void {
-		// if (localStorage.newEvent !== undefined) {
-		// 	let event = JSON.parse(localStorage.newEvent)
-
-			//event.packageID = this.selectedPack.toString();
-			//localStorage.setItem('newEvent', JSON.stringify(event));
-
-			//let path = ['/home'];
-			// let path = ['/organizer', 'event', event.id, 'purchase'];
-			//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
+	purchase(hora): void {
+		if(hora.length < 3){
+			alert("Selecione o horário do evento")
+			return;
+		}
+		if (this.titulo < 1) {
+			alert("Defina um titulo para o evento")
+			return;
+		}
+		hora = hora.split(':')
+		// alert(hora[0])
+		
+		let data = new Date(this.data.getFullYear(),this.data.getMonth(),
+					this.data.getDate(), hora[0], hora[1])
 		this.router.navigate(['/organizer', 'event', 'purchase'], {
 			queryParams: {
-				"data": this.data,
+				"data": data,
 				"quant_pessoas": this.qtd_pessoas,
-				"bairro": this.bairro_q,
-				"rua": this.rua_q,
-				"pacote": JSON.stringify(this.selectedPack),
+				"endereco": JSON.stringify(this.montarEndereco()),
+				"pacote": this.pacote,
 				"nome": this.titulo,
-				"descricao": this.info
+				"descricao": this.info,
+				"orcamento": this.orcamento
 			}
 		});
-			//let path = ['/event', this.event.id, 'purchase'];
-			//this.router.navigate(path);
-		// }
+/*
+		let code = this.service.get_redirect_code().subscribe(
+			res => {
+				console.log("success purchase");
+				console.log(res.checkoutCode)
+
+
+				let lightbox = PagSeguroLightbox({
+								code: res.checkoutCode
+							},
+							{
+								success: function(transactionCode){
+								alert("Operação de pagamento efetuada com sucesso. Aguardar confirmação do pagseguro.");
+							},
+								abort: function(){
+								alert("Operação de pagamento não efetuada.");
+							}
+						});
+
+				if(!lightbox){
+					location.href = "https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
+				}
+
+			},
+
+			erro => {
+			console.log("ERROR TO AUTHENTICATE: " + erro);
+			}
+		);
+		*/
+	}
+
+	montarEndereco() {
+		return {
+			"rua": this.__rua,
+			"bairro": this.__bairro,
+			"cidade": "Recife",
+			"estado": "PE",
+			"cep": this.__cep,
+			"numero": this.__numero
+		}
 	}
 
 	isPessoaFisica(): boolean {

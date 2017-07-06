@@ -1,8 +1,8 @@
-import { Component } 			from '@angular/core';
-import { Location }				from '@angular/common';
-import { ActivatedRoute, Router }				from '@angular/router';
+import { Component } 						from '@angular/core';
+import { Location }							from '@angular/common';
+import { ActivatedRoute, Router }			from '@angular/router';
 
-import { OrganizerService } from './../organizer.service';
+import { OrganizerService }					from './../organizer.service';
 
 @Component({
   selector: 'app-purchase',
@@ -11,73 +11,57 @@ import { OrganizerService } from './../organizer.service';
 })
 export class PurchaseComponent {
 
-	data:Date;
-	qtd_pessoas: number;
-	bairro_q: string;
-	rua_q:string;
-	pacote:any;
-	nome:any;
-	descricao:any;
+	data			:	Date;
+	qtd_pessoas		:	number;
+	endereco		:	any;
+	pacote			:	any;
+	nome			:	any;
+	descricao		:	any;
+	orcamento		:	number;
 
 	constructor(private location: Location,
 				private route: ActivatedRoute,
 				private router: Router,
 				private service: OrganizerService) { }
 
+	
 	ngOnInit() {
-		// this.selectedPackages = JSON.parse(localStorage.selectedPacks);
-		// this.eventInfo = JSON.parse(localStorage.newEvent);
-
-		// pega os dados informados na página anterior
 		this.route.queryParams.subscribe(
 			query => {
 				this.data = new Date(query["data"])
 				this.qtd_pessoas = query["quant_pessoas"]
-				this.bairro_q = query["bairro"]
-				this.rua_q = query["rua"]
+				this.endereco = query["endereco"]
 				this.pacote = query["pacote"]
+				this.orcamento = query["orcamento"]
 				this.nome = query["nome"]
-				this.descricao= query["descricao"]
-				// console.log(this.data.getFullYear())
-				// console.log(this.qtd_pessoas)
-				// console.log(this.bairro_q)
-				// console.log(this.rua_q);
-				// console.log(this.pacote);
-				// console.log(this.nome);
-				// console.log(this.descricao);
+				this.descricao = query["descricao"]
 			}
 		);
 	}
 
 	finish() {
-		// if (localStorage.newEvent !== undefined) {
-		// 	let event = JSON.parse(localStorage.newEvent)
-
-			//event.packageID = this.selectedPack.toString();
-			//localStorage.setItem('newEvent', JSON.stringify(event));
-
-			//let path = ['/home'];
-			// let path = ['/organizer', 'event', event.id, 'finish'];
-			//let path = ['/home', {outlets: {spa: ['event', event.id, 'confirmation']}}];
-		this.service.criarEvento(localStorage.getItem("token"), {
-			"nome": this.nome,
-			"quantidade_pessoas": this.qtd_pessoas,
-			"data": this.data.getFullYear() + "-" + this.data.getMonth() + "-" + this.data.getDay() + "T" + this.data.getHours() + ":" + this.data.getMinutes(),
-			"orcamento": 5002
+		let data = this.data.getFullYear() + '-' + this.data.getMonth() + '-' + 
+					this.data.getDate() + 'T' + this.data.getHours() + ':' + this.data.getMinutes();
+		this.service.criarEvento(localStorage.getItem('token'),{
+				"nome": this.nome,
+				"quantidade_pessoas": this.qtd_pessoas,
+				"data": data,
+				"orcamento": this.orcamento,
+				"descricao": this.descricao,
+				"endereco": JSON.parse(this.endereco),
+				"pacotes": JSON.parse(this.pacote),
 		}).subscribe(
 			res => {
-				console.log("success purchase")
-				console.log(res)
-			},
-			erro => {
-				console.log("erro purchase")
-				console.log(erro)
-				console.log("erro purchase")
-			}
-		);
-		this.router.navigate(['/organizer', 'event', 'finish']);
-			//let path = ['/event', this.event.id, 'purchase'];
-			//this.router.navigate(path);
+				console.log(res);
+				this.router.navigate(['/organizer', 'event', 'finish']);
+		},
+		err => {
+			console.log(err)
+		});
+
+		// for (let i; i<this.pacote.items;i++){
+		// 	let item = this.pacote.items[i];
+
 		// }
 	}
 

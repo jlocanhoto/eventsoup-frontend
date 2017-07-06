@@ -1,6 +1,8 @@
 import { Component } 			from '@angular/core';
 import { Location }				from '@angular/common';
-import { Router }				from '@angular/router';
+import { Router, ActivatedRoute }				from '@angular/router';
+
+
 
 @Component({
   selector: 'app-finish',
@@ -9,8 +11,18 @@ import { Router }				from '@angular/router';
 })
 export class FinishComponent {
 
+
+	data:Date;
+	qtd_pessoas: number;
+	endereco: string;
+	pacote:any;
+	orcamento: number;
+	nome: string;
+	descricao: string;
+
 	constructor(private location: Location,
-				private router	: Router	) { }
+							private route: ActivatedRoute,
+							private router	: Router,) { }
 
 	goDashboard() {
 		let path = ['/organizer'];

@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
     this.service.getEventos(localStorage.getItem("token")).subscribe(
     res => {
       this.eventos = res
+      console.log(res)
       // console.log(this.eventos);
       $.getScript('assets/modernizr.js');
       $.getScript("assets/main.js");
