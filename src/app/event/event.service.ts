@@ -153,6 +153,7 @@ export class EventService {
 		return this.http.post(url, { cpf_cnpj: cpf, password: senha }, options)
 			.map( res => {
 				let data = res.json();
+				localStorage.setItem('cpf', cpf);
 				localStorage.setItem('token', data.token);
 				return data.token;
 			}).catch( erro => {

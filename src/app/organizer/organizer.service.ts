@@ -51,12 +51,12 @@ export class OrganizerService {
                 });
   }
 
-  get_redirect_code() : any{
+  get_redirect_code(data: any) : any{
     let url = this.serverUrl + '/pagseguro/comprar/';
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.get(url, options)
+    return this.http.post(url, data, options)
         .map(response => {
           // login successful if there's a jwt token in the response
           console.log(response)
