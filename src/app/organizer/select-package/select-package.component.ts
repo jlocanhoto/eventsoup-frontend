@@ -121,9 +121,9 @@ export class SelectPackageComponent implements OnInit {
 								"img": "expresso.jpg",
 								"desc": "Pausa para um lanche após uma reunião",
 								"items": [
-									{"nome": "Coxinha"				,	"type": "salgado",	"qtd": this.qtd_pessoas, "precoUnitario": 0.2},
-									{"nome": "Empada"				,	"type": "salgado",	"qtd": this.qtd_pessoas*5, "precoUnitario": 0.15},
-									{"nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": this.qtd_pessoas*5, "precoUnitario": 0.15}
+									{"id":1, "nome": "Coxinha"				,	"type": "salgado",	"qtd": this.qtd_pessoas, "precoUnitario": 0.2},
+									{"id":2, "nome": "Empada"				,	"type": "salgado",	"qtd": this.qtd_pessoas*5, "precoUnitario": 0.15},
+									{"id":3, "nome": "Salgado de queijo"	,	"type": "salgado",	"qtd": this.qtd_pessoas*5, "precoUnitario": 0.15}
 									//{"nome": "Descartáveis"				, "check": false},
 									//{"nome": "Mesas e cadeiras"			, "check": false}
 								]};
@@ -132,10 +132,10 @@ export class SelectPackageComponent implements OnInit {
 								"img": "cerveja_artesanal.png",
 								"desc": "Um bom momento para trocar uma ideia",
 								"items": [
-									{"nome": "Brigadeiro"			,	"type": "doce",	"qtd": this.qtd_pessoas*3, "precoUnitario": 0.3},
-									{"nome": "Surpresa de uva"		,	"type": "doce",	"qtd": this.qtd_pessoas*3, "precoUnitario": 0.3},
-									{"nome": "Refrigerante"			,	"type": "liquido",	"qtd": this.qtd_pessoas*0.5, "precoUnitario": 5.5},
-									{"nome": "Pão de queijo"		,	"type": "salgado",	"qtd": this.qtd_pessoas*5, "precoUnitario": 0.2}
+									{"id":4, "nome": "Brigadeiro"			,	"type": "doce",	"qtd": this.qtd_pessoas*3, "precoUnitario": 0.3},
+									{"id":5, "nome": "Surpresa de uva"		,	"type": "doce",	"qtd": this.qtd_pessoas*3, "precoUnitario": 0.3},
+									{"id":6, "nome": "Refrigerante"			,	"type": "liquido",	"qtd": this.qtd_pessoas*0.5, "precoUnitario": 5.5},
+									{"id":7, "nome": "Pão de queijo"		,	"type": "salgado",	"qtd": this.qtd_pessoas*5, "precoUnitario": 0.2}
 									//"Outras bebidas"	];
 								]};
 
@@ -143,7 +143,7 @@ export class SelectPackageComponent implements OnInit {
 								"img": "brigadeiro.jpg",
 								"desc": "Descontraia com os aniversáriantes do mês",
 								"items": [
-									{"nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
+									{"id":8, "nome": "Torta"				,	"type": "doce",	"qtd": 1, "precoUnitario": 40}
 								]};
 
 
@@ -190,16 +190,52 @@ export class SelectPackageComponent implements OnInit {
 	}
 
 	confirmDetails(): void {
+		
 		this.router.navigate(['/organizer', 'event', 'confirmation'], {
 			queryParams: {
 				"data": this.data,
 				"quant_pessoas": this.qtd_pessoas,
 				"bairro": this.bairro_q,
 				"rua": this.rua_q,
-				"pacote": JSON.stringify(this.selectedPack),
+				"pacote": JSON.stringify(this.montarPacote()),
 				"orcamento": this.orcamento
 			}
 		});
+	}
+
+	montarPacote() {
+		let itens = []
+		let itemsofpackage = this.selectedPack.items
+		for (let i = 0;i<itemsofpackage.length; i++){
+			let item = {
+				"id": itemsofpackage[i].id,
+				"quantidade_item": itemsofpackage[i].qtd,
+				"precoUnitario": itemsofpackage[i].precoUnitario,
+				"nome": itemsofpackage[i].nome
+			}
+			itens.push(item)
+		}
+		return {
+			"nome": this.selectedPack.name,
+			"quantidade_pessoas": this.qtd_pessoas,
+			"preco": this.orcamento,
+			"fornecedor": 5,
+			"itens": itens
+		}
+		// console.log(this.selectedPack)
+		/*
+		"nome": "nome_do_pacote",
+		"quantidade_pessoas": quantidade_pessoas,
+		"preco": preco,
+		"fornecedor": id_fornecedor,
+		"itens": [
+			{
+				"id": id_item_1,
+				"quantidade_ite": quantidade_item_1
+			},
+			//...
+		]
+		*/
 	}
 
 	calcBudget(){

@@ -13,8 +13,7 @@ export class PurchaseComponent {
 
 	data			:	Date;
 	qtd_pessoas		:	number;
-	bairro_q		:	string;
-	rua_q			:	string;
+	endereco		:	any;
 	pacote			:	any;
 	nome			:	any;
 	descricao		:	any;
@@ -25,48 +24,45 @@ export class PurchaseComponent {
 				private router: Router,
 				private service: OrganizerService) { }
 
+	
 	ngOnInit() {
-		// this.selectedPackages = JSON.parse(localStorage.selectedPacks);
-		// this.eventInfo = JSON.parse(localStorage.newEvent);
-
-		// pega os dados informados na página anterior
 		this.route.queryParams.subscribe(
 			query => {
 				this.data = new Date(query["data"])
 				this.qtd_pessoas = query["quant_pessoas"]
-				this.bairro_q = query["bairro"]
-				this.rua_q = query["rua"]
+				this.endereco = query["endereco"]
 				this.pacote = query["pacote"]
+				this.orcamento = query["orcamento"]
 				this.nome = query["nome"]
 				this.descricao = query["descricao"]
-				this.orcamento = query["orcamento"]
 			}
 		);
 	}
 
 	finish() {
-		this.service.criarEvento(localStorage.getItem("token"), {
-			"nome": this.nome,
-			"quantidade_pessoas": this.qtd_pessoas,
-			"data": this.data.getFullYear() + "-" + this.data.getMonth() + "-" + this.data.getDay() + "T" + this.data.getHours() + ":" + this.data.getMinutes(),
-			"orcamento": this.orcamento
+		let data = this.data.getFullYear() + '-' + this.data.getMonth() + '-' + 
+					this.data.getDate() + 'T' + this.data.getHours() + ':' + this.data.getMinutes();
+		this.service.criarEvento(localStorage.getItem('token'),{
+				"nome": this.nome,
+				"quantidade_pessoas": this.qtd_pessoas,
+				"data": data,
+				"orcamento": this.orcamento,
+				"descricao": this.descricao,
+				"endereco": JSON.parse(this.endereco),
+				"pacotes": JSON.parse(this.pacote),
 		}).subscribe(
 			res => {
-				console.log("success purchase")
-				console.log(res)
-			},
-			erro => {
-				console.log("erro purchase")
-				console.log(erro)
-				console.log("erro purchase")
-			}
-		);
+				console.log(res);
+				this.router.navigate(['/organizer', 'event', 'finish']);
+		},
+		err => {
+			console.log(err)
+		});
 
 		// for (let i; i<this.pacote.items;i++){
 		// 	let item = this.pacote.items[i];
 
 		// }
-		this.router.navigate(['/organizer', 'event', 'finish']);
 	}
 
 }

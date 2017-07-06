@@ -2,7 +2,7 @@ import { Component, OnInit } 		from '@angular/core';
 import { Location }					from '@angular/common';
 import { ActivatedRoute, Router }	from '@angular/router';
 
-import { EventService }				from './../../event/event.service';
+import { OrganizerService }         from '../organizer.service';
 
 declare var $ : any;
 declare var PagSeguroLightbox : any;
@@ -60,13 +60,28 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	regAddr			: boolean = false;
 
+	token:any;
+
 
 	constructor(private location: Location,
 				private route: ActivatedRoute,
 				private router	: Router	,
-				private service : EventService) { }
+				private service: OrganizerService) { 
+					this.token = localStorage.getItem("token");
+
+				}
 
 	ngOnInit() {
+		this.service.getEventos(this.token).subscribe(
+			res => {
+				// this.eventos = res
+				// console.log(this.eventos);
+				// $.getScript('assets/modernizr.js');
+				// $.getScript("assets/main.js");
+				this.logged = true
+				$('#filled-in-box').prop('disabled', false);
+				this.fulfillFormData();
+		});
 
 		// pega os dados informados na página anterior
 		this.route.queryParams.subscribe(
@@ -79,6 +94,7 @@ export class ConfirmDetailsComponent implements OnInit {
 				this.orcamento = query["orcamento"];
 				this.eventInfo = {"rua": this.rua_q, "bairro": this.bairro_q, "numero": 0}
 				this.selectedPack = JSON.parse(this.pacote);
+				console.log("pacote",this.pacote, "teste")
 			}
 		);
 		// $('.timepicker').pickatime({
@@ -98,7 +114,7 @@ export class ConfirmDetailsComponent implements OnInit {
 		$('.modal').modal({
 			complete: () => {
 				if (localStorage.token !== undefined) {
-					localStorage.removeItem('token');
+					// localStorage.removeItem('token');
 					console.log('User logged in');
 					this.logged = true;
 
@@ -178,10 +194,10 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	calcBudget(){
 		let budget = 0;
-		if(this.selectedPack.items !== undefined)
+		if(this.selectedPack.itens !== undefined)
 		{
-			for(let i = 0; i < this.selectedPack.items.length; i++){
-				budget += this.selectedPack.items[i].qtd * this.selectedPack.items[i].precoUnitario;
+			for(let i = 0; i < this.selectedPack.itens.length; i++){
+				budget += this.selectedPack.itens[i].quantidade_item * this.selectedPack.itens[i].precoUnitario;
 			}
 		}
 
@@ -216,9 +232,8 @@ export class ConfirmDetailsComponent implements OnInit {
 			queryParams: {
 				"data": data,
 				"quant_pessoas": this.qtd_pessoas,
-				"bairro": this.bairro_q,
-				"rua": this.rua_q,
-				"pacote": JSON.stringify(this.selectedPack),
+				"endereco": JSON.stringify(this.montarEndereco()),
+				"pacote": this.pacote,
 				"nome": this.titulo,
 				"descricao": this.info,
 				"orcamento": this.orcamento
@@ -254,6 +269,17 @@ export class ConfirmDetailsComponent implements OnInit {
 			}
 		);
 		*/
+	}
+
+	montarEndereco() {
+		return {
+			"rua": this.__rua,
+			"bairro": this.__bairro,
+			"cidade": "Recife",
+			"estado": "PE",
+			"cep": this.__cep,
+			"numero": this.__numero
+		}
 	}
 
 	isPessoaFisica(): boolean {

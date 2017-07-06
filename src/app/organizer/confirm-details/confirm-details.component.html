@@ -149,24 +149,17 @@
 			<div class="card">
 				<h5 class ="green padding20 white-text">Seu Pedido</h5>
 				<div class="card-content">
-					<div class="row mb5" *ngFor="let item of selectedPack.items">
-
-						<div *ngIf="item.type==='liquido'">
-							<div class="col s8">
-								{{item.nome}} (L)
-							</div>
-						</div>
-
-						<div *ngIf="item.type!=='liquido'">
+					<div class="row mb5" *ngFor="let item of selectedPack.itens">
+						<div>
 							<div class="col s8" >
 								{{item.nome}}
 							</div>
 						</div>
 
-						<div class="col s4">{{item.qtd}}</div>
+						<div class="col s4">{{item.quantidade_item}}</div>
 					</div>
 					<br />
-					<b>Subtotal: R$ {{calcBudget()}},00</b>
+					<b>Subtotal: R$ {{calcBudget()}}</b>
 				</div>
 
 				<!-- <div class="divider"></div> -->
