@@ -68,7 +68,6 @@ export class ConfirmDetailsComponent implements OnInit {
 				private router	: Router	,
 				private service: OrganizerService) { 
 					this.token = localStorage.getItem("token");
-
 				}
 
 	ngOnInit() {
@@ -228,7 +227,7 @@ export class ConfirmDetailsComponent implements OnInit {
 		
 		let data = new Date(this.data.getFullYear(),this.data.getMonth(),
 					this.data.getDate(), hora[0], hora[1])
-		this.router.navigate(['/organizer', 'event', 'purchase'], {
+		/*this.router.navigate(['/organizer', 'event', 'purchase'], {
 			queryParams: {
 				"data": data,
 				"quant_pessoas": this.qtd_pessoas,
@@ -238,8 +237,8 @@ export class ConfirmDetailsComponent implements OnInit {
 				"descricao": this.info,
 				"orcamento": this.orcamento
 			}
-		});
-/*
+		});*/
+
 		let code = this.service.get_redirect_code().subscribe(
 			res => {
 				console.log("success purchase");
@@ -268,7 +267,7 @@ export class ConfirmDetailsComponent implements OnInit {
 			console.log("ERROR TO AUTHENTICATE: " + erro);
 			}
 		);
-		*/
+		
 	}
 
 	montarEndereco() {
