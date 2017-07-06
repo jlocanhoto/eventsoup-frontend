@@ -5,24 +5,14 @@
   <h3>Você não tem nenhum evento</h3>
 </div>
 
-<div id="homepage-timeline" *ngIf="eventos?.length > 0">
-  <section id="cd-timeline" class="cd-container">
-		<div class="cd-timeline-block cssanimations" *ngFor="let evento of eventos">
-			<div class="cd-timeline-img cd-picture containerIcon">
-				<i class="small material-icons updateIcon">event</i>
-			</div> <!-- cd-timeline-img -->
 
-			<div class="cd-timeline-content">
-				<h5>{{evento.nome}}</h5>
-				<p>Descrição</p>
-				<p>Orçamento: R$ {{evento.orcamento}}</p>
-				<p>Quantidade de Pessoas: {{evento.quantidade_pessoas}} pessoas</p>
-				<p>Restrinções: {{evento.restricoes}}</p>
-				<a class="cd-read-more">Ver mais</a>
-				<span class="cd-date">{{evento.data | date:'dd/MM/yy - hh:mm a' }}</span>
-			</div> <!-- cd-timeline-content -->
-		</div> <!-- cd-timeline-block -->
-	</section> <!-- cd-timeline -->
+
+
+<div class="row col s12 m12 l9 xl9" *ngIf="eventos?.length > 0" style="width: 90%">
+  <!--<app-card2  *ngFor="let evento of eventos" ></app-card2>-->
+  <app-card2 *ngFor="let evento of eventos" [evento]=evento >{{evento}}</app-card2>
+
+
 </div>
 
 <div class="fixed-action-btn">
