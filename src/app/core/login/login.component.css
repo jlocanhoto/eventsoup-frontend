@@ -43,10 +43,9 @@ body{
 }
 
 .header{
-	position: absolute;
-	top: calc(50% - 50px);
-	left: calc(50% - 300px);
-	z-index: 2;
+  position: absolute;
+  right: calc(50% - 120px);
+  z-index: 2;
 }
 
 .header div{
@@ -72,4 +71,11 @@ body{
 
 ::-moz-input-placeholder{
 	color: rgba(255,255,255,0.6);
+}
+
+
+.col{
+  position: absolute;
+  right: calc(50% - 158px);
+  top: 60px;
 }
