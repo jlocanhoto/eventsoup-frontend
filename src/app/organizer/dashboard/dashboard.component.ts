@@ -30,17 +30,15 @@ export class DashboardComponent implements OnInit {
       'descricao': 'um evento muito legal :)', 'data' : '2017-07-10T16:33:00Z', 'endereco' : this.endereco}]
 
   ngOnInit() {
-    // $('.tap-target').tapTarget('open');
-    // this.service.getEventos(localStorage.getItem("token")).subscribe(
-    // res => {
-    //   this.eventos = res
-    //   console.log(res)
-    //   // console.log(this.eventos);
-    //   $.getScript('assets/modernizr.js');
-    //   $.getScript("assets/main.js");
-    // });
-
-    this.eventos = this.events;
+    $('.tap-target').tapTarget('open');
+    this.service.getEventos(localStorage.getItem("token")).subscribe(
+    res => {
+      this.eventos = res
+      console.log(res)
+      // console.log(this.eventos);
+      $.getScript('assets/modernizr.js');
+      $.getScript("assets/main.js");
+    });
   }
 
 }

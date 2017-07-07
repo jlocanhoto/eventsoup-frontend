@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {CardOrganizerComponent} from './card/card-organizer.component';
 import {DashboardComponent} from './dashboard.component';
+import {OrganizerRoutingModule} from '../organizer-routing.module';
 
 
 
@@ -10,6 +11,7 @@ import {DashboardComponent} from './dashboard.component';
   imports: [
     CommonModule,
     FormsModule,
+    OrganizerRoutingModule
   ],
   exports: [
     DashboardComponent
