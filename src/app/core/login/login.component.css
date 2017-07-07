@@ -79,3 +79,9 @@ body{
   right: calc(50% - 158px);
   top: 60px;
 }
+
+.col2{
+  position: absolute;
+  right: calc(50% - 200px);
+  top: 60px;
+}

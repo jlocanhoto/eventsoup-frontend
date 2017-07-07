@@ -115,10 +115,15 @@ export class LoginFormsComponent implements OnInit {
 
   registerIntent() {
     this.flagReg = true;
+
+    document.getElementById('formulario').classList.remove('col');
+    document.getElementById('formulario').classList.add('col2');
   }
 
   haveAccount() {
     this.flagReg = false;
+    document.getElementById('formulario').classList.remove('col2');
+    document.getElementById('formulario').classList.add('col');
   }
 
   onSubmit() {
