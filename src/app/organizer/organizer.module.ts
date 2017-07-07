@@ -1,13 +1,12 @@
 import { NgModule } 				        from '@angular/core';
 import { CommonModule } 		        from '@angular/common';
 import { FormsModule }              from '@angular/forms';
-//import { RouterModule }             from '@angular/router';
 
 import { CreateEventComponent }		  from './create-event/create-event.component';
 import { SelectPackageComponent }   from './select-package/select-package.component';
 import { ConfirmDetailsComponent }  from './confirm-details/confirm-details.component';
 import { OrganizerComponent }       from './organizer.component';
-import { DashboardComponent }       from './dashboard/dashboard.component';
+import { DashboardModule }       from './dashboard/dashboard.module';
 import { OrganizerRoutingModule }   from './organizer-routing.module';
 import { PurchaseComponent }        from './purchase/purchase.component';
 import { FinishComponent }          from './finish/finish.component';
@@ -20,7 +19,8 @@ import { LoginModule }              from '../core/login/login.module';
     FormsModule,
     //RouterModule,
     OrganizerRoutingModule,
-    LoginModule
+    LoginModule,
+    DashboardModule
   ],
   exports: [
   ],
@@ -29,9 +29,8 @@ import { LoginModule }              from '../core/login/login.module';
   	SelectPackageComponent,
   	ConfirmDetailsComponent,
   	OrganizerComponent,
-  	DashboardComponent,
   	PurchaseComponent,
-  	FinishComponent
+  	FinishComponent,
   ],
   providers: [
     OrganizerService

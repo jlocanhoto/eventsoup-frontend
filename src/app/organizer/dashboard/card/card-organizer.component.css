@@ -1,0 +1,76 @@
+.wrapper {
+  padding-left: 50px !important;
+  position: relative !important;
+}
+.event-date {
+  width: 50px;
+  float: left;
+  overflow: hidden;
+  text-align: center;
+  line-height: 40px;
+  font-weight: 600;
+  padding: 0;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, .5);
+  position: absolute;
+  right: 24px;
+  top: -40px;
+
+}
+
+.event-date span {
+  display: block;
+  background: #fa565a;
+  font-size: 17px;
+  line-height: 17px;
+  font-weight: bold;
+  padding: 5px 0;
+  margin: 0px 0 0 0;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+
+.event-date .number {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 2px;
+  padding: 17px 0;
+  height: 30px;
+  background-color: white;
+}
+
+
+.conteudo {
+  left: 25%;
+  width: 75%;
+  position: absolute;
+  height: 113px;
+}
+
+.btnPronto{
+  float:right;
+}
+
+.contem-imagem {
+  overflow: hidden;
+  height: 200px;
+}
+
+.card{
+  margin: 3rem 0 1rem 0;
+
+}
+
+.card-content{
+  padding-top: 25px;
+}
+
+.card-content h5{
+  text-transform: uppercase;
+}
+.collapsible-body{
+  max-height: 340px;
+  overflow: auto;
+}
+
+
