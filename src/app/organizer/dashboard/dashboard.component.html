@@ -10,7 +10,7 @@
 
 <div class="row col s12 m12 l9 xl9" *ngIf="eventos?.length > 0" style="width: 90%">
   <!--<app-card2  *ngFor="let evento of eventos" ></app-card2>-->
-  <app-card2 *ngFor="let evento of eventos" [evento]=evento >{{evento}}</app-card2>
+  <app-card2 *ngFor="let evento of eventos; index as i " [evento]=evento [id]=i  >{{evento}}</app-card2>
 
 
 </div>

@@ -21,7 +21,13 @@ export class DashboardComponent implements OnInit {
 
 
   events = [{'nome': 'evento1', 'orçamento': '3000', 'quantidade_pessoas': '30', 'restricoes' : 'laticinio', 'status' : 'Aguardando pagamento',
-    'descricao': 'um evento muito legal :)', 'data' : '2017-07-10T16:33:00Z', 'endereco' : this.endereco}]
+    'descricao': 'um evento muito legal :)', 'data' : '2017-07-10T16:33:00Z', 'endereco' : this.endereco},
+    {'nome': 'evento2', 'orçamento': '3000', 'quantidade_pessoas': '30', 'restricoes' : 'laticinio', 'status' : 'Cancelada',
+      'descricao': 'um evento muito legal :)', 'data' : '2017-07-10T16:33:00Z', 'endereco' : this.endereco},
+    {'nome': 'evento3', 'orçamento': '3000', 'quantidade_pessoas': '30', 'restricoes' : 'laticinio', 'status' : 'Paga',
+      'descricao': 'um evento muito legal :)', 'data' : '2017-07-10T16:33:00Z', 'endereco' : this.endereco},
+    {'nome': 'evento4', 'orçamento': '3000', 'quantidade_pessoas': '30', 'restricoes' : 'laticinio', 'status' : 'Debitado',
+      'descricao': 'um evento muito legal :)', 'data' : '2017-07-10T16:33:00Z', 'endereco' : this.endereco}]
 
   ngOnInit() {
     // $('.tap-target').tapTarget('open');

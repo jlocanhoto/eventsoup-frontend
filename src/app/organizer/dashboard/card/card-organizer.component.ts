@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit   } from '@angular/core';
 
 declare let $;
 @Component({
@@ -6,13 +6,15 @@ declare let $;
   templateUrl: './card-organizer.component.html',
   styleUrls: ['./card-organizer.component.css']
 })
-export class CardOrganizerComponent implements OnInit {
+export class CardOrganizerComponent implements OnInit, AfterViewInit {
 
   @Input() evento: any;
+  @Input() id: any;
   mes: string;
   dia: number;
   horario: string;
   dataD: Date;
+  valor: string;
   constructor() {
     $(document).ready(function(){
       // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
@@ -26,6 +28,29 @@ export class CardOrganizerComponent implements OnInit {
     this.getMes();
   }
 
+  ngAfterViewInit() {
+    this.getClass();
+  }
+  getClass() {
+    switch (this.evento.status) {
+      case 'Aguardando pagamento' :
+        this.setColor('blue');
+        break;
+      case 'Paga' :
+        this.setColor('green');
+        break;
+      case 'Cancelada' :
+        this.setColor('red');
+        break;
+    }
+  }
+
+
+  setColor(cor: string) {
+    this.valor = 'card' + this.id;
+    document.getElementById(this.valor).classList.remove('blue');
+    document.getElementById(this.valor).classList.add(cor);
+  }
 
   getMes() {
     this.dataD = new Date(this.evento.data);
@@ -73,24 +98,6 @@ export class CardOrganizerComponent implements OnInit {
     this.dia = this.dataD.getDate();
     this.horario = ' ' + this.dataD.getHours() + ' : ' + this.dataD.getMinutes();
   }
-
-  // timer() {
-  //   setTimeout(() => {
-  //     this.tempo.setSeconds(this.tempo.getSeconds() - 1)
-  //     this.timer()
-  //   }, 1000)
-  // }
-  //
-  //
-  //
-  // click() {
-  //   this.botao = !this.botao;
-  //   this.pronto.emit({pronto: this.botao, codigo: this.codigo});
-  // }
-  //
-  //
-
-
 
 
 }
