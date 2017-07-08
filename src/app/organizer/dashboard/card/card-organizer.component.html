@@ -36,8 +36,36 @@
     </div>
 
     <div class="card-action">
-      <a class="btnPronto white-text" onclick="">Detalhes</a>
-      <a href="#"></a>
+      <a class="btnPronto white-text" href="#modal{{id}}">Detalhes</a>
+      <a ></a>
     </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="modal{{id}}" class="modal teal darken-4 white-text  ">
+  <div class="modal-content">
+    <h4>Itens</h4>
+    <table class="white striped centered responsive-table black-text">
+      <thead>
+      <tr>
+        <th align="center">Nome</th>
+        <th align="center">Quantidade</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let pacote of evento.pacotes">
+      <tr *ngFor="let item of pacote.itens" >
+        <td align="center">{{item.nome}}</td>
+        <td>{{item.quantidade}}</td>
+      </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+  <div class="modal-footer">
+    <a  class="modal-action modal-close waves-effect waves-green btn-flat">Fechar</a>
   </div>
 </div>

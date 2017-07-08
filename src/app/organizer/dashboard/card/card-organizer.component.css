@@ -73,4 +73,6 @@
   overflow: auto;
 }
 
-
+.modal-content h4{
+  text-transform: uppercase;
+}
