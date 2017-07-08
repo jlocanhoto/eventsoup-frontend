@@ -72,8 +72,4 @@ export class OrganizerService {
         });
   }
 
-  getUserInfo() {
-    
-  }
-
 }
