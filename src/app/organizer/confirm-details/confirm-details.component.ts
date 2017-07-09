@@ -60,6 +60,9 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	regAddr			: boolean = false;
 
+	deliveryTax		: number = 10;
+	budget			: number;
+
 	token:any;
 
 
@@ -151,7 +154,7 @@ export class ConfirmDetailsComponent implements OnInit {
 			canceltext: 'Cancelar', // Text for cancel-button
 			autoclose: false, // automatic close timepicker
 			ampmclickable: true, // make AM PM clickable
-			aftershow: function(){} //Function for after opening timepicker  
+			aftershow: function(){}, //Function for after opening timepicker
 		});
 	}
 
@@ -192,15 +195,15 @@ export class ConfirmDetailsComponent implements OnInit {
 	}
 
 	calcBudget(){
-		let budget = 0;
+		this.budget = 0;
 		if(this.selectedPack.itens !== undefined)
 		{
 			for(let i = 0; i < this.selectedPack.itens.length; i++){
-				budget += this.selectedPack.itens[i].quantidade_item * this.selectedPack.itens[i].precoUnitario;
+				this.budget += this.selectedPack.itens[i].quantidade_item * this.selectedPack.itens[i].precoUnitario;
 			}
 		}
 
-		return budget;
+		return this.service.currencyBRL(this.budget);
 	}
 
 	redefine(): void {
@@ -311,6 +314,54 @@ export class ConfirmDetailsComponent implements OnInit {
 		this.tipoSelecionado = $("select").val();
 
 		return (this.tipoSelecionado === null) || (this.tipoSelecionado == 1);
+	}
+
+	getDeliveryTax(): string {
+		return this.service.currencyBRL(this.deliveryTax);
+	}
+
+	getEventTime(): string {
+		return $("#timepicker")[0].value;
+	}
+
+	subtractTime(time1, time2): string {
+		time1 = time1.split(':'); time2 = time2.split(':');
+
+		let hr1 = +time1[0]; let min1 = +time1[1];
+		let hr2 = +time2[0]; let min2 = +time2[1];
+
+		let min = min1 - min2;
+		let hour = hr1;
+
+		if (min < 0) {
+			min = 60 + min;
+			hour--;
+		}
+
+		hour -= hr2;
+
+		if (hour < 0) {
+			hour = 24 + hour;
+		}
+
+		let time = ('0' + hour.toString()).slice(-2) + ":" + ('0' + min.toString()).slice(-2);
+
+		return time;
+	};
+
+	getDeliveryTime(): string {
+		let eventTime = this.getEventTime();
+		let ret = '00:00';
+
+		if (eventTime) {
+			ret = this.subtractTime(eventTime, '00:30');
+		}
+
+		return ret;
+	}
+
+	getTotal(): string {
+		return this.service.currencyBRL(this.budget + this.deliveryTax);
 	}
 
 	goBack(): void {

@@ -9,6 +9,14 @@ export class OrganizerService {
 
   serverUrl	 : string = 'https://eventsoup-backend.herokuapp.com';
 
+  pacoteExpresso : any;
+  pacoteCasual   : any;
+  pacoteFesta    : any;
+
+  pacotes        : any;
+
+  packageIndex   : number = -1;
+
   constructor(private http: Http) { 
     console.log("criado");
   }
@@ -72,4 +80,52 @@ export class OrganizerService {
         });
   }
 
+  definePackages(qtd_pessoas) {
+    this.pacoteExpresso = {"name": "Expresso",
+                "img": "expresso.jpg",
+                "desc": "Pausa para um lanche após uma reunião",
+                "items": [
+                  {"id":1, "nome": "Coxinha"        ,  "type": "salgado",  "qtd": qtd_pessoas, "precoUnitario": 0.2},
+                  {"id":2, "nome": "Empada"        ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15},
+                  {"id":3, "nome": "Salgado de queijo"  ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15}
+                  //{"nome": "Descartáveis"        , "check": false},
+                  //{"nome": "Mesas e cadeiras"      , "check": false}
+                ]};
+          
+    this.pacoteCasual = {"name": "Casual",
+                "img": "cerveja_artesanal.png",
+                "desc": "Um bom momento para trocar uma ideia",
+                "items": [
+                  {"id":4, "nome": "Brigadeiro"      ,  "type": "doce",  "qtd": qtd_pessoas*3, "precoUnitario": 0.3},
+                  {"id":5, "nome": "Surpresa de uva"    ,  "type": "doce",  "qtd": qtd_pessoas*3, "precoUnitario": 0.3},
+                  {"id":6, "nome": "Refrigerante"      ,  "type": "liquido",  "qtd": qtd_pessoas*0.5, "precoUnitario": 5.5},
+                  {"id":7, "nome": "Pão de queijo"    ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.2}
+                  //"Outras bebidas"  ];
+                ]};
+
+    this.pacoteFesta = {"name": "Festa",
+                "img": "brigadeiro.jpg",
+                "desc": "Descontraia com os aniversáriantes do mês",
+                "items": [
+                  {"id":8, "nome": "Torta"        ,  "type": "doce",  "qtd": 1, "precoUnitario": 40}
+                ]};
+
+
+    this.pacoteCasual.items.push.apply(this.pacoteCasual.items, this.pacoteExpresso.items);
+    this.pacoteFesta.items.push.apply(this.pacoteFesta.items, this.pacoteCasual.items);
+
+    this.pacotes = [this.pacoteExpresso, this.pacoteCasual, this.pacoteFesta];
+
+    return this.pacotes;
+  }
+
+  getSelectedPackage(index) {
+    return this.pacotes[index];
+  }
+
+  currencyBRL(value: number): string {
+    return value.toFixed(2).replace('.', ',').replace(/./g, function(c, i, a) {
+      return i && c !== "," && ((a.length - i) % 3 === 0) ? ('.' + c) : c;
+    });
+  }
 }

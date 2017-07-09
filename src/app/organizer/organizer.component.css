@@ -76,3 +76,7 @@ header .intro-text .intro-heading {
     margin-bottom: 50px;
   }
 }
+
+.page-footer {
+  background-color: #000000;
+}
