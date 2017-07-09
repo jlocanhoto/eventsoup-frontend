@@ -6,20 +6,20 @@
 
 <div class="col s12 m6 l6 xl6 " style="">
 
-  <div class="card  ">
+  <div class="card green darken-4 ">
     <div class="event-date halfway-fab">
       <span>{{mes}}</span>
       <div class="number">{{dia}}</div>
     </div>
 
-    <div class="card-content">
-      <h5>Codigo: {{codigo}}</h5>
+    <div class="card-content white-text">
+      <h5><b>Código:</b> {{codigo}}</h5>
       <div style="height: 30px">
-        <h6 style="float:left">Stauts: {{statusEntrega}}  </h6>
-        <h6 style="float: right"> Hora da Entrega: {{horario}}hrs</h6>
+        <h6 style="float:left"><b>Stauts:</b> {{statusEntrega}}  </h6>
+        <h6 style="float: right"> <b>Hora da Entrega:</b> {{horario}}hrs</h6>
       </div>
 
-      <ul class="collapsible" data-collapsible="accordion">
+      <ul class="collapsible black-text white" data-collapsible="accordion">
         <li>
           <div class="collapsible-header"><i class="material-icons">filter_drama</i>Itens</div>
           <div class="collapsible-body">
@@ -49,7 +49,7 @@
     </div>
 
     <div class="card-action">
-      <a class="btnPronto" (click)="click()">{{getBotao()}}</a>
+      <a class="btnPronto white-text" (click)="click()">{{getBotao()}}</a>
       <a href="#"></a>
     </div>
   </div>

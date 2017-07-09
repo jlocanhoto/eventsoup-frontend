@@ -49,8 +49,8 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	__complemento	: any = "CIn - UFPE";
 	__sobrenome		: any = "Oliveira Canhoto";
-	__telefone		: any = "(81) 3333-4444";
-	__celular		: any = "(81) 99999-8888";
+	__telefone		: any = "3333-4444";
+	__celular		: any = "99999-8888";
 	__numero		: any = "1235";
 	__bairro		: any = "Cidade Universitária";
 	__email			: any = "ufpe@ufpe.br";
@@ -238,8 +238,34 @@ export class ConfirmDetailsComponent implements OnInit {
 				"orcamento": this.orcamento
 			}
 		});*/
+		let contato = "";
+		if(this.celular !== "")
+			contato = this.celular;
 
-		let code = this.service.get_redirect_code().subscribe(
+		else if(this.telefone !== "")
+			contato = this.telefone;
+
+		console.log(this.celular)
+		console.log(this.telefone)
+
+		let jsonData = {
+				"token": localStorage.getItem('token'),
+				"cpf": localStorage.getItem('cpf'),
+				"data": data,
+				"quant_pessoas": this.qtd_pessoas,
+				"endereco": JSON.stringify(this.montarEndereco()),
+				"pacote": JSON.parse(this.pacote).nome,
+				"pacote_detail": this.pacote,
+				"nome": this.nome + ' ' + this.sobrenome,
+				"descricao": this.info,
+				"orcamento": Number(this.orcamento).toFixed(2),
+				"email": this.email.split('@')[0],
+				"contato": contato
+			};
+
+		console.log(jsonData)
+
+		let code = this.service.get_redirect_code(jsonData).subscribe(
 			res => {
 				console.log("success purchase");
 				console.log(res.checkoutCode)

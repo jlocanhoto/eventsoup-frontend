@@ -1,0 +1,71 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+
+
+<div class="col s12 m6 l6 xl6  " style="">
+
+  <div id="card{{id}}" class="card blue darken-4">
+    <div class="event-date halfway-fab">
+      <span>{{mes}}</span>
+      <div class="number">{{dia}}</div>
+    </div>
+
+    <div class="card-content white-text">
+      <h5>{{evento.nome}}</h5>
+      <div style="height: 30px">
+        <h6 style="float:left"><b>Stauts:</b> {{evento.status}} </h6>
+        <h6 style="float: right"><b> Horário:</b> {{horario}} </h6>
+      </div>
+
+      <ul class="collapsible white black-text" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Descrição</div>
+          <div class="collapsible-body"><span>{{evento.descricao}}</span></div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">place</i>Endereço</div>
+          <div class="collapsible-body"><span><b>Rua:</b> {{evento.endereco.rua}} <b> Nº: </b>{{evento.endereco.numero}} <b> Bairro:</b> {{evento.endereco.bairro}}
+            <b>Cidade: </b>{{evento.endereco.cidade}} <b>Estado: </b> {{evento.endereco.estado}}  <b>CEP: </b> {{evento.endereco.cep}}
+
+          </span></div>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="card-action">
+      <a class="btnPronto white-text" href="#modal{{id}}">Detalhes</a>
+      <a ></a>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="modal{{id}}" class="modal teal darken-4 white-text  ">
+  <div class="modal-content">
+    <h4>Itens</h4>
+    <table class="white striped centered responsive-table black-text">
+      <thead>
+      <tr>
+        <th align="center">Nome</th>
+        <th align="center">Quantidade</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let pacote of evento.pacotes">
+      <tr *ngFor="let item of pacote.itens" >
+        <td align="center">{{item.nome}}</td>
+        <td>{{item.quantidade}}</td>
+      </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+  <div class="modal-footer">
+    <a  class="modal-action modal-close waves-effect waves-green btn-flat">Fechar</a>
+  </div>
+</div>
