@@ -15,8 +15,6 @@ export class OrganizerService {
 
   pacotes        : any;
 
-  packageIndex   : number = -1;
-
   constructor(private http: Http) { 
     console.log("criado");
   }
@@ -85,7 +83,7 @@ export class OrganizerService {
                 "img": "expresso.jpg",
                 "desc": "Pausa para um lanche após uma reunião",
                 "items": [
-                  {"id":1, "nome": "Coxinha"        ,  "type": "salgado",  "qtd": qtd_pessoas, "precoUnitario": 0.2},
+                  {"id":1, "nome": "Coxinha"        ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.2},
                   {"id":2, "nome": "Empada"        ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15},
                   {"id":3, "nome": "Salgado de queijo"  ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15}
                   //{"nome": "Descartáveis"        , "check": false},
