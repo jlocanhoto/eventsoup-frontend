@@ -61,6 +61,7 @@ export class ConfirmDetailsComponent implements OnInit {
 	regAddr			: boolean = false;
 
 	deliveryTax		: number = 10;
+	budget			: number;
 
 	token:any;
 
@@ -194,15 +195,15 @@ export class ConfirmDetailsComponent implements OnInit {
 	}
 
 	calcBudget(){
-		let budget = 0;
+		this.budget = 0;
 		if(this.selectedPack.itens !== undefined)
 		{
 			for(let i = 0; i < this.selectedPack.itens.length; i++){
-				budget += this.selectedPack.itens[i].quantidade_item * this.selectedPack.itens[i].precoUnitario;
+				this.budget += this.selectedPack.itens[i].quantidade_item * this.selectedPack.itens[i].precoUnitario;
 			}
 		}
 
-		return budget;
+		return this.service.currencyBRL(this.budget);
 	}
 
 	redefine(): void {
@@ -315,12 +316,12 @@ export class ConfirmDetailsComponent implements OnInit {
 		return (this.tipoSelecionado === null) || (this.tipoSelecionado == 1);
 	}
 
-	getDeliveryTax() {
-		let delivery = this.deliveryTax.toFixed(2).replace('.', ',').replace(/./g, function(c, i, a) {
-			return i && c !== "," && ((a.length - i) % 3 === 0) ? ('.' + c) : c;
-		});
+	getDeliveryTax(): string {
+		return this.service.currencyBRL(this.deliveryTax);
+	}
 
-		return delivery;
+	getTotal(): string {
+		return this.service.currencyBRL(this.budget + this.deliveryTax);
 	}
 
 	goBack(): void {

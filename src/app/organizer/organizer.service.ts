@@ -72,4 +72,9 @@ export class OrganizerService {
         });
   }
 
+  currencyBRL(value: number): string {
+    return value.toFixed(2).replace('.', ',').replace(/./g, function(c, i, a) {
+      return i && c !== "," && ((a.length - i) % 3 === 0) ? ('.' + c) : c;
+    });
+  }
 }

@@ -6,6 +6,8 @@ import 'rxjs/add/operator/switchMap';
 import { Event } 							from '../../event/event';
 import { EventService }						from '../../event/event.service';
 
+import { OrganizerService }        			from '../organizer.service';
+
 declare var $ : any;
 
 const classesKits = [
@@ -87,10 +89,11 @@ export class SelectPackageComponent implements OnInit {
 	rua_q:string;
 	orcamento: number;
 
-	constructor (private eventService	: EventService,
-				 private route			: ActivatedRoute,
-				 private location		: Location,
-				 private router			: Router		) {	}
+	constructor (private eventService		: EventService    ,
+				 private route				: ActivatedRoute  ,
+				 private location			: Location        ,
+				 private router				: Router          ,
+				 private organizerService	: OrganizerService) {	}
 
 	ngOnInit(): void {
 		// pega os dados informados na página anterior
@@ -248,8 +251,12 @@ export class SelectPackageComponent implements OnInit {
 		}
 		// this.orcamento = budget
 		
-		console.log("this.orcamento")
+		//console.log("this.orcamento")
 		return budget;
+	}
+
+	getOrcamento() {
+		return this.organizerService.currencyBRL(this.orcamento);
 	}
 
 /*

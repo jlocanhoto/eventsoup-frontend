@@ -42,7 +42,7 @@
 					</h5>
 				</div>
 				<div *ngIf="selectedPack.name!==undefined">
-					<div class="card-title padding20">R$ {{orcamento}}</div>
+					<div class="card-title padding20">R$ {{getOrcamento()}}</div>
 					<div class="card-content">
 						<ul class="collection no-border">
 							<li class="collection-items" *ngFor="let item of selectedPack.items">
