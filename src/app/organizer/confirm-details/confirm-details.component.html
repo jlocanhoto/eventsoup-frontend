@@ -131,9 +131,13 @@
 								<input id="titulo" type="text" [(ngModel)]="titulo" name="titulo">
 								<label for="titulo">Título</label>
 							</div>
+							<div class="input-field col s5">
+								<input #hora id="timepicker" class="timepicker" type="text">
+								<label for="timepicker">Horário de início</label>
+							</div>
 						</div>
 						<div class="row">
-							<div class="input-field col s7">
+							<div class="input-field col s12">
 	         					<textarea id="info" class="materialize-textarea" [(ngModel)]="info" name="info" placeholder="Exemplos:
 - Workshop de empreendedorismo voltado ao público universitário.
 - Evento de divulgação da empresa em que a prefeitura vai estar presente."></textarea>
@@ -149,6 +153,7 @@
 			<div class="card">
 				<h5 class ="green padding20 white-text">Seu Pedido</h5>
 				<div class="card-content">
+					<h5 class="card-title">Pacote</h5>
 					<div class="row mb5" *ngFor="let item of selectedPack.itens">
 						<div>
 							<div class="col s8" >
@@ -158,21 +163,24 @@
 
 						<div class="col s4">{{item.quantidade_item}}</div>
 					</div>
+					<br/>
+					<p style="color:blue">* Pratos, copos e talheres descartáveis inclusos</p>
 					<br />
-					<b>Subtotal: R$ {{calcBudget()}}</b>
+					<b>Subtotal:</b>
+					<h5 id="subtotal">
+						 R$ {{calcBudget()}}
+					</h5>
 				</div>
 
-				<!-- <div class="divider"></div> -->
+				<div class="divider"></div>
 
 				<div class="card-content">
 					<h5 class="card-title">Entrega</h5>
-					<b>Horário do evento:</b>
-					<div class="row">
-                    	<div class="input-field col s12">
-	                        <input #hora id="timepicker" class="timepicker" type="text">
-	                        <label for="timepicker">Selecione um horário</label>
-	                    </div>
-	                </div>
+					<b>Horário:</b>
+					<p id="horario_entrega">
+						{{getDeliveryTime()}}
+					</p>
+					<br>
 					<!-- <input id="horario" type="text"> -->
 					<b>Local:</b>
 					<p id="end_entrega">
@@ -183,7 +191,11 @@
 						Recife, PE - Brasil
 					</p>
 					<br />
-					<b>Taxa de Entrega: R$ {{getDeliveryTax()}}</b><br /><br />
+					<b>Taxa de Entrega:</b>
+					<h5 id="delivery_tax">
+						 R$ {{getDeliveryTax()}}
+					</h5>
+					<br /><br />
 					<button (click)="redefine()" class="btn w100 waves-effect waves-light">Redefinir Dados</button>
 				</div>
 
@@ -191,7 +203,6 @@
 
 				<div class="card-content">
 					<h5 class="card-title">Valor Total</h5>
-					<p>Este pacote inclui pratos, copos e talheres descartáveis para {{eventInfo.qtd}} pessoas</p><br />
 					<h3><b>R$ {{getTotal()}}</b></h3>
 				</div>
 

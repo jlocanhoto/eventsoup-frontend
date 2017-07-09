@@ -154,7 +154,7 @@ export class ConfirmDetailsComponent implements OnInit {
 			canceltext: 'Cancelar', // Text for cancel-button
 			autoclose: false, // automatic close timepicker
 			ampmclickable: true, // make AM PM clickable
-			aftershow: function(){} //Function for after opening timepicker  
+			aftershow: function(){}, //Function for after opening timepicker
 		});
 	}
 
@@ -318,6 +318,46 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	getDeliveryTax(): string {
 		return this.service.currencyBRL(this.deliveryTax);
+	}
+
+	getEventTime(): string {
+		return $("#timepicker")[0].value;
+	}
+
+	subtractTime(time1, time2): string {
+		time1 = time1.split(':'); time2 = time2.split(':');
+
+		let hr1 = +time1[0]; let min1 = +time1[1];
+		let hr2 = +time2[0]; let min2 = +time2[1];
+
+		let min = min1 - min2;
+		let hour = hr1;
+
+		if (min < 0) {
+			min = 60 + min;
+			hour--;
+		}
+
+		hour -= hr2;
+
+		if (hour < 0) {
+			hour = 24 + hour;
+		}
+
+		let time = ('0' + hour.toString()).slice(-2) + ":" + ('0' + min.toString()).slice(-2);
+
+		return time;
+	};
+
+	getDeliveryTime(): string {
+		let eventTime = this.getEventTime();
+		let ret = '00:00';
+
+		if (eventTime) {
+			ret = this.subtractTime(eventTime, '00:30');
+		}
+
+		return ret;
 	}
 
 	getTotal(): string {
