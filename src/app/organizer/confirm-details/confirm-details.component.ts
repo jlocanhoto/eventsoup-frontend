@@ -69,12 +69,12 @@ export class ConfirmDetailsComponent implements OnInit {
 	constructor(private location: Location,
 				private route: ActivatedRoute,
 				private router	: Router	,
-				private service: OrganizerService) { 
+				private organizerService: OrganizerService) { 
 					this.token = localStorage.getItem("token");
 				}
 
 	ngOnInit() {
-		this.service.getEventos(this.token).subscribe(
+		this.organizerService.getEventos(this.token).subscribe(
 			res => {
 				// this.eventos = res
 				// console.log(this.eventos);
@@ -89,10 +89,10 @@ export class ConfirmDetailsComponent implements OnInit {
 		this.route.queryParams.subscribe(
 			query => {
 				this.data = new Date(query["data"])
-				this.qtd_pessoas = query["quant_pessoas"]
-				this.bairro_q = query["bairro"]
-				this.rua_q = query["rua"]
-				this.pacote = query["pacote"]
+				this.qtd_pessoas = query["quant_pessoas"];
+				this.bairro_q = query["bairro"];
+				this.rua_q = query["rua"];
+				this.pacote = query["pacote"];
 				this.orcamento = query["orcamento"];
 				this.eventInfo = {"rua": this.rua_q, "bairro": this.bairro_q, "numero": 0}
 				this.selectedPack = JSON.parse(this.pacote);
@@ -203,7 +203,7 @@ export class ConfirmDetailsComponent implements OnInit {
 			}
 		}
 
-		return this.service.currencyBRL(this.budget);
+		return this.organizerService.currencyBRL(this.budget);
 	}
 
 	redefine(): void {
@@ -268,7 +268,7 @@ export class ConfirmDetailsComponent implements OnInit {
 
 		console.log(jsonData)
 
-		let code = this.service.get_redirect_code(jsonData).subscribe(
+		let code = this.organizerService.get_redirect_code(jsonData).subscribe(
 			res => {
 				console.log("success purchase");
 				console.log(res.checkoutCode)
@@ -317,7 +317,7 @@ export class ConfirmDetailsComponent implements OnInit {
 	}
 
 	getDeliveryTax(): string {
-		return this.service.currencyBRL(this.deliveryTax);
+		return this.organizerService.currencyBRL(this.deliveryTax);
 	}
 
 	getEventTime(): string {
@@ -351,7 +351,7 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	getDeliveryTime(): string {
 		let eventTime = this.getEventTime();
-		let ret = '00:00';
+		let ret = '- - : - -';
 
 		if (eventTime) {
 			ret = this.subtractTime(eventTime, '00:30');
@@ -361,7 +361,7 @@ export class ConfirmDetailsComponent implements OnInit {
 	}
 
 	getTotal(): string {
-		return this.service.currencyBRL(this.budget + this.deliveryTax);
+		return this.organizerService.currencyBRL(this.budget + this.deliveryTax);
 	}
 
 	goBack(): void {

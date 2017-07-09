@@ -8,10 +8,9 @@
 			<h4 class="header">Selecione seus pacotes</h4>
 			<!-- Teal page content  -->
 			<div class="row">
-				<div class="col s12 m4 l4" *ngFor="let pct of pacotes">
+				<div class="col s12 m4 l4" *ngFor="let pct of pacotes; index as i">
 					<div class="card waves-block waves-light">
-
-						<div class="card-image" (click)="selectPackage(pct)" style="cursor: pointer;">
+						<div class="card-image" (click)="selectPackage(pct, i)" style="cursor: pointer;">
 							<img class="responsive-img" src="assets/imagens/{{pct.img}}">
 							<span class="card-title" style="background: rgba(0,0,0,0.6)">{{pct.name}}</span>
 						</div>
@@ -46,7 +45,6 @@
 					<div class="card-content">
 						<ul class="collection no-border">
 							<li class="collection-items" *ngFor="let item of selectedPack.items">
-
 								<div *ngIf="item.type==='liquido'">
 									<div class="col s12 m12 l12 xl9" style="transform: translate(0,75%);">
 										{{item.nome}} (L)
