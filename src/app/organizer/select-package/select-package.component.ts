@@ -29,6 +29,7 @@ export class SelectPackageComponent implements OnInit {
 	qtd_pessoas		: number;
 	bairro_q		: string;
 	rua_q			: string;
+	pacote_q		: number;
 	orcamento		: number;
 
 	pacotes			: any;
@@ -50,10 +51,10 @@ export class SelectPackageComponent implements OnInit {
 				
 				this.pacotes = this.organizerService.definePackages(this.qtd_pessoas);
 
-				let pacote_q = query["pacote"];
+				this.pacote_q = query["pacote"];
 
-				if (pacote_q) {
-					this.selectedPack = this.organizerService.getSelectedPackage(pacote_q);
+				if (this.pacote_q) {
+					this.selectedPack = this.organizerService.getSelectedPackage(this.pacote_q);
 					this.orcamento = this.calcBudget();
 
 					console.log(this.orcamento);
@@ -85,8 +86,9 @@ export class SelectPackageComponent implements OnInit {
 	}
 	*/
 
-	selectPackage(pkg){
+	selectPackage(pkg, index){
 		console.log(pkg)
+		this.pacote_q = index;
 		this.selectedPack = pkg;
 		this.orcamento = this.calcBudget()
 	}
@@ -130,7 +132,7 @@ export class SelectPackageComponent implements OnInit {
 
 			itens.push(item);
 		}
-		
+
 		return {
 			"nome": this.selectedPack.name,
 			"quantidade_pessoas": this.qtd_pessoas,
