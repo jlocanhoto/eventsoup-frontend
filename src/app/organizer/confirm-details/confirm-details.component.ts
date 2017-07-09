@@ -282,7 +282,7 @@ export class ConfirmDetailsComponent implements OnInit {
 									let pacote = JSON.parse(that.pacote);
 									console.log(pacote);
 
-									that.service.criarEvento(that.token,
+									that.organizerService.criarEvento(that.token,
 									{
 										nome: that.nome,
 										quantidade_pessoas: that.qtd_pessoas,
