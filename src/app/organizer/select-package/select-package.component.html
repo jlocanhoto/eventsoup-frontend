@@ -9,9 +9,9 @@
 			<!-- Teal page content  -->
 			<div class="row">
 				<div class="col s12 m4 l4" *ngFor="let pct of pacotes">
-					<div class="card waves-block waves-light" (click)="selectPackage(pct)">
+					<div class="card waves-block waves-light">
 
-						<div class="card-image">
+						<div class="card-image" (click)="selectPackage(pct)" style="cursor: pointer;">
 							<img class="responsive-img" src="assets/imagens/{{pct.img}}">
 							<span class="card-title" style="background: rgba(0,0,0,0.6)">{{pct.name}}</span>
 						</div>
@@ -27,7 +27,7 @@
 							</ul>
 						</div>
 						<div class="card-action">
-			              <button class="waves-effect waves-light btn red btn-large">Peça agora</button>
+			              <button (click)="selectPackage(pct)" class="waves-effect waves-light btn red btn-large">Peça agora</button>
 			            </div>
 					</div>
 				</div>
