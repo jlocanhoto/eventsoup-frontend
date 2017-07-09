@@ -239,11 +239,14 @@ export class ConfirmDetailsComponent implements OnInit {
 			}
 		});*/
 		let contato = "";
-		if(this.celular == "")
+		if(this.celular !== "")
+			contato = this.celular;
+
+		else if(this.telefone !== "")
 			contato = this.telefone;
 
-		else if(this.telefone == "")
-			contato = this.celular;
+		console.log(this.celular)
+		console.log(this.telefone)
 
 		let jsonData = {
 				"token": localStorage.getItem('token'),
@@ -251,13 +254,16 @@ export class ConfirmDetailsComponent implements OnInit {
 				"data": data,
 				"quant_pessoas": this.qtd_pessoas,
 				"endereco": JSON.stringify(this.montarEndereco()),
-				"pacote": this.pacote,
+				"pacote": JSON.parse(this.pacote).nome,
+				"pacote_detail": this.pacote,
 				"nome": this.nome + ' ' + this.sobrenome,
 				"descricao": this.info,
-				"orcamento": this.orcamento,
+				"orcamento": Number(this.orcamento).toFixed(2),
 				"email": this.email.split('@')[0],
 				"contato": contato
 			};
+
+		console.log(jsonData)
 
 		let code = this.service.get_redirect_code(jsonData).subscribe(
 			res => {
