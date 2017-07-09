@@ -60,6 +60,8 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	regAddr			: boolean = false;
 
+	deliveryTax		: number = 10;
+
 	token:any;
 
 
@@ -311,6 +313,14 @@ export class ConfirmDetailsComponent implements OnInit {
 		this.tipoSelecionado = $("select").val();
 
 		return (this.tipoSelecionado === null) || (this.tipoSelecionado == 1);
+	}
+
+	getDeliveryTax() {
+		let delivery = this.deliveryTax.toFixed(2).replace('.', ',').replace(/./g, function(c, i, a) {
+			return i && c !== "," && ((a.length - i) % 3 === 0) ? ('.' + c) : c;
+		});
+
+		return delivery;
 	}
 
 	goBack(): void {
