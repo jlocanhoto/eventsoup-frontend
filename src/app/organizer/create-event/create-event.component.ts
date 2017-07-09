@@ -1,10 +1,9 @@
-import { Component }			from '@angular/core';
-import { Router } 				from '@angular/router';
-import { Location }				from '@angular/common';
-import { FormsModule }   		from '@angular/forms';
+import { Component, OnInit }				from '@angular/core';
+import { ActivatedRoute, Params, Router }	from '@angular/router';
+import { Location }							from '@angular/common';
+import { FormsModule }   					from '@angular/forms';
 
-import { Event } 				from '../../event/event';
-import { EventService }			from '../../event/event.service';
+import { OrganizerService }        			from '../organizer.service';
 
 declare var $ : any;	// jQuery variable
 
@@ -13,9 +12,8 @@ declare var $ : any;	// jQuery variable
 	templateUrl: './create-event.component.html',
 	styleUrls: ['./create-event.component.css']
 })
-export class CreateEventComponent {
-
-	newEvent		: Event;
+export class CreateEventComponent implements OnInit {
+	pacote_q		: number;
 
 	title			: string = "";
 	//date			: Date;
@@ -32,11 +30,17 @@ export class CreateEventComponent {
 
 	requiredData	: boolean = false;
 
+	constructor(private location			: Location,
+				private route				: ActivatedRoute,
+				private router				: Router,
+				private organizerService	: OrganizerService) { }
 
-	constructor(private location		: Location,
-				private router			: Router,
-				private eventService	: EventService) {
-
+	ngOnInit() {
+		this.route.queryParams.subscribe(
+			query => {
+				this.pacote_q = query["pacote"];
+			}
+		);
 	}
 
 	ngAfterContentInit() {
@@ -92,20 +96,28 @@ export class CreateEventComponent {
 		
 		$('.money').mask("#.##0,00", options);
 	}
+
 	private moneyNotation(money: string): number {
 		return parseFloat(money.replace(".",";").replace(",",".").replace(";",","));
 	}
 
 	createEvent(): void {
-		this.router.navigate(['/organizer', 'event', 'packages'], {
+		var obj = {
 			queryParams: {
 				"data": this.date.obj,
 				"quant_pessoas": this.qtd,
 				"bairro": this.bairro,
-				"rua": this.rua
+				"rua": this.rua,
 			}
-		});
+		};
+
+		if (this.pacote_q) {
+			obj["queryParams"]["pacote"] = this.pacote_q;
+		}
+
+		this.router.navigate(['/organizer', 'event', 'packages'], obj);
 	}
+
 	checkRequiredData(): string {
 		let flag = true;
 		flag = flag && ($('.datepicker').val() !== "");
