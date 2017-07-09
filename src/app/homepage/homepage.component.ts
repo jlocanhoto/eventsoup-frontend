@@ -1,7 +1,9 @@
-import { EventService } from './../event/event.service';
 import { Component, OnInit } from '@angular/core';
+import { Params, Router }    from '@angular/router';
 
-declare var $:any;
+import { OrganizerService }  from '../organizer/organizer.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-homepage',
@@ -10,9 +12,8 @@ declare var $:any;
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private service: EventService) { 
-	
-  }
+  constructor(private organizerService: OrganizerService,
+              private router          : Router) { }
 
   ngOnInit() {
     $('.parallax').parallax();
@@ -43,9 +44,16 @@ export class HomepageComponent implements OnInit {
     $("body").removeAttr( 'style' );
   }
 
-  goto(type: string){
+  selectPackage(index: number): void {
+    this.router.navigate(['/organizer', 'event', 'create'], {
+      queryParams: {
+        "pacote": index
+      }
+    });
+  }
+
+  goto(type: string): void {
     localStorage.setItem('usertype', type);
   }
 
 }
-
