@@ -64,9 +64,9 @@ export class ConfirmDetailsComponent implements OnInit {
 	deliveryTax		: number = 10;
 	budget			: number;
 
-	loading			: boolean = true;
-
 	token:any;
+
+	requiredData = false;
 
 
 	constructor(private location: Location,
@@ -77,15 +77,20 @@ export class ConfirmDetailsComponent implements OnInit {
 				}
 
 	ngOnInit() {
+		if(this.token){
+			this.logged = true;
+			this.cpf_cnpj = localStorage.getItem("cpf");
+		}
+
 		this.organizerService.getEventos(this.token).subscribe(
 			res => {
 				// this.eventos = res
 				// console.log(this.eventos);
 				// $.getScript('assets/modernizr.js');
 				// $.getScript("assets/main.js");
-				this.logged = true;
+				this.logged = true
 				$('#filled-in-box').prop('disabled', false);
-				this.fulfillFormData();
+				//this.fulfillFormData();
 		});
 
 		// pega os dados informados na página anterior
@@ -113,6 +118,32 @@ export class ConfirmDetailsComponent implements OnInit {
 		this.bairro		 = this.bairro_q;
 		this.rua		 = this.rua_q;
 	}
+
+	checkRequiredData(): string {
+		let flag = true;
+		flag = flag && (this.nome !== "");
+		flag = flag && (this.email !== "");
+		flag = flag && (this.celular !== "");
+		flag = flag && (this.cpf_cnpj !== "");
+		flag = flag && (this.cep !== "");
+		flag = flag && (this.rua !== "");
+		flag = flag && (this.numero !== "");
+		flag = flag && (this.complemento !== "");
+		flag = flag && (this.bairro !== "");
+		flag = flag && (this.titulo !== "");
+		//flag = flag && (this.getEventTime() < 3);
+
+		let str = "btn disabled";
+
+		if (flag) {
+			str = "btn";
+		}
+
+		this.requiredData = flag;
+
+		return str;
+	}
+
 
 	ngAfterViewInit() {
 		$('select').material_select();
@@ -231,7 +262,7 @@ export class ConfirmDetailsComponent implements OnInit {
 
 		$('#modal_loading').modal('open', {dismissible: false});
 
-		hora = hora.split(':');
+		hora = hora.split(':')
 		// alert(hora[0])
 		
 		let data = new Date(this.data.getFullYear(),this.data.getMonth(),
@@ -248,61 +279,54 @@ export class ConfirmDetailsComponent implements OnInit {
 				"orcamento": this.orcamento
 			}
 		});*/
-		let contato = "";
-		if(this.celular !== "")
-			contato = this.celular;
-
-		else if(this.telefone !== "")
-			contato = this.telefone;
 
 		let jsonData = {
 				"token": this.token,
-				"cpf": localStorage.getItem('cpf'),
+				"cpf": this.cpf_cnpj,
 				"data": data,
 				"quant_pessoas": this.qtd_pessoas,
 				"endereco": endereco,
 				"pacote": JSON.parse(this.pacote).nome,
 				"pacote_detail": this.pacote,
-				"nome": this.nome + ' ' + this.sobrenome,
+				"nome": this.nome,
 				"descricao": this.info,
 				"orcamento": Number(this.getTotal().replace(/,/g, '.')).toFixed(2),
 				"email": this.email.split('@')[0],
-				"contato": contato
+				"contato": this.celular
 			};
 
-		console.log(jsonData)
+		console.log(jsonData);
+
 
 		let code = this.organizerService.get_redirect_code(jsonData).subscribe(
 			res => {
 				console.log("success purchase");
 				console.log(res.checkoutCode)
 
-				//let that = this;
-
+				let that = this;
 
 				let lightbox = PagSeguroLightbox({
 								code: res.checkoutCode
 							},
 							{
-								success: (transactionCode) => {
+								success: function(transactionCode){
 									$('#modal_loading').modal('close');
-									let pacote = JSON.parse(this.pacote);
-									console.log(pacote);
+									let pacote = JSON.parse(that.pacote);
 
-									this.organizerService.criarEvento(this.token,
+									that.organizerService.criarEvento(that.token,
 									{
-										nome: this.nome,
-										quantidade_pessoas: this.qtd_pessoas,
-										data: this.data,
-										orcamento: this.orcamento,
-										descricao: this.info,
+										nome: that.titulo,
+										quantidade_pessoas: that.qtd_pessoas,
+										data: that.data,
+										orcamento: that.orcamento,
+										descricao: that.info,
 										codigo_pag_seguro: transactionCode,
 										endereco:  JSON.parse(endereco),
 										pacotes: pacote
 									}).subscribe(
 										res => {
 														console.log(res);
-														this.router.navigate(['/organizer', 'event', 'finish']);
+														that.router.navigate(['/organizer', 'event', 'finish']);
 												},
 										err => {
 													console.log(err);
@@ -310,7 +334,7 @@ export class ConfirmDetailsComponent implements OnInit {
 								);
 								
 							},
-								abort: () => {
+								abort: function(){
 									$('#modal_loading').modal('close');
 									alert("Operação de pagamento não efetuada.");
 							}
@@ -331,12 +355,12 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	montarEndereco() {
 		return {
-			"rua": this.__rua,
-			"bairro": this.__bairro,
+			"rua": this.rua,
+			"bairro": this.bairro,
 			"cidade": "Recife",
 			"estado": "PE",
-			"cep": this.__cep,
-			"numero": this.__numero
+			"cep": this.cep,
+			"numero": this.numero
 		}
 	}
 

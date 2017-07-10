@@ -222,7 +222,7 @@
 				</div>
 
 				<div class="card-action">
-			        <button (click)="purchase(hora.value)" class="btn red waves-effect waves-light">Realizar Pagamento
+			        <button (click)="purchase(hora.value)" class="{{checkRequiredData()}} red waves-effect waves-light">Realizar Pagamento
 						<i class="material-icons right">done</i>
 					</button>
 			    </div>
