@@ -15,12 +15,12 @@ export class OrganizerService {
 
   pacotes        : any;
 
-  constructor(private http: Http) { 
+  constructor(private http: Http) {
     console.log("criado");
   }
 
   getEventos(token: string) {
-    let url = this.serverUrl + '/eventos/crud-eventos/';
+    let url = this.serverUrl + '/eventos/proximos-eventos/';
     token = "JWT " + token;
     console.log(token)
     console.log("token")
@@ -31,7 +31,7 @@ export class OrganizerService {
                   // console.log("get");
                   let data = res.json();
                   // console.log(data.results);
-                  return data.results;
+                  return data;
                 }).catch( erro => {
                     console.log(erro);
                     return Observable.throw(erro);
@@ -89,7 +89,7 @@ export class OrganizerService {
                   //{"nome": "Descartáveis"        , "check": false},
                   //{"nome": "Mesas e cadeiras"      , "check": false}
                 ]};
-          
+
     this.pacoteCasual = {"name": "Casual",
                 "img": "cerveja_artesanal.png",
                 "desc": "Um bom momento para trocar uma ideia",
