@@ -90,7 +90,7 @@ export class SelectPackageComponent implements OnInit {
 		console.log(pkg)
 		this.pacote_q = index;
 		this.selectedPack = pkg;
-		this.orcamento = this.calcBudget()
+		this.orcamento = this.calcBudget();
 	}
 
 	checkRequiredData(): string {
@@ -171,6 +171,7 @@ export class SelectPackageComponent implements OnInit {
 	}
 
 	getOrcamento() {
+		this.orcamento = this.calcBudget();
 		return this.organizerService.currencyBRL(this.orcamento);
 	}
 }
