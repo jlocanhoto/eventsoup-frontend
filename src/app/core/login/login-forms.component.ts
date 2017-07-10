@@ -12,10 +12,10 @@ declare var $ : any;
   styleUrls: ['./login-forms.component.css']
 })
 export class LoginFormsComponent implements OnInit {
-  user    : User = new User();
-  title     : string = 'Eventsoup';
+  user       : User = new User();
+  title      : string = 'Eventsoup';
   loading    : boolean =  false;
-  errorMsg  : string = '';
+  errorMsg   : string = '';
   returnUrl  : string = '/' + localStorage.usertype;
   password1  : string = '';
   password2  : string = '';

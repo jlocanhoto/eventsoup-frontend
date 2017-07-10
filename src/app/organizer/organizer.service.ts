@@ -83,9 +83,9 @@ export class OrganizerService {
                 "img": "expresso.jpg",
                 "desc": "Pausa para um lanche após uma reunião",
                 "items": [
-                  {"id":6, "nome": "Coxinha"        ,  "type": "salgado",  "qtd": qtd_pessoas, "precoUnitario": 0.2},
-                  {"id":7, "nome": "Empada"        ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15},
-                  {"id":8, "nome": "Salgado de queijo"  ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15}
+                  {"id":6, "nome": "Coxinhas"        ,  "type": "salgado",  "qtd": qtd_pessoas, "precoUnitario": 0.2},
+                  {"id":7, "nome": "Empadas"        ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15},
+                  {"id":8, "nome": "Salgados de queijo"  ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15}
                   //{"nome": "Descartáveis"        , "check": false},
                   //{"nome": "Mesas e cadeiras"      , "check": false}
                 ]};
@@ -94,10 +94,10 @@ export class OrganizerService {
                 "img": "cerveja_artesanal.png",
                 "desc": "Um bom momento para trocar uma ideia",
                 "items": [
-                  {"id":2, "nome": "Brigadeiro"      ,  "type": "doce",  "qtd": qtd_pessoas*3, "precoUnitario": 0.3},
-                  {"id":3, "nome": "Surpresa de uva"    ,  "type": "doce",  "qtd": qtd_pessoas*3, "precoUnitario": 0.3},
-                  {"id":4, "nome": "Refrigerante"      ,  "type": "liquido",  "qtd": qtd_pessoas*0.5, "precoUnitario": 5.5},
-                  {"id":5, "nome": "Pão de queijo"    ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.2}
+                  {"id":2, "nome": "Brigadeiros"      ,  "type": "doce",  "qtd": qtd_pessoas*3, "precoUnitario": 0.3},
+                  {"id":3, "nome": "Surpresas de uva"    ,  "type": "doce",  "qtd": qtd_pessoas*3, "precoUnitario": 0.3},
+                  {"id":4, "nome": "Refrigerantes"      ,  "type": "liquido",  "qtd": qtd_pessoas*0.5, "precoUnitario": 5.5},
+                  {"id":5, "nome": "Pães de queijo"    ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.2}
                   //"Outras bebidas"  ];
                 ]};
 
