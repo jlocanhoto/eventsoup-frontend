@@ -57,7 +57,7 @@ export class ConfirmDetailsComponent implements OnInit {
 	__email			: any = "ufpe@ufpe.br";
 	__nome			: any = "João Lucas";
 	__rua			: any = "Av. Prof. Moraes Rego";
-	__cep			: any = "50670-901";
+	__cep			: any = "50670901";
 
 	regAddr			: boolean = false;
 
