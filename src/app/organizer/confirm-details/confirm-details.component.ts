@@ -79,7 +79,6 @@ export class ConfirmDetailsComponent implements OnInit {
 	ngOnInit() {
 		if(this.token){
 			this.logged = true;
-			this.cpf_cnpj = localStorage.getItem("cpf");
 		}
 
 		this.organizerService.getEventos(this.token).subscribe(
@@ -190,6 +189,10 @@ export class ConfirmDetailsComponent implements OnInit {
 			ampmclickable: true, // make AM PM clickable
 			aftershow: function(){}, //Function for after opening timepicker
 		});
+
+		if(this.logged){
+			this.cpf_cnpj = localStorage.getItem("cpf");
+		}
 	}
 
 	fulfillFormData() {
