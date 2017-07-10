@@ -68,24 +68,6 @@ export class SelectPackageComponent implements OnInit {
 		// console.dir(this.newEvent);
 	}
 
-	// updatePackageItems() {
-	// 	for (let i = 0; i < this.pacotes.length; i++)
-	// 	{
-	// 		let items = this.pacotes[i].items;
-
-	// 		for (let j = 0; j < items.length; j++)
-	// 		{
-	// 			if(items[j].type !== 'torta')
-	// 			items[j].qtd *= this.qtd_pessoas;
-	// 		}
-	// 	}
-	// }
-	/*
-	ngAfterViewInit(): void {
-		$('.chip').css('cursor', 'pointer');
-	}
-	*/
-
 	selectPackage(pkg, index){
 		console.log(pkg)
 		this.pacote_q = index;
@@ -140,20 +122,6 @@ export class SelectPackageComponent implements OnInit {
 			"fornecedor": 4,
 			"itens": itens
 		}
-		// console.log(this.selectedPack)
-		/*
-		"nome": "nome_do_pacote",
-		"quantidade_pessoas": quantidade_pessoas,
-		"preco": preco,
-		"fornecedor": id_fornecedor,
-		"itens": [
-			{
-				"id": id_item_1,
-				"quantidade_ite": quantidade_item_1
-			},
-			//...
-		]
-		*/
 	}
 
 	calcBudget(){
