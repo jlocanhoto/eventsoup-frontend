@@ -89,6 +89,7 @@ export class OrganizerService {
                   //{"nome": "Descartáveis"        , "check": false},
                   //{"nome": "Mesas e cadeiras"      , "check": false}
                 ]};
+    let refri = Math.round(qtd_pessoas*0.5); if(refri%2!==0) refri++;
 
     this.pacoteCasual = {"name": "Casual",
                 "img": "cerveja_artesanal.png",
@@ -96,7 +97,7 @@ export class OrganizerService {
                 "items": [
                   {"id":2, "nome": "Brigadeiros"      ,  "type": "doce",  "qtd": qtd_pessoas*3, "precoUnitario": 0.3},
                   {"id":3, "nome": "Surpresas de uva"    ,  "type": "doce",  "qtd": qtd_pessoas*3, "precoUnitario": 0.3},
-                  {"id":4, "nome": "Refrigerantes"      ,  "type": "liquido",  "qtd": qtd_pessoas*0.5, "precoUnitario": 5.5},
+                  {"id":4, "nome": "Refrigerantes (L)"      ,  "type": "liquido",  "qtd": refri, "precoUnitario": 5.5},
                   {"id":5, "nome": "Pães de queijo"    ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.2}
                   //"Outras bebidas"  ];
                 ]};

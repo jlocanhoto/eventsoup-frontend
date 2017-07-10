@@ -45,13 +45,7 @@
 					<div class="card-content">
 						<ul class="collection no-border">
 							<li class="collection-items" *ngFor="let item of selectedPack.items">
-								<div *ngIf="item.type==='liquido'">
-									<div class="col s12 m12 l12 xl9" style="transform: translate(0,75%);">
-										{{item.nome}} (L)
-									</div>
-								</div>
-
-								<div *ngIf="item.type!=='liquido'">
+								<div>
 									<div class="col s12 m12 l12 xl9" style="transform: translate(0,75%);">
 										{{item.nome}} 
 									</div>

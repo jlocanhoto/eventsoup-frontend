@@ -68,7 +68,7 @@ export class SelectPackageComponent implements OnInit {
 		// console.dir(this.newEvent);
 	}
 
-		// updatePackageItems() {
+	// updatePackageItems() {
 	// 	for (let i = 0; i < this.pacotes.length; i++)
 	// 	{
 	// 		let items = this.pacotes[i].items;
@@ -173,11 +173,4 @@ export class SelectPackageComponent implements OnInit {
 	getOrcamento() {
 		return this.organizerService.currencyBRL(this.orcamento);
 	}
-
-/*
-	// Não utilizado
-	goBack(): void {
-		this.location.back();
-	}
-*/
 }
