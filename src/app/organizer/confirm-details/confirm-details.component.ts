@@ -50,8 +50,8 @@ export class ConfirmDetailsComponent implements OnInit {
 
 	__complemento	: any = "CIn - UFPE";
 	__sobrenome		: any = "Oliveira Canhoto";
-	__telefone		: any = "3333-4444";
-	__celular		: any = "99999-8888";
+	__telefone		: any = "33334444";
+	__celular		: any = "999998888";
 	__numero		: any = "1235";
 	__bairro		: any = "Cidade Universitária";
 	__email			: any = "ufpe@ufpe.br";
