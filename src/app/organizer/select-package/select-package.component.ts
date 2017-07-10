@@ -137,7 +137,7 @@ export class SelectPackageComponent implements OnInit {
 			"nome": this.selectedPack.name,
 			"quantidade_pessoas": this.qtd_pessoas,
 			"preco": this.orcamento,
-			"fornecedor": 5,
+			"fornecedor": 4,
 			"itens": itens
 		}
 		// console.log(this.selectedPack)

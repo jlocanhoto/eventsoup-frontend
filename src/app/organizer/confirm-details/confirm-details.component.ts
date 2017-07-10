@@ -231,6 +231,7 @@ export class ConfirmDetailsComponent implements OnInit {
 		
 		let data = new Date(this.data.getFullYear(),this.data.getMonth(),
 					this.data.getDate(), hora[0], hora[1])
+		let endereco = JSON.stringify(this.montarEndereco());
 		/*this.router.navigate(['/organizer', 'event', 'purchase'], {
 			queryParams: {
 				"data": data,
@@ -249,20 +250,17 @@ export class ConfirmDetailsComponent implements OnInit {
 		else if(this.telefone !== "")
 			contato = this.telefone;
 
-		console.log(this.celular)
-		console.log(this.telefone)
-
 		let jsonData = {
-				"token": localStorage.getItem('token'),
+				"token": this.token,
 				"cpf": localStorage.getItem('cpf'),
 				"data": data,
 				"quant_pessoas": this.qtd_pessoas,
-				"endereco": JSON.stringify(this.montarEndereco()),
+				"endereco": endereco,
 				"pacote": JSON.parse(this.pacote).nome,
 				"pacote_detail": this.pacote,
 				"nome": this.nome + ' ' + this.sobrenome,
 				"descricao": this.info,
-				"orcamento": Number(this.orcamento).toFixed(2),
+				"orcamento": Number(this.getTotal().replace(/,/g, '.')).toFixed(2),
 				"email": this.email.split('@')[0],
 				"contato": contato
 			};
@@ -274,13 +272,37 @@ export class ConfirmDetailsComponent implements OnInit {
 				console.log("success purchase");
 				console.log(res.checkoutCode)
 
+				let that = this;
+
 
 				let lightbox = PagSeguroLightbox({
 								code: res.checkoutCode
 							},
 							{
 								success: function(transactionCode){
-								alert("Operação de pagamento efetuada com sucesso. Aguardar confirmação do pagseguro.");
+									let pacote = JSON.parse(that.pacote);
+									console.log(pacote);
+
+									that.organizerService.criarEvento(that.token,
+									{
+										nome: that.nome,
+										quantidade_pessoas: that.qtd_pessoas,
+										data: that.data,
+										orcamento: that.orcamento,
+										descricao: that.info,
+										codigo_pag_seguro: transactionCode,
+										endereco:  JSON.parse(endereco),
+										pacotes: pacote
+									}).subscribe(
+										res => {
+														console.log(res);
+														that.router.navigate(['/organizer', 'event', 'finish']);
+												},
+										err => {
+													console.log(err);
+												}
+								);
+								
 							},
 								abort: function(){
 								alert("Operação de pagamento não efetuada.");

@@ -30,6 +30,7 @@ export class CardOrganizerComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.getClass();
+    $('.collapsible').collapsible();
   }
   getClass() {
     switch (this.evento.status) {
