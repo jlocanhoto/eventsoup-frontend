@@ -16,7 +16,7 @@ export class LoginFormsComponent implements OnInit {
   title      : string = 'Eventsoup';
   loading    : boolean =  false;
   errorMsg   : string = '';
-  returnUrl  : string = '/' + localStorage.usertype;
+  returnUrl  : string = '';///organizer' //+ localStorage.usertype;
   password1  : string = '';
   password2  : string = '';
 
@@ -26,7 +26,10 @@ export class LoginFormsComponent implements OnInit {
   flagReg    : boolean = false;
 
   constructor(private service        : EventService,
-              private router         : Router) { }
+              private router         : Router) { 
+    localStorage.setItem('usertype', 'organizer');
+    this.returnUrl = '/' + localStorage.usertype;
+  }
 
   ngOnInit() {
     if (this.service.getToken() != null) {

@@ -148,11 +148,12 @@ export class EventService {
 		let url = this.serverUrl + '/api-token-auth/';
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
-		console.log("teste aqui");
+		//console.log("teste aqui");
 		
 		return this.http.post(url, { cpf_cnpj: cpf, password: senha }, options)
 			.map( res => {
 				let data = res.json();
+				console.log(data);
 				localStorage.setItem('cpf', cpf);
 				localStorage.setItem('token', data.token);
 				return data.token;

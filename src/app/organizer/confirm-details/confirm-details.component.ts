@@ -64,6 +64,8 @@ export class ConfirmDetailsComponent implements OnInit {
 	deliveryTax		: number = 10;
 	budget			: number;
 
+	loading			: boolean = true;
+
 	token:any;
 
 
@@ -81,7 +83,7 @@ export class ConfirmDetailsComponent implements OnInit {
 				// console.log(this.eventos);
 				// $.getScript('assets/modernizr.js');
 				// $.getScript("assets/main.js");
-				this.logged = true
+				this.logged = true;
 				$('#filled-in-box').prop('disabled', false);
 				this.fulfillFormData();
 		});
@@ -226,7 +228,10 @@ export class ConfirmDetailsComponent implements OnInit {
 			alert("Defina um titulo para o evento")
 			return;
 		}
-		hora = hora.split(':')
+
+		$('#modal_loading').modal('open');
+
+		hora = hora.split(':');
 		// alert(hora[0])
 		
 		let data = new Date(this.data.getFullYear(),this.data.getMonth(),
@@ -272,31 +277,32 @@ export class ConfirmDetailsComponent implements OnInit {
 				console.log("success purchase");
 				console.log(res.checkoutCode)
 
-				let that = this;
+				//let that = this;
 
 
 				let lightbox = PagSeguroLightbox({
 								code: res.checkoutCode
 							},
 							{
-								success: function(transactionCode){
-									let pacote = JSON.parse(that.pacote);
+								success: (transactionCode) => {
+									$('#modal_loading').modal('close');
+									let pacote = JSON.parse(this.pacote);
 									console.log(pacote);
 
-									that.organizerService.criarEvento(that.token,
+									this.organizerService.criarEvento(this.token,
 									{
-										nome: that.nome,
-										quantidade_pessoas: that.qtd_pessoas,
-										data: that.data,
-										orcamento: that.orcamento,
-										descricao: that.info,
+										nome: this.nome,
+										quantidade_pessoas: this.qtd_pessoas,
+										data: this.data,
+										orcamento: this.orcamento,
+										descricao: this.info,
 										codigo_pag_seguro: transactionCode,
 										endereco:  JSON.parse(endereco),
 										pacotes: pacote
 									}).subscribe(
 										res => {
 														console.log(res);
-														that.router.navigate(['/organizer', 'event', 'finish']);
+														this.router.navigate(['/organizer', 'event', 'finish']);
 												},
 										err => {
 													console.log(err);
@@ -304,8 +310,9 @@ export class ConfirmDetailsComponent implements OnInit {
 								);
 								
 							},
-								abort: function(){
-								alert("Operação de pagamento não efetuada.");
+								abort: () => {
+									$('#modal_loading').modal('close');
+									alert("Operação de pagamento não efetuada.");
 							}
 						});
 
