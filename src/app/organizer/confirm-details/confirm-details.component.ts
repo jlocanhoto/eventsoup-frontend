@@ -34,16 +34,17 @@ export class ConfirmDetailsComponent implements OnInit {
 	nome			: any = "";
 	rua				: any = "";
 	cep				: any = "";
+	cpf_cnpj		: any = "";
 
-	selectedPack		: any;
-	eventInfo			: any;
+	selectedPack	: any;
+	eventInfo		: any;
 
-	data:Date;
-	qtd_pessoas: number;
-	bairro_q: string;
-	rua_q:string;
-	pacote:any;
-	orcamento: number;
+	data			: Date;
+	qtd_pessoas		: number;
+	bairro_q		: string;
+	rua_q			: string;
+	pacote			: any;
+	orcamento		: number;
 
 	logged 			: boolean = false;
 
@@ -311,9 +312,24 @@ export class ConfirmDetailsComponent implements OnInit {
 	}
 
 	isPessoaFisica(): boolean {
-		this.tipoSelecionado = $("select").val();
+		this.tipoSelecionado = +$("#tipoSelecionado").val();
 
-		return (this.tipoSelecionado === null) || (this.tipoSelecionado == 1);
+		return (this.tipoSelecionado === null) || (this.tipoSelecionado === 1);
+	}
+
+	getPessoaType(): boolean {
+		this.tipoSelecionado = +$("#tipoSelecionado").val();
+
+		let text;
+
+		if (this.tipoSelecionado === 1) {
+			text = "CPF";
+		}
+		else {
+			text = "CNPJ";
+		}
+
+		return text;
 	}
 
 	getDeliveryTax(): string {
