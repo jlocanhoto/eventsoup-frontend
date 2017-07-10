@@ -18,7 +18,7 @@ export class ConfirmDetailsComponent implements OnInit {
        {id: 2, name: "Pessoa Jurídica"}
      ];
 
-	tipoSelecionado : any = null;
+	tipoSelecionado : number = 1;
 
 	confirmpass		: any = "";
 	complemento		: any = "";
@@ -190,8 +190,9 @@ export class ConfirmDetailsComponent implements OnInit {
 			aftershow: function(){}, //Function for after opening timepicker
 		});
 
-		if(this.logged){
+		if (this.logged){
 			this.cpf_cnpj = localStorage.getItem("cpf");
+			$('#label_cpf').addClass('active');
 		}
 	}
 
@@ -368,13 +369,15 @@ export class ConfirmDetailsComponent implements OnInit {
 	}
 
 	isPessoaFisica(): boolean {
-		this.tipoSelecionado = +$("#tipoSelecionado").val();
+		if (!this.logged)
+			this.tipoSelecionado = +$("#tipoSelecionado").val();
 
 		return (this.tipoSelecionado === null) || (this.tipoSelecionado === 1);
 	}
 
 	getPessoaType(): boolean {
-		this.tipoSelecionado = +$("#tipoSelecionado").val();
+		if (!this.logged)
+			this.tipoSelecionado = +$("#tipoSelecionado").val();
 
 		let text;
 
