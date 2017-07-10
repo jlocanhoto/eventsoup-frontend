@@ -83,7 +83,7 @@ export class OrganizerService {
                 "img": "expresso.jpg",
                 "desc": "Pausa para um lanche após uma reunião",
                 "items": [
-                  {"id":6, "nome": "Coxinhas"        ,  "type": "salgado",  "qtd": qtd_pessoas, "precoUnitario": 0.2},
+                  {"id":6, "nome": "Coxinhas"        ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.2},
                   {"id":7, "nome": "Empadas"        ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15},
                   {"id":8, "nome": "Salgados de queijo"  ,  "type": "salgado",  "qtd": qtd_pessoas*5, "precoUnitario": 0.15}
                   //{"nome": "Descartáveis"        , "check": false},
@@ -92,7 +92,7 @@ export class OrganizerService {
     let refri = Math.round(qtd_pessoas*0.5); if(refri%2!==0) refri++;
 
     this.pacoteCasual = {"name": "Casual",
-                "img": "cerveja_artesanal.png",
+                "img": "brigadeiro.jpg",
                 "desc": "Um bom momento para trocar uma ideia",
                 "items": [
                   {"id":2, "nome": "Brigadeiros"      ,  "type": "doce",  "qtd": qtd_pessoas*3, "precoUnitario": 0.3},
@@ -103,7 +103,7 @@ export class OrganizerService {
                 ]};
 
     this.pacoteFesta = {"name": "Festa",
-                "img": "brigadeiro.jpg",
+                "img": "torta.jpg",
                 "desc": "Descontraia com os aniversáriantes do mês",
                 "items": [
                   {"id":1, "nome": "Torta"        ,  "type": "doce",  "qtd": 1, "precoUnitario": 40}
