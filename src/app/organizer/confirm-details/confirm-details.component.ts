@@ -229,7 +229,7 @@ export class ConfirmDetailsComponent implements OnInit {
 			return;
 		}
 
-		$('#modal_loading').modal('open');
+		$('#modal_loading').modal('open', {dismissible: false});
 
 		hora = hora.split(':');
 		// alert(hora[0])
